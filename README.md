@@ -1,1 +1,1 @@
-P7_Créez_un_ réseau_social_d’entreprise
+P7_Creez_un_ reseau_social_d_entreprise
