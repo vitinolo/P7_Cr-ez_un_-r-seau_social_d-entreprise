@@ -17,9 +17,9 @@ exports.createPost = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
-//sélection un post
+//sélection d'un post
 exports.getOnePost = (req, res, next) => {
-Post.findOne({ _id: req.params.id })
+  Post.findOne({ _id: req.params.id })
     .then((post) => {
       res.status(200).json(post);
     })
@@ -97,7 +97,7 @@ exports.getAllPost = (req, res, next) => {
     });
 };
 
-//création des likes et modification
+//création et modification des likes pour les posts
 exports.createLike = (req, res) => {
   Post.findOne({ _id: req.params.id })
     .then((post) => {
