@@ -5,7 +5,7 @@ const fs = require("fs");
 exports.createComment = (req, res, next) => {
   const commentObject = JSON.parse(req.body.comment);
   delete commentObject._id;
-  const comment = new Post({
+  const comment = new Comment({
     ...commentObject,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${
       req.file.filename
