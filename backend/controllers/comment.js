@@ -3,14 +3,20 @@ const fs = require("fs");
 
 //création d'un Commentaire
 exports.createComment = (req, res, next) => {
-  const commentObject = JSON.parse(req.body.comment);
-  delete commentObject._id;
-  const comment = new Comment({
-    ...commentObject,
-    imageUrl: `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
-    }`,
-  });
+  const commentObject = req.body.comment;
+
+  let comment;
+  if (req.file) {
+    comment = new Comment({
+      ...commentObject,
+      imageUrl: `${req.protocol}://${req.get("host")}/images/${
+        req.file.filename
+      }`,
+    });
+  } else {
+    comment = new Comment({ ...commentObject });
+  }
+  //comment.createdAt = 1986-05-15 02:03:15
   comment
     .save()
     .then(() => res.status(201).json({ message: "commentaire enregistré !" }))

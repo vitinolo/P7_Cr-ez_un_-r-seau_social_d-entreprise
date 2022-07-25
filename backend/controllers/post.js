@@ -3,14 +3,19 @@ const fs = require("fs");
 
 //création d'un post
 exports.createPost = (req, res, next) => {
-  const postObject = JSON.parse(req.body.post);
-  delete postObject._id;
-  const post = new Post({
-    ...postObject,
-    imageUrl: `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
-    }`,
-  });
+  const postObject = req.body.post;
+  let post;
+  if (req.file) {
+    post = new Post({
+      ...postObject,
+      imageUrl: `${req.protocol}://${req.get("host")}/images/${
+        req.file.filename
+      }`,
+    });
+  } else {
+    post = new Post({ ...postObject });
+  }
+  //post.createdAt= 1986-05-15 02:03:15
   post
     .save()
     .then(() => res.status(201).json({ message: "post enregistré !" }))
@@ -40,7 +45,7 @@ exports.modifyPost = (req, res, next) => {
         }`,
       }
     : { ...req.body };
-  //trouver l'ancienne image et la supprimer
+  //trouver le post et le supprimer
   if (req.file) {
     Post.findOne({ _id: req.params.id })
       .then((post) => {
