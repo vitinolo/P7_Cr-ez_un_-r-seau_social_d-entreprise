@@ -15,7 +15,6 @@ exports.createPost = (req, res, next) => {
   } else {
     post = new Post({ ...postObject });
   }
-  //post.createdAt= 1986-05-15 02:03:15
   post
     .save()
     .then(() => res.status(201).json({ message: "post enregistré !" }))

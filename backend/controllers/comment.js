@@ -16,7 +16,6 @@ exports.createComment = (req, res, next) => {
   } else {
     comment = new Comment({ ...commentObject });
   }
-  //comment.createdAt = 1986-05-15 02:03:15
   comment
     .save()
     .then(() => res.status(201).json({ message: "commentaire enregistré !" }))
