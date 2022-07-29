@@ -79,20 +79,22 @@ exports.modifyComment = (req, res, next) => {
 
 //supprimer un commentaire
 exports.deleteComment = (req, res, next) => {
-  Comment.findOne({ _id: req.params.id })
+  if (req.file) {
+    Comment.findOne({ _id: req.params.id })
     .then((comment) => {
-      const filename = comment.imageUrl.split("/images/")[1];
-      fs.unlink(`images/${filename}`, () => {
-        Comment.deleteOne({ _id: req.params.id })
-          .then(() =>
-            res.status(200).json({ message: "Commentaire supprimé !" })
-          )
-          .catch((error) => res.status(400).json({ error }));
-      });
-    })
-    .catch((error) => res.status(500).json({ error }));
+      const filename = post.imageUrl.split("/images/")[1];
+      fs.unlink(`images/${filename}`, () => {  
+    Comment.deleteOne({ _id: req.params.id })
+      .then(() => res.status(200).json({ message: "Commentaire supprimé !" }))
+      .catch((error) => res.status(400).json({ error })); 
+      })})
+  }else{
+    Comment.findOne({_id:req.params.id})
+    Comment.deleteOne({ _id: req.params.id })
+      .then(() => res.status(200).json({ message: "Commentaire supprimé !" }))
+      .catch((error) => res.status(400).json({ error }))
+  }
 };
-
 //voir toutes les commentaires
 exports.getAllComment = (req, res, next) => {
   Comment.find()
