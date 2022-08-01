@@ -4,7 +4,6 @@ const fs = require("fs");
 //création d'un Commentaire
 exports.createComment = (req, res, next) => {
   const commentObject = req.body.comment;
-
   let comment;
   if (req.file) {
     comment = new Comment({
@@ -111,18 +110,15 @@ exports.createLike = (req, res) => {
   Comment.findOne({ _id: req.params.id })
     .then((comment) => {
       const userId = req.body.userId;
-      const userWantsToLike = req.body.like == 1;
-      const userWantsToClear = req.body.like == 0;
+      const userHasAlreadyLiked = comment.usersLiked.includes(userId);
 
-      if (userWantsToLike) {
+      if (!userHasAlreadyLiked) {
         comment.usersLiked.push(userId);
+      }else{
+        const index = comment.usersLiked.findIndex(a => a == userId);
+        comment.usersLiked.splice(index, 1)
       }
-      if (userWantsToClear) {
-        if (comment.usersLiked.includes(userId)) {
-          const index = comment.usersLiked.indexOf(userId);
-          comment.usersLiked.splice(index, 1);
-        }
-      }
+      
       comment.likes = comment.usersLiked.length;
       comment.save();
       return comment;

@@ -112,17 +112,13 @@ exports.createLike = (req, res) => {
   Post.findOne({ _id: req.params.id })
     .then((post) => {
       const userId = req.body.userId;
-      const userWantsToLike = req.body.like == 1;
-      const userWantsToClear = req.body.like == 0;
+      const userHasAlreadyLiked = comment.usersLiked.includes(userId);
 
-      if (userWantsToLike) {
+      if (!userHasAlreadyLiked) {
         post.usersLiked.push(userId);
-      }
-      if (userWantsToClear) {
-        if (post.usersLiked.includes(userId)) {
-          const index = post.usersLiked.indexOf(userId);
-          post.usersLiked.splice(index, 1);
-        }
+      }else{
+        const index = post.usersLiked.findIndex(a => a == userId);
+        post.usersLiked.splice(index, 1)
       }
       post.likes = post.usersLiked.length;
       post.save();
