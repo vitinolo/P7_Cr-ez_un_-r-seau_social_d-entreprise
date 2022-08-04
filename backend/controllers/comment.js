@@ -1,5 +1,7 @@
 const Comment = require("../models/Comment");
 const fs = require("fs");
+const { equal } = require("assert");
+const User = require("../models/User");
 
 //création d'un Commentaire
 exports.createComment = (req, res, next) => {
@@ -44,36 +46,42 @@ exports.modifyComment = (req, res, next) => {
         }`,
       }
     : { ...req.body };
-  //trouver l'ancienne image et la supprimer
-  if (req.file) {
-    Comment.findOne({ _id: req.params.id })
-      .then((comment) => {
-        const filename = comment.imageUrl.split("/images/")[1];
-        fs.unlink(`images/${filename}`, () => {
+  //si l'utilisateur est autorisé, trouver l'ancien commentaire et le supprimer ou modifier
+    const userAuthorized = User._id == Comment.userId || User.isAdmin == true ;
+      if(userAuthorized){
+        if (req.file) {
+          Comment.findOne({ _id: req.params.id })
+            .then((comment) => {
+              const filename = comment.imageUrl.split("/images/")[1];
+              fs.unlink(`images/${filename}`, () => {
+                Comment.updateOne(
+                  { _id: req.params.id },
+                  { ...commentObject, _id: req.params.id }
+                )
+                  .then(() => {
+                    res.status(200).json({ message: "Commentaire mise à jour!" });
+                  })
+                  .catch((error) => {
+                    res.status(400).json({ error });
+                  });
+              });
+            })
+            .catch((error) => {
+              res.status(500).json({ error });
+            });
+          //le mettre à jour
+        } else {
           Comment.updateOne(
             { _id: req.params.id },
             { ...commentObject, _id: req.params.id }
           )
-            .then(() => {
-              res.status(200).json({ message: "Commentaire mise à jour!" });
-            })
-            .catch((error) => {
-              res.status(400).json({ error });
-            });
-        });
-      })
-      .catch((error) => {
-        res.status(500).json({ error });
-      });
-    //le mettre à jour
-  } else {
-    Comment.updateOne(
-      { _id: req.params.id },
-      { ...commentObject, _id: req.params.id }
-    )
-      .then(() => res.status(200).json({ message: "Commentaire mise à jour!" }))
-      .catch((error) => res.status(400).json({ error }));
-  }
+            .then(() => res.status(200).json({ message: "Commentaire mise à jour!" }))
+            .catch((error) => res.status(400).json({ error }));
+        }
+
+      }else{
+        ((error) => res.status(500).json({ error }))
+      }
 };
 
 //supprimer un commentaire

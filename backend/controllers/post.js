@@ -34,15 +34,8 @@ exports.getOnePost = (req, res, next) => {
 
 //modifier un post
 exports.modifyPost = (req, res, next) => {
-  //si ma requête contient un fichier
-  const postObject = req.file
-    ? {
-        //alors le fichier ressemble à ça: sinon (:) à ça:
-        ...JSON.parse(req.body.post),
-        imageUrl: `${req.protocol}://${req.get("host")}/images/${
-          req.file.filename
-        }`,
-      }
+  //si ma requête contient un fichier alors le fichier ressemble à ça: sinon (:) à ça:
+  const postObject = req.file? {...JSON.parse(req.body.post),imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,}
     : { ...req.body };
   //trouver le post et le supprimer
   if (req.file) {

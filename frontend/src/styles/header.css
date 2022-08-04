@@ -1,0 +1,25 @@
+.slf{
+    display:flex;
+    background-color: white;
+    align-items: center;
+    justify-content: space-around; 
+    border: solid 3px black;
+    border-radius: 10px;
+}
+
+.slf-logo{
+    width:35%;
+    padding:2px;
+}
+.btsignup{
+    width:100px;
+    height: 50px;
+    display: inline-block;
+    
+}
+.btlogin{
+    width:100px;
+    height: 50px;
+    display: inline-block;
+    
+}
