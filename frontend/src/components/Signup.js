@@ -1,37 +1,37 @@
 import '../styles/signup.css'
+import BtnSend from'./BtnSend'
+import { useState } from 'react'
 
 const Signup =()=> {
+    const [setInputValue] = useState()
     return (
         <div className="signup">
             <h1><span className="sign">Inscription</span></h1>
             <div className="signup-form">
                 <form>
                     <label>
-                        Email :<input type="text" name="email" />
+                        Email :<input onChange={(e) => setInputValue(e.target.value)} type="text" name="email" />
                     </label>
-                    <input type="submit" value="Envoyer" />
                 </form>
                 <form>
                     <label>
-                        Mot de passe :<input type="text" name="lastname" />
+                        Mot de passe :<input onChange={(e) => setInputValue(e.target.value)} type="text" name="lastname" />
                     </label>
-                    <input type="submit" value="Envoyer" />
                 </form>
                 <form>
                     <label>
-                        Prenom :<input type="text" name="name" />
+                        Prenom :<input onChange={(e) => setInputValue(e.target.value)} type="text" name="name" />
                     </label>
-                    <input type="submit" value="Envoyer" />
                 </form>
                 <form>
                     <label>
-                        Nom :<input type="text" name="lastname" />
+                        Nom :<input onChange={(e) => setInputValue(e.target.value)} type="text" name="lastname" />
                     </label>
-                    <input type="submit" value="Envoyer" />
                 </form>
             </div>
+            <BtnSend />
         </div>
     )
 }
 
-export default Signup;
+export default Signup

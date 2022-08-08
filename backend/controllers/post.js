@@ -33,10 +33,17 @@ exports.getOnePost = (req, res, next) => {
 };
 
 //modifier un post
-exports.modifyPost = (req, res, next) => {
-  //si ma requête contient un fichier alors le fichier ressemble à ça: sinon (:) à ça:
-  const postObject = req.file? {...JSON.parse(req.body.post),imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,}
-    : { ...req.body };
+async function modifyPost(req, res, next)  {
+  //récupèrer user et post
+  const post = await Post.findOne({ id: req.params.id})
+  const user = await User.findOne({ id:req.body.userId })
+  const userAuthorized = user.isAdmin || req.body.userId === comment.userId
+  //si ma requête contient un fichier 
+  const postObject = req.file? {...JSON.parse(req.body.post),imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,}: { ...req.body };
+  //si l'utilisateur n'est pas autorisé, message d'erreur
+  if(!userAuthorized){
+    return  res.status(403).json({ error: new Error("unauthorized request") });
+  }
   //trouver le post et le supprimer
   if (req.file) {
     Post.findOne({ _id: req.params.id })
@@ -68,9 +75,18 @@ exports.modifyPost = (req, res, next) => {
       .catch((error) => res.status(400).json({ error }));
   }
 };
+module.exports.modifyPost = modifyPost
 
 //supprimer un post
-exports.deletePost = (req, res, next) => {
+async function deletePost(req, res, next) {
+   // récupèrer user et post
+   const comment = await Post.findOne({ id: req.params.id })
+   const user = await User.findOne({ id:req.body.userId })
+   const userAuthorized = user.isAdmin || req.body.userId === comment.userId
+   //si l'utilisateur n'est pas autorisé, message d'erreur
+   if(!userAuthorized){
+    return  res.status(403).json({ error: new Error("unauthorized request") });
+  }
   if (req.file) {
     Post.findOne({ _id: req.params.id })
     .then((post) => {
@@ -87,7 +103,7 @@ exports.deletePost = (req, res, next) => {
       .catch((error) => res.status(400).json({ error }))
   }
 };
-
+module.exports.deletePost = deletePost
 
 //voir toutes les posts
 exports.getAllPost = (req, res, next) => {
