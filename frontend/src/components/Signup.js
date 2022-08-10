@@ -6,26 +6,26 @@ const Signup =()=> {
     const [setInputValue] = useState()
     return (
         <div className="signup">
-            <h1><span className="sign">Inscription</span></h1>
-            <div className="signup-form">
-                <form>
-                    <label>
-                        Email :<input onChange={(e) => setInputValue(e.target.value)} type="text" name="email" />
+            <h2>Inscription</h2>
+            <div className="form">
+                <form className='form-signup'>
+                    <label className='form-label'>
+                        <input placeholder ='Email' onChange={(e) => setInputValue(e.target.value)} type="email" name="email" id="email" />
                     </label>
                 </form>
-                <form>
-                    <label>
-                        Mot de passe :<input onChange={(e) => setInputValue(e.target.value)} type="text" name="lastname" />
+                <form className='form-signup'>
+                    <label className='form-label'>
+                        <input placeholder ='Password' onChange={(e) => setInputValue(e.target.value)} type="text" name="password" id="password" />
                     </label>
                 </form>
-                <form>
-                    <label>
-                        Prenom :<input onChange={(e) => setInputValue(e.target.value)} type="text" name="name" />
+                <form className='form-signup'>
+                    <label className='form-label'>
+                        <input placeholder ='Name' onChange={(e) => setInputValue(e.target.value)} type="text" name="name" id="name" />
                     </label>
                 </form>
-                <form>
-                    <label>
-                        Nom :<input onChange={(e) => setInputValue(e.target.value)} type="text" name="lastname" />
+                <form className='form-signup'>
+                    <label className='form-label'>
+                        <input placeholder ='Lastname' onChange={(e) => setInputValue(e.target.value)} type="text" name="lastname" />
                     </label>
                 </form>
             </div>

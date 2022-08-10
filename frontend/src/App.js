@@ -1,6 +1,6 @@
-import Header from "./Header";
-import Signup from "./Signup";
-import Login from "./Login";
+import Header from "./components/Header";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
 
 function App() {
   return (

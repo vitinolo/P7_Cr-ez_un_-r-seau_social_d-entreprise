@@ -5,6 +5,18 @@
     border: solid 3px black;
     border-radius: 10px;
     padding:10px;
-    margin:0px;
     background-color:#ffd7d7;
+}
+.form{
+    width:40%;
+}
+input{
+    width:100%;
+    border-radius: 10px;
+}
+input::placeholder{
+    text-align: center;
+}
+.form-signup{
+    margin-bottom: 15px;
 }
