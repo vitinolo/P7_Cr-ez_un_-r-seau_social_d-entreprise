@@ -10,22 +10,28 @@
 .titre{
     display:flex;
     align-items: center;
-    
     margin-bottom: 30px;
 }
+
 .logo{
-    width:30%;
     padding:2px;
 }
-.btsignup{
+/*img::after{
+    max-height: 150px;
+    width:300px;
+}*/
+.inscription{
     width:100px;
     height: 50px;
     display: inline-block;
-    
+    text-align: center; 
+    margin-top: 0px;
+    margin-bottom: 20px;    
 }
-.btlogin{
+
+.connexion{
     width:100px;
     height: 50px;
     display: inline-block;
-    
+    text-align: center;   
 }
