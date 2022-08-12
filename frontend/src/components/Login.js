@@ -12,7 +12,7 @@ const Login =()=> {
                         <p id="emailErrorMsg"></p>
                     </div>
                     <div className="form__question">
-                        <input placeholder='Password' type="text" name="password" id="password"/>
+                        <input placeholder='Mot de passe' type="text" name="password" id="password"/>
                         <p id="passwordErrorMsg"></p>
                     </div>
                     <div className="form__submit">
@@ -20,9 +20,9 @@ const Login =()=> {
                     </div>
                 </form>
             </div>
-            <span className='inscription'><a href="/inscription">S'inscrire</a></span>
+            <span className='inscription'><a href="/inscription" target="_blank" title="Cliquez vers l'incription">S'inscrire</a></span>
         </div>
     )
 }
 
-export default Login;
+export default Login
