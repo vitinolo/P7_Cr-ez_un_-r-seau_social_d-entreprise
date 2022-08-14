@@ -23,7 +23,6 @@ Le frontend a été crée avec React.js.
 __Installation__  
 Dans le dossier /frontend démarrez npm install pour installer toutes les dépendances du frontend.
 
-Development server
 Démarrer npm start pour avoir accès au serveur de développement. L'application va se recharger automatiquement si vous modifiez un fichier source.
 
 **Droits Admin**
