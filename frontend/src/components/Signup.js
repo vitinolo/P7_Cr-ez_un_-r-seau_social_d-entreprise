@@ -1,12 +1,13 @@
 import '../styles/signup.css'
-//import { useState } from 'react'
+import { useState } from 'react'
 
 const Signup =()=> {
+    const [inputValue, setInputValue] = useState()
     return (
         <div className="signup">
             <h2>Inscription</h2>
             <div className="form">
-                <form method="get" className='form-signup' >
+                <form method="post" className='form-signup' id='myform' value={inputValue} onChange={(e) => setInputValue(e.target.value)} >
                     <div className='form__question'>
                         <input placeholder='Email' type="email" name="email" id="email" required />
                         <p id="emailErrorMsg"></p>
@@ -16,153 +17,99 @@ const Signup =()=> {
                         <p id="passwordErrorMsg"></p>
                     </div>
                     <div className='form__question'>
-                        <input placeholder='Prénom' type="text" name="name" id="name" required/>
-                        <p id="nameErrorMsg"></p>
+                        <input placeholder='Prénom' type="text" name="firstname" id="firstname" required/>
+                        <p id="firstnameErrorMsg"></p>
                     </div>
                     <div className='form__question'>
                         <input placeholder='Nom' type="text" name="lastname" id ="lastname" required/>
                         <p id="lastnameErrorMsg"></p>
                     </div>
                     <div className="form__submit">
-                        <input type="submit" value="Envoyer" id="order"/>
+                        <input onClick={()=>alert(setInputValue)} type="submit" value="Envoyer" id="order"/>
                     </div>
                 </form>
             </div>
         </div>
     )
-}
+};
 
-/*
-listenFormSubmit()
-listenForFormChange();
-
-function listenForFormChange() 
-{   
-    //écouter champ prénom 
-    document.getElementById('name').addEventListener('input', () => 
-    {
-        hideError('firstNameErrorMsg'); 
-        if (!isFirstNameValid())
-        {
-            showError('firstNameErrorMsg', 'Merci de bien remplir le champ prénom');   
-        }
-    })
-    
-    //écouter champ nom
-    document.getElementById('lastName').addEventListener('input', () => 
-    {
-        hideError('lastNameErrorMsg');  
-        if (!isLastNameValid())
-        {
-            showError('lastNameErrorMsg', 'Merci de bien remplir le champ nom');
-        } 
-    })
-    
-    //écouter champ email
-    document.getElementById('email').addEventListener('input', () => 
-    { 
-        hideError('emailErrorMsg');  
-        if (!isEmailValid()) 
-        {
-            showError('emailErrorMsg', 'Merci de bien remplir le champ email');
-        }  
-    })
-
-    //écouter champ mot de passe
-    document.getElementById('password').addEventListener('input', () => 
-    { 
-        hideError('emailErrorMsg');  
-        if (!isEmailValid()) 
-        {
-            showError('emailErrorMsg', 'Merci de bien remplir le champ mot de passe');
-        }  
-    })
-}
-function listenFormSubmit()
-{
-    //écoute du bouton envoyer
-    document.getElementById('order').addEventListener('click', (e) =>
-    {  
-        e.preventDefault();
+function formValidation (){
+    let myForm = document.getElementById('myform');
+    return(  
         
-        hideError('firstNameErrorMsg'); 
-        hideError('lastNameErrorMsg');  
-        hideError('addressErrorMsg');  
-        hideError('cityErrorMsg');  
-        hideError('emailErrorMsg'); 
+        myForm.onChange('myform', function(e){
+            
+            //validation champs email
+            let myInputEmail = document.getElementById('email');
+            let myRegexEmail = /^[a-zA-Z-\s]+$/;
         
-        if (!isFirstNameValid())
-        {
-            showError('firstNameErrorMsg', 'Merci de bien remplir le champ prénom');
-            return;   
-        }
+            if(myInputEmail.value.trim() === ""){
+                let myError = document.getElementById('emailErrorMsg');
+                myError.innerHTML ="le champs email doit être rempli";
+                myError.style.color ='red';
+                e.preventDefault();
+                return;
+                
+            }else if(myRegexEmail.test(myInputEmail) === false){
+                let myError = document.getElementById('emailErrorMsg');
+                myError.innerHTML ="le champs email doit être rempli";
+                myError.style.color ='red';
+                e.preventDefault();
+                return;
+            }   
+            //validation champs nom
+             let myInputLastName = document.getElementById('lastname');
+             let myRegexLastName = /^[a-zA-Z-\s]+$/;
+         
+             if(myInputLastName.value.trim() === ""){
+                 let myError = document.getElementById('lastnameErrorMsg');
+                 myError.innerHTML ="le champs nom doit être rempli";
+                 myError.style.color ='red';
+                 e.preventDefault();
+                 return;
+             }else if(myRegexLastName.test(myInputLastName) === false){
+                 let myError = document.getElementById('lastnameErrorMsg');
+                 myError.innerHTML ="le champs nom doit être rempli";
+                 myError.style.color ='red';
+                 e.preventDefault();
+                 return;
+             }   
+            //validation champs prénom
+            let myInputFirstName = document.getElementById('firstname');
+            let myRegexFirstName = /^[a-zA-Z-\s]+$/;
         
-        if (!isLastNameValid())
-        {
-            showError('lastNameErrorMsg', 'Merci de bien remplir le champ nom');
-            return;
-        } 
-
+            if(myInputFirstName.value.trim() === ""){
+                let myError = document.getElementById('firstnameErrorMsg');
+                myError.innerHTML ="le champs prénom doit être rempli";
+                myError.style.color ='red';
+                e.preventDefault();
+                return;
+            }else if(myRegexFirstName.test(myInputFirstName) === false){
+                let myError = document.getElementById('firstnameErrorMsg');
+                myError.innerHTML ="le champs prénom doit être rempli";
+                myError.style.color ='red';
+                e.preventDefault();
+                return;
+            }   
+            //validation champs password
+            let myInputPassword = document.getElementById('password');
+            let myRegexPassword = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/;
         
-        if (!isEmailValid()) 
-        {
-            showError('emailErrorMsg', 'Merci de bien remplir le champ email');
-            return;
-        }  
-        
-        //récupèration des id
-        const products = JSON.parse(localStorage.getItem('products'));
-        let productIds = [];
-        products.forEach(product => { productIds.push(product.id) })
-    });
-}
-function hideError(id)
-{
-    document.getElementById(id).innerText = ''; 
-}
-function isEmailValid()
-{
-    const email = document.getElementById('email').value;
+            if(myInputPassword.value.trim() === ""){
+                let myError = document.getElementById('passwordErrorMsg');
+                myError.innerHTML ="le champs mot de passe doit être rempli";
+                myError.style.color ='red';
+                e.preventDefault();
+                return;
+            }else if(myRegexPassword.test(myInputPassword) === false){
+                let myError = document.getElementById('passwordErrorMsg');
+                myError.innerHTML ="le champs mot de passe doit être rempli";
+                myError.style.color ='red';
+                e.preventDefault();
+                return;
+            }    
+        })
+    )
+};
 
-    return String(email)
-    .toLowerCase()
-    .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        );
-}
-function isFirstNameValid()
-{
-    const firstName = document.getElementById('firstName').value;
-
-    if(firstName.length < 2 || !validateNoun(firstName))
-    {
-        return false
-    }
-    return true;
-}
-function isLastNameValid()
-{
-    const lastName = document.getElementById('lastName').value;
-
-    if(lastName.length < 2 || !validateNoun(lastName))
-    {
-        return false
-    }
-    return true;
-}
-function showError(id,text)
-{
-    document.getElementById(id).innerText = text;   
-}
-
-function validateNoun(value)
-{
-    return String(value)
-    .toLowerCase()
-    .match(
-    /^[A-Za-z\5-]+$/
-    );
-}
-*/
-export default Signup
-
+export default Signup;

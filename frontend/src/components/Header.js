@@ -14,4 +14,4 @@ import logo from '../assets/icon-left-font.svg'
     )
 }
  
-export default Header
+export default Header;
