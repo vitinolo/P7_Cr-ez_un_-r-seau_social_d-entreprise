@@ -1,7 +1,7 @@
 import Header from "../components/Header"
 import Signup from "../components/Signup"
 
-function Inscription () {
+function InscriptionPage () {
     return (
         <div className="inscription">
             <Header />
@@ -9,4 +9,4 @@ function Inscription () {
         </div>
     )
 }
-export default Inscription
+export default InscriptionPage

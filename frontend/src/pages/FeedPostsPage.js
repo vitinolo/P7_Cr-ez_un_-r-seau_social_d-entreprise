@@ -1,8 +1,8 @@
 import Header from "../components/Header"
 
-function FeedPosts () {
+function FeedPostsPage () {
     <div className="feedposts">
         <Header />
     </div>
 }
-export default FeedPosts
+export default FeedPostsPage

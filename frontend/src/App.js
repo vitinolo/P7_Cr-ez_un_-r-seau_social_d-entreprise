@@ -1,14 +1,13 @@
 import Header from "./components/Header";
 import Signup from "./components/Signup";
-import Login from "./components/Login";
-
+import Connexion from "./components/Connexion"
 function App() {
   return (
     
     <div className="App">
       <Header />
       <Signup />
-      <Login />
+      <Connexion />
     </div>
   );
 };

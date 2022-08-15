@@ -1,4 +1,4 @@
-function NotFound (){
+function NotFoundPage (){
     return (
         <div className="notfound">
            <span> Page Not found !</span> 
@@ -6,4 +6,4 @@ function NotFound (){
     )
 }
 
-export default NotFound
+export default NotFoundPage

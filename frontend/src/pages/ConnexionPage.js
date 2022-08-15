@@ -1,12 +1,12 @@
 import Header from "../components/Header"
-import Login from "../components/Login"
+import Connexion from "../components/Connexion"
 
-function Connexion () {
+function ConnexionPage () {
     return (
         <div className="connexion">
             <Header />
-            <Login />
+            <Connexion />
         </div>
     )
 }
-export default Connexion
+export default ConnexionPage
