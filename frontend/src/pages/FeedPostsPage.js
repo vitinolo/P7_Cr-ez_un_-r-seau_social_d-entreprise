@@ -1,8 +1,10 @@
-import Header from "../components/Header"
+import HeaderPosts from "../components/HeaderPosts"
 
 function FeedPostsPage () {
+    return(
     <div className="feedposts">
-        <Header />
+        <HeaderPosts />
     </div>
+    )
 }
 export default FeedPostsPage

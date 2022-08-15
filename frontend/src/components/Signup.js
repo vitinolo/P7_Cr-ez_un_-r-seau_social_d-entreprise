@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import "../styles/connexsignup.css";
-
+import axios from "axios";
 
 class Signup extends Component {
     constructor(props){
@@ -9,20 +9,31 @@ class Signup extends Component {
             inputEmail :"",
             inputPassword : "",
             inputFirstName : "",
-            inputLastName : ""
-
+            inputLastName : ""    
         };
+
         this.handleChangeEmail = this.handleChangeEmail.bind(this)
         this.handleChangePassword = this.handleChangePassword.bind(this)
         this.handleChangeFirstName = this.handleChangeFirstName.bind(this)
         this.handleChangeLastName = this.handleChangeLastName.bind(this)
         this.handleClick = this.handleClick.bind(this)
     }
+    
     handleClick(e) {
         e.preventDefault();
-     console.log("salut");
+        const postData = () => {
+            axios
+            .post('http://localhost:3000/api/auth/signup')
+            .then((response) => console.log(response.data))
+            .catch((err) => console.log(err));
+        };
+        useEffect=(() =>{
+            postData();
+        }, []);
+        postData();
+    
     }
-
+    
     handleChangeEmail(e) {
         console.log(e.target.value)
         this.setState(() => ({
@@ -72,7 +83,6 @@ class Signup extends Component {
                     </form>
                 </div>
             </div>
-
         );
     }
 }
