@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import "../styles/signup.css"
+import "../styles/connexsignup.css";
+
+
 class Signup extends Component {
     constructor(props){
         super(props);
@@ -16,13 +18,9 @@ class Signup extends Component {
         this.handleChangeLastName = this.handleChangeLastName.bind(this)
         this.handleClick = this.handleClick.bind(this)
     }
-    handleClick() {
-      this.setState({
-        inputEmail :"",
-        inputPassword : "",
-        inputFirstName : "",
-        inputLastName : ""
-      })
+    handleClick(e) {
+        e.preventDefault();
+     console.log("salut");
     }
 
     handleChangeEmail(e) {
@@ -58,19 +56,15 @@ class Signup extends Component {
                     <form method="post" className='form-signup' id='myform'>
                         <div className='form__question'>
                             <input placeholder='Email' type="email" name="email" id="email" required value={this.state.inputEmail} onChange={this.handleChangeEmail}/>
-                            <p id="emailErrorMsg"></p>
                         </div>
                         <div className='form__question'>
-                            <input placeholder='Mot de passe' type="text" name="password" id="password" required value={this.state.inputPassword} onChange={this.handleChangePassword}/>
-                            <p id="passwordErrorMsg"></p>
+                            <input placeholder='Mot de passe' type="password" name="password" id="password" required value={this.state.inputPassword} onChange={this.handleChangePassword}/>
                         </div>
                         <div className='form__question'>
                             <input placeholder='Prénom' type="text" name="firstname" id="firstname" required value={this.state.inputFirstName} onChange={this.handleChangeFirstName}/>
-                            <p id="firstnameErrorMsg"></p>
                         </div>
                         <div className='form__question'>    
                             <input placeholder='Nom' type="text" name="lastname" id ="lastname" required value={this.state.inputLastName} onChange={this.handleChangeLastName}/>
-                            <p id="lastnameErrorMsg"></p>
                         </div>
                         <div className="form__submit">
                             <input onClick={this.handleClick} type="submit" value="Envoyer" id="order"/>

@@ -1,0 +1,15 @@
+.notfound{
+    background-color: white;
+    border: solid 3px black;
+    padding:50px;
+    display:flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 20%;
+}
+
+.notfound span{
+    text-align: center;
+    font-size: 50px;
+}
+

@@ -1,7 +1,8 @@
+import "../styles/notfoundpage.css";
 function NotFoundPage (){
     return (
         <div className="notfound">
-           <span> Page Not found !</span> 
+           <span>Erreur 404 Page Not found !</span> 
         </div>
     )
 }

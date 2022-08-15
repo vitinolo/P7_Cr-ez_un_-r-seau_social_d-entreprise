@@ -11,27 +11,21 @@
     display:flex;
     align-items: center;
     margin-bottom: 30px;
+    margin-top:20px;
 }
 
 .logo{
     padding:2px;
 }
-/*img::after{
-    max-height: 150px;
-    width:300px;
-}*/
+
 .inscription{
-    width:100px;
     height: 50px;
-    display: inline-block;
     text-align: center; 
-    margin-top: 0px;
+    margin: 20px;
     margin-bottom: 20px;    
 }
 
-.connexion{
-    width:100px;
+.connexion{ 
     height: 50px;
-    display: inline-block;
     text-align: center;   
 }
