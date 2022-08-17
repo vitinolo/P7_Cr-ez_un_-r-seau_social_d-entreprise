@@ -8,6 +8,7 @@
     border: solid 3px black;
     border-radius: 10px;
 }
+
 .titre{
     display:flex;
     align-items: center;
@@ -22,7 +23,6 @@
 .inscription{
     height: 50px;
     text-align: center; 
-    margin: 20px;
     margin-bottom: 20px;    
 }
 

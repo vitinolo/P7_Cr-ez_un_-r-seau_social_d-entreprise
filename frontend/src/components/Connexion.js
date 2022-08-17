@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "../styles/connexsignup.css";
+import "../styles/style.css";
 import { Link } from "react-router-dom"
 
 

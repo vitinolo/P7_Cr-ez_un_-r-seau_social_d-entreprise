@@ -1,7 +1,8 @@
 import React, { Component, useEffect } from 'react';
-import "../styles/connexsignup.css";
+import "../styles/style.css";
 import axios from "axios";
 
+//on construit le composant
 class Signup extends Component {
     constructor(props){
         super(props);
@@ -11,29 +12,29 @@ class Signup extends Component {
             inputFirstName : "",
             inputLastName : ""    
         };
-
+        //on bind les chgt
         this.handleChangeEmail = this.handleChangeEmail.bind(this)
         this.handleChangePassword = this.handleChangePassword.bind(this)
         this.handleChangeFirstName = this.handleChangeFirstName.bind(this)
         this.handleChangeLastName = this.handleChangeLastName.bind(this)
         this.handleClick = this.handleClick.bind(this)
     }
-    
+    //au click du bouton on appel le serveur (axios) et récupère les données
     handleClick(e) {
         e.preventDefault();
         const postData = () => {
             axios
             .post('http://localhost:3000/api/auth/signup')
-            .then((response) => console.log(response.data))
+            .then((res) => console.log(res.data))
             .catch((err) => console.log(err));
-        };
+            
+        }
         useEffect=(() =>{
             postData();
         }, []);
-        postData();
-    
     }
     
+    //on set le state
     handleChangeEmail(e) {
         console.log(e.target.value)
         this.setState(() => ({
