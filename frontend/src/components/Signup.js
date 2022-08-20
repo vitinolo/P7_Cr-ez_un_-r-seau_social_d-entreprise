@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component } from 'react';
 import "../styles/style.css";
 import axios from "axios";
 
@@ -12,29 +12,45 @@ class Signup extends Component {
             inputFirstName : "",
             inputLastName : ""    
         };
-        //on bind les chgt
+        //on bind les chgts
         this.handleChangeEmail = this.handleChangeEmail.bind(this)
         this.handleChangePassword = this.handleChangePassword.bind(this)
         this.handleChangeFirstName = this.handleChangeFirstName.bind(this)
         this.handleChangeLastName = this.handleChangeLastName.bind(this)
         this.handleClick = this.handleClick.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
-    //au click du bouton on appel le serveur (axios) et récupère les données
-    handleClick(e) {
-        e.preventDefault();
-        const postData = () => {
+    //au click du bouton (handleClick) on envoie les données au serveur (axios, handleSubmit) 
+    handleClick(){
+        this.handleSubmit()
+    }
+
+    handleSubmit(e) {
+        
+        const data = JSON.stringify(this.state)
+        console.log(data)
+        function postData (data){
             axios
-            .post('http://localhost:3000/api/auth/signup')
+            .post('http://localhost:3000/api/auth/signup',{
+                email: data.email,
+                password: data.password,
+                name: data.name,
+                lastname: data.lastname,
+            })
             .then((res) => console.log(res.data))
             .catch((err) => console.log(err));
-            
         }
-        useEffect=(() =>{
-            postData();
-        }, []);
-    }
+        postData();
+        //on réinitialise le formulaire après l'envoi
+        this.setState({
+            inputEmail :"",
+            inputPassword : "",
+            inputFirstName : "",
+            inputLastName : ""    
+        })
+    } 
     
-    //on set le state
+    //on set le state de l'email,password,name et lastname
     handleChangeEmail(e) {
         console.log(e.target.value)
         this.setState(() => ({
@@ -59,13 +75,13 @@ class Signup extends Component {
             inputLastName : e.target.value
         }))
     }
-
+    // on renvoie
     render() {
         return (
             <div className="signup">
                 <h2>Inscription</h2>
                 <div className="form">
-                    <form method="post" className='form-signup' id='myform'>
+                    <form onSubmit={this.handleSubmit} method="post" className='form-signup' id='myform'>
                         <div className='form__question'>
                             <input placeholder='Email' type="email" name="email" id="email" required value={this.state.inputEmail} onChange={this.handleChangeEmail}/>
                         </div>
@@ -73,7 +89,7 @@ class Signup extends Component {
                             <input placeholder='Mot de passe' type="password" name="password" id="password" required value={this.state.inputPassword} onChange={this.handleChangePassword}/>
                         </div>
                         <div className='form__question'>
-                            <input placeholder='Prénom' type="text" name="firstname" id="firstname" required value={this.state.inputFirstName} onChange={this.handleChangeFirstName}/>
+                            <input placeholder='Prénom' type="text" name="name" id="firstname" required value={this.state.inputFirstName} onChange={this.handleChangeFirstName}/>
                         </div>
                         <div className='form__question'>    
                             <input placeholder='Nom' type="text" name="lastname" id ="lastname" required value={this.state.inputLastName} onChange={this.handleChangeLastName}/>

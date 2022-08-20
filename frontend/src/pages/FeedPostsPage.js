@@ -1,15 +1,14 @@
 
 import HeaderPosts from "../components/HeaderPosts"
-import FeedsPub from "../components/FeedsPub"
+import FeedsPublisher from "../components/FeedsPublisher"
 import Feed from "../components/Feed"
 
 function FeedPostsPage () {
     return(
     <div className="feedposts">
         <HeaderPosts />
-        <FeedsPub />
-        <Feed />
-            
+        <FeedsPublisher />
+        <Feed />          
     </div>
     )
 }

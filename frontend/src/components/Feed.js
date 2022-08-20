@@ -1,4 +1,6 @@
 import "../styles/style.css";
+import Comments from "../components/Comments";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function Feed() {
   return (
@@ -14,13 +16,15 @@ function Feed() {
         <div className="texte_publication">
           ça va bien ?
         </div>
+          <div className="modifyAndRemovePost">
+            <div className="icone"><FontAwesomeIcon icon="fa-solid fa-trash-can" /></div>
+            <div className="icone"><FontAwesomeIcon icon="fa-solid fa-pen-to-square" /></div>
+          </div>
         <div className="vote_publication">
-          <div className="like">like<img src="" alt=""/></div>
-          <div className="dislike">dislike<img src="" alt=""/></div>
+          <div className="icone"><FontAwesomeIcon icon="fa-solid fa-thumbs-up" /></div>
+          <div className="icone"><FontAwesomeIcon icon="fa-solid fa-thumbs-down" /></div>
         </div>
-        <div className="comments_publication">
-
-        </div>
+        <Comments />
     </div>
       
 
