@@ -86,7 +86,7 @@ a{
     
 }
 .icone{
-    width:16px;
+    color:#4e5166;
 }
 .img_publication{
     background-color: white;
@@ -113,7 +113,6 @@ input::placeholder{
     display:flex;
     justify-content: space-around;
     border: solid 2px;
-    height:20px;
 }
 .publication_button {
     font-size: 10px;
@@ -173,6 +172,5 @@ input::placeholder{
     display:flex;
     justify-content: space-around;
     border: solid 2px;
-    height:20px;
 }
 
