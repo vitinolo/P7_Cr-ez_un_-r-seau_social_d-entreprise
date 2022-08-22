@@ -5,10 +5,8 @@
 }
 .deconnexion{
     display:flex;
-    align-items: center;
-    
+    align-items: center;  
 }
-
 .header{
     display:flex;
     background-color: white;
@@ -19,8 +17,7 @@
 }
 .headposts{
     display:flex;
-    justify-content: space-around;
-   
+    justify-content: space-around;  
 }
 .headerposts{
     background-color: white;
@@ -29,7 +26,6 @@
     border-radius: 10px;
     height: 150px;
 }
-
 .inscription{
     height: 50px;
     text-align: center;
@@ -49,7 +45,6 @@
     color: white;
     font-size: 20px;
     margin: 20px;
-   
 }
 .titreposts{
     display:flex;

@@ -24,4 +24,3 @@ Dans le dossier /frontend démarrez npm install pour installer toutes les dépen
 
 Démarrer npm start pour avoir accès au serveur de développement. L'application va se recharger automatiquement si vous modifiez un fichier source.
 
-**Droits Admin**

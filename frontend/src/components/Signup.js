@@ -21,26 +21,26 @@ class Signup extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
     }
     //au click du bouton (handleClick) on envoie les données au serveur (axios, handleSubmit) 
-    handleClick(){
-        this.handleSubmit()
+    handleClick(e){
+        this.handleSubmit(e)
     }
 
     handleSubmit(e) {
-        
-        const data = JSON.stringify(this.state)
+       e.preventDefault();
+        const data = this.state
         console.log(data)
         function postData (data){
             axios
-            .post('http://localhost:3000/api/auth/signup',{
-                email: data.email,
-                password: data.password,
-                name: data.name,
-                lastname: data.lastname,
+            .post('http://localhost:3001/api/auth/signup',{
+                email: data.inputEmail,
+                password: data.inputPassword,
+                name: data.inputFirstName,
+                lastname: data.inputLastName,
             })
             .then((res) => console.log(res.data))
             .catch((err) => console.log(err));
         }
-        postData();
+        postData(data);
         //on réinitialise le formulaire après l'envoi
         this.setState({
             inputEmail :"",

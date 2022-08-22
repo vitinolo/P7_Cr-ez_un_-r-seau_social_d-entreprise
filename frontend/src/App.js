@@ -7,13 +7,12 @@ import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
-    
     <div className="App">
       <Routes>
         <Route path="/" element={<ConnexionPage/>} />
         <Route path="/Inscription" element={<InscriptionPage/>} />
         <Route path="/Feed" element={<FeedPostsPage/>} />
-        <Route path="/*" element={<NotFoundPage/> } />
+        <Route path="/*" element={<NotFoundPage/>} />
       </Routes>
     </div>
   );

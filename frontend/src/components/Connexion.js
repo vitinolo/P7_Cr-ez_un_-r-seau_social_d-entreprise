@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import "../styles/style.css";
 import { Link } from "react-router-dom"
 
-
 class Connexion extends Component {
     constructor(props){
         super(props);
@@ -11,7 +10,6 @@ class Connexion extends Component {
             inputPassword : "",
             inputFirstName : "",
             inputLastName : ""
-
         }
         this.handleChangeEmail = this.handleChangeEmail.bind(this)
         this.handleChangePassword = this.handleChangePassword.bind(this)
@@ -72,7 +70,7 @@ class Connexion extends Component {
                         </div>
                     </form>
                 </div>
-                <span className='inscription'><Link to="/inscription" target="_blank" title="Cliquez vers l'inscription">Inscription</Link></span>
+                <span className='inscription'><Link to="/inscription" title="Cliquez vers l'inscription">Inscription</Link></span>
             </div>
         );
     }

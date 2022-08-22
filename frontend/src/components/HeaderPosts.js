@@ -1,6 +1,7 @@
 import "../styles/header.css"
 import logo from '../assets/icon-left-font.svg'
 import { Link } from "react-router-dom"
+
  function HeaderPosts () {
     return ( 
         <div className="bigheader">
@@ -8,7 +9,7 @@ import { Link } from "react-router-dom"
                 <div className="headposts">
                     <div className='logoposts'><img src={logo} alt='groupomania'/>
                     </div>
-                    <span className='deconnexion'><Link to ="/" target="_blank" title="Cliquez pour vous déconnecter">Se déconnecter</Link></span>
+                    <span className='deconnexion'><Link to ="/" title="Cliquez pour vous déconnecter">Se déconnecter</Link></span>
                 </div>
             </div>
             <span className="titreposts">Bienvenu dans votre réseau social d'entreprise !</span> 

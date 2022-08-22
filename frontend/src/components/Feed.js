@@ -30,7 +30,6 @@ function Feed() {
         </div>
         <Comments />
     </div>
-
   );
 }
 
