@@ -1,64 +1,64 @@
 import React, { Component } from 'react';
 import "../styles/style.css";
-import { Link } from "react-router-dom"
+import { Link, } from "react-router-dom";
+import axios from "axios";
 
 class Connexion extends Component {
     constructor(props){
         super(props);
         this.state ={
             inputEmail :"",
-            inputPassword : "",
-            inputFirstName : "",
-            inputLastName : ""
-        }
+            inputPassword : "",            
+        };
+        //on bind les chgts
         this.handleChangeEmail = this.handleChangeEmail.bind(this)
         this.handleChangePassword = this.handleChangePassword.bind(this)
-        this.handleChangeFirstName = this.handleChangeFirstName.bind(this)
-        this.handleChangeLastName = this.handleChangeLastName.bind(this)
-        //this.handleClick = this.handleClick.bind(this)
-        
+        this.handleClick = this.handleClick.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
-    /*handleClick() {
-        this.setState({
-          inputEmail :  "",
-          inputPassword : "",
-          inputFirstName : "",
-          inputLastName : ""
-        })
-    }*/
-    
-
-    handleChangeEmail(e) {
-        console.log(e.target.value)
-        this.setState(() => ({
-            inputEmail : e.target.value
-        }))
-    }
-    handleChangePassword(e) {
-        console.log(e.target.value)
-        this.setState(() => ({
-            inputPassword : e.target.value
-        }))
-    }
-    handleChangeFirstName(e) {
-        console.log(e.target.value)
-        this.setState(() => ({
-            inputFirstName : e.target.value
-        }))
-    }
-    handleChangeLastName(e) {
-        console.log(e.target.value)
-        this.setState(() => ({
-            inputLastName : e.target.value
-        }))
-    }
-
-    render() {
+        //au click du bouton (handleClick) on envoie les données au serveur (axios, handleSubmit) 
+        handleClick (e) {
+            this.handleSubmit(e)
+        }
+        handleSubmit (e) {
+            e.preventDefault();
+            const data = this.state
+            console.log(data)
+            function postData (data){
+                axios
+                .post('http://localhost:3001/api/auth/login',{
+                    email: data.inputEmail,
+                    password: data.inputPassword,
+                })
+                .then((res) => console.log(res.data))
+                .catch((err) => console.log(err))
+            }
+            postData(data);
+            //on réinitialise le formulaire après l'envoi
+            this.setState({
+                inputEmail :"",
+                inputPassword : ""    
+            })     
+        } 
+        // nouvelle valeur des input
+        handleChangeEmail (e) {
+            console.log(e.target.value)
+            this.setState(() => ({
+                inputEmail : e.target.value
+            }))
+        }
+        handleChangePassword (e) {
+            console.log(e.target.value)
+            this.setState(() => ({
+                inputPassword : e.target.value
+            }))
+        }
+        render(){
         return (
             <div className="signup">
                 <h2>Se connecter</h2>
                 <div className="form">
-                    <form method="post" className='form-signup' id='myform'>
+                    <form onSubmit={this.handleSubmit} method="post" className='form-signup' id='myform'>
                         <div className='form__question'>
                             <input placeholder='Email' type="email" name="email" id="email" required value={this.state.inputEmail} onChange={this.handleChangeEmail}/>
                         </div>

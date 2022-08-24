@@ -26,7 +26,7 @@ class Signup extends Component {
     }
 
     handleSubmit(e) {
-       e.preventDefault();
+        e.preventDefault();
         const data = this.state
         console.log(data)
         function postData (data){
