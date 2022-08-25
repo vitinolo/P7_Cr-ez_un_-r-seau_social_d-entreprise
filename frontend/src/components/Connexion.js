@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "../styles/style.css";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 class Connexion extends Component {
@@ -23,6 +23,7 @@ class Connexion extends Component {
         handleSubmit (e) {
             e.preventDefault();
             const data = this.state
+            const userId = this.state.userId
             console.log(data)
             function postData (data){
                 axios
@@ -38,7 +39,13 @@ class Connexion extends Component {
             this.setState({
                 inputEmail :"",
                 inputPassword : ""    
-            })     
+            })
+            if(userId){
+                window.location.href ="http://localhost:3000/Feed";   
+            } else{
+                //window.location.href ="http://localhost:3000/auth/login"
+                return
+            }
         } 
         // nouvelle valeur des input
         handleChangeEmail (e) {
