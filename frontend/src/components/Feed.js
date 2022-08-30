@@ -2,14 +2,20 @@ import "../styles/style.css";
 import Comments from "../components/Comments";
 import Profile from "../components/Profile";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faTrash, faPen, faThumbsUp,faThumbsDown } from '@fortawesome/free-solid-svg-icons'
+import { faComment, faTrash, faPen, faThumbsUp,faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 
-function Feed() {
-  axios.get('http://localhost:3001/api/posts')
-  .then((res) => console.log(res))
-  .catch((err) => console.log(err))
 
+function getData() {
+  return axios.get('http://localhost:3001/api/posts')
+  .then(reponse => reponse.json())
+  .then(posts =>{
+    console.log(posts)
+  })
+}
+getData();
+function Feed () {
+  getData();
   return (
     <div className="feed_publication">
         <Profile />
@@ -32,5 +38,8 @@ function Feed() {
     </div>
   );
 }
-Feed();
+
+  
+
+
 export default Feed;

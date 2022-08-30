@@ -84,6 +84,9 @@ a{
     box-shadow: rgb(42 18 206 / 55%) 0 0 22px 6px;
     
 }
+.headposts{
+    display:flex;
+}
 .icone{
     color:#4e5166;
     cursor:pointer;
