@@ -6,16 +6,24 @@ import { faComment, faTrash, faPen, faThumbsUp,faThumbsDown } from '@fortawesome
 import axios from "axios";
 
 
-function getData() {
-  return axios.get('http://localhost:3001/api/posts')
-  .then(reponse => reponse.json())
-  .then(posts =>{
-    console.log(posts)
-  })
-}
-getData();
-function Feed () {
-  getData();
+  const getFeed = () => {
+    return axios
+    .get('http://localhost:3001/api/posts')
+    .then(posts =>
+    {
+      console.log(posts)
+      const post = posts.map((post, _id)=>
+        <div key={_id}>
+          {post.body}
+        </div>
+      );
+      Feed(post);
+    })
+    .catch((err) => console.log(err)) 
+  }
+  getFeed();
+
+function Feed (post) {
   return (
     <div className="feed_publication">
         <Profile />
@@ -23,7 +31,7 @@ function Feed () {
           Ceci est une image
         </div>
         <div className="texte_publication">
-          Ceci est un message
+          $({post.body})
         </div>
         <div className="modifyAndRemovePost">
           <span className="icone-remove icone"><FontAwesomeIcon icon={faTrash} /></span>
