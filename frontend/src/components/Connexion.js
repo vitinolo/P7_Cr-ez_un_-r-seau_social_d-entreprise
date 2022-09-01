@@ -7,12 +7,10 @@ function Connexion(props) {
     const [inputEmail, setInputEmail] = useState("")
     const [inputPassword, setInputPassword] = useState("")
     let navigate = useNavigate();
-
     //au click du bouton (handleClick) on envoie les données au serveur (axios, handleSubmit) 
     function handleClick (e) {
        handleSubmit(e)
     }
-
     function handleSubmit (e) {
         e.preventDefault()
         function postData() {
@@ -29,7 +27,7 @@ function Connexion(props) {
                 localStorage.setItem("userId", userId);
                 navigate('/Feed');
             })
-            .catch((err) => console.log(err))   
+            .catch((err) => alert(err ="identifiant ou mot de passe inconnut !"))   
         }
         postData();
         //on réinitialise le formulaire après l'envoi  

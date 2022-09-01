@@ -93,7 +93,6 @@ a{
 }
 .img_publication{
     background-color: white;
-    height:50px;
 }
 input{
     width:100%;
@@ -173,7 +172,6 @@ input::placeholder{
     background-color: white;
     border: solid 2px;
     color:#4e5166;
-    font-size: 20px;
 }
 .vote_publication{
     display:flex;

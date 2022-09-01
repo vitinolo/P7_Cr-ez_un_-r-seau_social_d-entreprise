@@ -1,17 +1,55 @@
+import React, { useState } from 'react';
 import "../styles/style.css";
+import axios from "axios";
 
 function FeedsPublisher() {
-  
-  return (
-    <div className="feeds_publication">
-      <span className="feed_title">Publiez votre message:</span>
-      <div className="feed_publication_send">
-        <button className="publication_button" title="Cliquez pour ajouter une image">Ajouter une image</button>
-        <input title="Cliquez puis écrire votre message" placeholder="Composez et partagez" type="text" name="text" id="text_feed"></input>
+  const [inputMessage, setInputMessage] = useState("")
+  const [image, setImage] = useState ("")
+
+  function handleClick (e) {
+    handleSubmit(e)
+  }
+
+  function handleSubmit (e) {
+    e.preventDefault()
+    function postData() {
+        return axios
+        .post('http://localhost:3001/api/posts',{
+            body: inputMessage,
+            imageURL: image,
+        })
+        // rècupèrer le token et le userId dans le localStorage
+        .then(function (res){
+          let token;
+          let userId;
+          localStorage.getItem("token", token);
+          localStorage.getItem("userId", userId);            
+        })
+        .catch((err) => alert(err ="identifiant ou mot de passe inconnut !"))   
+      }
+      postData();
+      //on réinitialise le formulaire après l'envoi 
+      useState = ("")
+    } 
+
+    function handleChangeMessage (e) {
+      setInputMessage(e.target.value)
+    }
+
+    function handleChangeImage (e) {
+      setImage(e.target.value)
+    }
+
+    return (
+      <div onSubmit={handleSubmit} className="feeds_publication">
+        <span className="feed_title">Publiez votre message:</span>
+        <div className="feed_publication_send">
+          <button className="publication_button" title="Cliquez pour ajouter une image" value={image} onChange={handleChangeImage}>Ajouter une image</button>
+          <input title="Cliquez puis écrire votre message" placeholder="Composez et partagez" type="text" name="text" id="text_feed" value={inputMessage} onChange={handleChangeMessage}></input>
+        </div>
+        <button onClick={handleClick} className="publication_button_send" title="Cliquez pour afficher votre message">Afficher</button>    
       </div>
-        <button className="publication_button_send" title="Cliquez pour afficher votre message">Afficher</button>    
-    </div>
-  );
+    );
 }
 
 export default FeedsPublisher;

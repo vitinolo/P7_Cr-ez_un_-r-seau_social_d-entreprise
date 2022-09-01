@@ -4,8 +4,8 @@ function Comment(){
     return(
     <div className="comment">
             <Profile />
-            <div className="img_publication">Ceci est une image</div>
-            <div className="texte_publication">ceci est un commentaire !</div>
+            <div className="img_publication"></div>
+            <div className="texte_publication"></div>
     </div>);
 }
 
