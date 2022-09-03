@@ -1,12 +1,13 @@
 import "../styles/style.css";
 import Profile from "../components/Profile";
-function Comment(){
-    return(
-    <div className="comment">
-            <Profile />
-            <div className="img_publication"></div>
-            <div className="texte_publication"></div>
-    </div>);
+
+const Comment = ({comment}) => {
+    return (
+        <div className="comment">
+                <Profile />
+                <img className="img_comment" src={comment.imageUrl} alt=""></img>
+                <span className="texte_publication_comment">{comment.body}</span>
+        </div>);
 }
 
 export default Comment

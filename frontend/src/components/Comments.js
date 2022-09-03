@@ -1,11 +1,24 @@
 import "../styles/style.css";
 import Comment from"./Comment";
 import CommentsPublisher from "./CommentsPublisher";
-function Comments() {
+import axios from "axios";
+import React, { useState, useEffect } from 'react';
+
+const Comments = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/api/comments')
+      .then((res) => setData(res.data));   
+  },[]);
+      
+  console.log({data})
+
   return (
-    <div className="comments">
-      <Comment />
-     <CommentsPublisher />
+    <div className="comments">{data.map((comment, data_id) => (
+        <Comment key={data_id} comment={comment} />))}
+      <CommentsPublisher />
     </div>
   );
 }
