@@ -13,8 +13,11 @@ a{
     align-items: center;
     width:60%;
     background-color:#ffd7d7;
+    box-shadow: 10px 5px 5px black;
     border-radius: 10px;
+    padding: 15px;
     margin-top: 20px;
+    /*animation: titre ease 3.5s;*/
 }
 .connexion a:hover{
     transition:0.6s;
@@ -46,7 +49,9 @@ a{
     flex-direction: column;
     align-items: center;
     background-color:#ffd7d7;
+    box-shadow: 10px 5px 5px black;
     border-radius: 10px;
+    padding: 15px;
     width:60%;  
 }
 .feed_title{
@@ -63,16 +68,14 @@ a{
 .form__question  {
     margin: 10px;
     
-    font-size: 15px;
-    
+    font-size: 15px;  
 }
 .form-signup{
     margin-bottom: 20px;
 }
 .form__submit {
     display: flex;
-    justify-content: center;
-    
+    justify-content: center;   
 }
 .form__submit:hover{
     cursor: pointer;
@@ -91,8 +94,7 @@ a{
 .form__submit input:hover {
     background-color: #fd2d01;
     transition:0.5s;
-    box-shadow: rgb(42 18 206 / 55%) 0 0 22px 6px;
-    
+    box-shadow: rgb(42 18 206 / 55%) 0 0 22px 6px; 
 }
 .headposts{
     display:flex;
@@ -101,15 +103,8 @@ a{
     color:#4e5166;
     cursor:pointer;
 }
-.icone :hover{
-    transition:0.4s;
-    color:#fd2d01;
-}
 .icone-like {
     color:green;
-}
-.icone-dislike{
-    color:#fd2d01;
 }
 .img_comment{
     background-color: white;
@@ -150,11 +145,12 @@ input::placeholder{
 }
 .post{
     background-color:#ffd7d7;
+    box-shadow: 10px 5px 5px black;
     border-radius: 10px;
-    padding:10px;
+    margin:20px 0px 20px 0px;
+    padding:15px;
 }
 .posts{
-    background-color:white;
     border-radius: 10px;
 }
 .profile{
@@ -173,8 +169,7 @@ input::placeholder{
 .publication_button:hover{
     background-color: #fd2d01;
     transition:0.5s;
-    box-shadow: rgb(42 18 206 / 55%) 0 0 22px 6px;
-    
+    box-shadow: rgb(42 18 206 / 55%) 0 0 22px 6px;  
 }
 .publication_button_send{
     width:150px;
@@ -190,8 +185,7 @@ input::placeholder{
 .publication_button_send:hover{
     background-color: #fd2d01;
     transition:0.5s;
-    box-shadow: rgb(42 18 206 / 55%) 0 0 22px 6px;
-    
+    box-shadow: rgb(42 18 206 / 55%) 0 0 22px 6px;   
 }
 .publication_file{
     border-radius:0px;
@@ -208,10 +202,8 @@ input::placeholder{
     border-radius: 10px;
     padding:10px;
     background-color:#ffd7d7;
+    box-shadow: 10px 5px 5px black;
     margin:0px 50px 0px 50px;
-}
-#text_feed{
-    width:100%;
 }
 .texte_publication{
     background-color: white;
@@ -237,3 +229,13 @@ input::placeholder{
     padding:5px;
 }
 
+/*@keyframes titre{
+    0%{
+        opacity: 0;
+        transform: translateY(180px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}*/

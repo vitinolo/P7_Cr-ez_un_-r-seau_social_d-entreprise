@@ -14,7 +14,7 @@ function CommentsPublisher () {
         e.preventDefault()
         function postData() {
             return axios
-            .post('http://localhost:3001/api/posts',{
+            .post('http://localhost:3001/api/comments',{
                 body: inputMessage,
                 imageURL: image,
             })
@@ -41,15 +41,15 @@ function CommentsPublisher () {
         }
     
     return (
-        <div onSubmit={handleSubmit} className="comments_publication">
+        <div onSubmit={handleSubmit} className="comments_publication" id="publisher_comment">
             <span className="feed_title">Commentez:</span>
             <div className="publication_send">
                 <input  type="file" accept=".Jpg, .Jpeg, .png" className="publication_file" title="Cliquez pour ajouter une image" value={image} onChange={handleChangeImage}></input>
                 <input title="Cliquez puis écrire votre message" placeholder="Tapez ici votre message" type="text" name="text" id="text_feed" value={inputMessage} onChange={handleChangeMessage}></input>
             </div>
-            <button onClick={handleClick} className="publication_button_send" title="Cliquez pour afficher votre message">Afficher</button>
+            <button onClick={handleClick} className="publication_button_send" title="Cliquez pour afficher votre message">Afficher le commentaire</button>
         </div>
     );
 }
 
-export default CommentsPublisher
+export default CommentsPublisher;

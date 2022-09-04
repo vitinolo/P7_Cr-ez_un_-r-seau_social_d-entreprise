@@ -1,9 +1,11 @@
 import "../styles/style.css";
 
-function Profile () {
+
+
+const Profile = () => {
     return (
             <div className="profile">
-                <div className="profile_img"> photo de profile de </div>
+                <div className="profile_img" > photo de profil de </div>
                 <span className="profile_firstname"> roger </span>
                 <span className="profile_lastname"> duchesne</span>
                 <span className="created_at"></span>

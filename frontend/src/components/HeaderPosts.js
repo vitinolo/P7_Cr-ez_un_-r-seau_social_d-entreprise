@@ -3,8 +3,9 @@ import logo from '../assets/icon-left-font.svg'
 import { Link } from "react-router-dom"
 
  function HeaderPosts () {
-    return ( 
-        <div className="bigheader">
+    
+     return ( 
+         <div className="bigheader">
             <div className="headerposts">
                 <div className="headposts">
                     <div className='logoposts'><img src={logo} alt='groupomania'/>

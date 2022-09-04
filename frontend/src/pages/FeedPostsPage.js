@@ -10,7 +10,7 @@ function FeedPostsPage () {
         <HeaderPosts />
         <FeedsPublisher />
         <Feeds /> 
-        <CommentsPublisher />         
+        <CommentsPublisher />      
     </div>
     )
 }
