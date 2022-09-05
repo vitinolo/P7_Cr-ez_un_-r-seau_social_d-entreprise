@@ -16,8 +16,8 @@ const Comments = () => {
   console.log({data})
 
   return (
-    <div className="comments">{data.map((comment, data_id) => (
-        <Comment key={data_id} comment={comment} />))}
+    <div className="comments">{data.map((comment, index) => (
+      <Comment key={index} comment={comment} />))}
       <CommentsPublisher />
     </div>
   );

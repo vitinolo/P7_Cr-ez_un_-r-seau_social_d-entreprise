@@ -1,4 +1,5 @@
 import "../styles/notfoundpage.css";
+
 function NotFoundPage (){
     return (
         <div className="notfound">
