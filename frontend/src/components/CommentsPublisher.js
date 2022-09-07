@@ -47,7 +47,7 @@ function CommentsPublisher () {
                 <input  type="file" accept=".Jpg, .Jpeg, .png" className="publication_file" title="Cliquez pour ajouter une image" value={image} onChange={handleChangeImage}></input>
                 <input title="Cliquez puis écrire votre message" placeholder="Tapez ici votre message" type="text" name="text" id="text_feed" value={inputMessage} onChange={handleChangeMessage}></input>
             </div>
-            <button onClick={handleClick} className="publication_button_send" title="Cliquez pour afficher votre message">Afficher le commentaire</button>
+            <button onClick={handleClick} className="publication_button_send" title="Cliquez pour afficher votre message">Publier le commentaire</button>
         </div>
     );
 }

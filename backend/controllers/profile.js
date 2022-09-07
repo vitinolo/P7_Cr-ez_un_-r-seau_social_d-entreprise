@@ -89,7 +89,7 @@ async function deleteProfile(req, res, next) {
   }
   if (req.file) {
     Profile.findOne({ _id: req.params.id })
-    .then((Profile) => {
+    .then((profile) => {
       const filename = post.imageUrl.split("/images/")[1];
       fs.unlink(`images/${filename}`, () => {  
     Profile.deleteOne({ _id: req.params.id })

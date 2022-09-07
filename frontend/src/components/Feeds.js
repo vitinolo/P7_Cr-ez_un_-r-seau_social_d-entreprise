@@ -9,7 +9,11 @@ const Feeds = () => {
   
   useEffect(() => {
     axios
-    .get('http://localhost:3001/api/posts')
+    .get('http://localhost:3001/api/posts',{
+      headers:{
+        'Authorization': 'Bearer '+ localStorage.getItem("token")
+      }
+    })
     .then((res) => setData(res.data));   
   },[]);
   
