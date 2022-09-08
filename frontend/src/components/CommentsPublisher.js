@@ -17,6 +17,10 @@ function CommentsPublisher () {
             .post('http://localhost:3001/api/comments',{
                 body: inputMessage,
                 imageURL: image,
+            },{
+              headers:{
+                'Authorization': 'Bearer '+ localStorage.getItem("token")
+              }
             })
             // rècupèrer le token et le userId dans le localStorage
             .then(function (res){

@@ -7,7 +7,6 @@ const path = require("path");
 const postRoutes = require("./routes/post");
 const userRoutes = require("./routes/user");
 const commentRoutes = require("./routes/comment");
-const profileRoutes = require("./routes/profile");
 const dotenv = require("dotenv");
 const result = dotenv.config();
 
@@ -49,6 +48,5 @@ app.use("/api/posts", postRoutes);
 app.use("/api/auth", limiter, userRoutes);
 app.use("/api/auth", userRoutes);
 app.use("/api/comments", commentRoutes);
-app.use("/api/profiles", profileRoutes);
 app.use(helmet());
 module.exports = app;

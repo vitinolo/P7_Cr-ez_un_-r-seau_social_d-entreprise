@@ -15,16 +15,17 @@ function FeedsPublisher() {
     function postData() {
       let userId;
       let file;
-      const formData = new FormData();
+      const formData = require ('form-data');
+      const form = new FormData();
       formData.append("filename", file);
       formData.append("destination", "images");
-      let imageUrl = formData;
+      
         return axios
         .post('http://localhost:3001/api/posts',{
           post:{
             userId: localStorage.getItem("userId", userId),
             body: inputMessage,
-            imageUrl, 
+            form
           }
         },{
           headers:{
