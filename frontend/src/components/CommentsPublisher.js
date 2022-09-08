@@ -8,41 +8,51 @@ function CommentsPublisher () {
     
     function handleClick (e) {
         handleSubmit(e)
-      }
+    }
     
-      function handleSubmit (e) {
-        e.preventDefault()
-        function postData() {
-            return axios
-            .post('http://localhost:3001/api/comments',{
-                body: inputMessage,
-                imageURL: image,
-            },{
-              headers:{
-                'Authorization': 'Bearer '+ localStorage.getItem("token")
+    function handleSubmit (e) {
+      e.preventDefault()
+      function postData() {
+          let userId;
+          let file;
+          const formData = require ('form-data');
+          const form = new FormData();
+          formData.append("filename", file);
+          formData.append("destination", "images");
+
+          return axios
+          .post('http://localhost:3001/api/comments',{
+              comment:{
+                  userId: localStorage.getItem("userId", userId),
+                  body: inputMessage,
+                  form
               }
-            })
-            // rècupèrer le token et le userId dans le localStorage
-            .then(function (res){
-              let token;
-              let userId;
-              localStorage.getItem("token", token);
-              localStorage.getItem("userId", userId);            
-            })
-            .catch((err) => alert(err ="identifiant ou mot de passe inconnut !"))   
-          }
-          postData();
-          //on réinitialise le formulaire après l'envoi 
-          useState = ("")
-        } 
+          },{
+            headers:{
+              'Authorization': 'Bearer '+ localStorage.getItem("token")
+            }
+          })
+          // rècupèrer le token et le userId dans le localStorage
+          .then(function (res){
+            let token;
+            let userId;
+            localStorage.getItem("token", token);
+            localStorage.getItem("userId", userId);            
+          })
+          .catch((err) => alert(err ="identifiant ou mot de passe inconnut !"))   
+      }
+      postData();
+      //on réinitialise le formulaire après l'envoi 
+      useState = ("")
+    } 
     
-        function handleChangeMessage (e) {
-          setInputMessage(e.target.value)
-        }
-    
-        function handleChangeImage (e) {
-          setImage(e.target.value)
-        }
+    function handleChangeMessage (e) {
+      setInputMessage(e.target.value)
+    }
+
+    function handleChangeImage (e) {
+      setImage(e.target.value)
+    }
     
     return (
         <div onSubmit={handleSubmit} className="comments_publication" id="publisher_comment">

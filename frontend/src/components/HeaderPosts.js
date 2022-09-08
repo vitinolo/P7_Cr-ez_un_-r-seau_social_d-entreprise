@@ -3,7 +3,6 @@ import logo from '../assets/icon-left-font.svg'
 import { Link } from "react-router-dom"
 
  function HeaderPosts () {
-    
      return ( 
          <div className="bigheader">
             <div className="headerposts">

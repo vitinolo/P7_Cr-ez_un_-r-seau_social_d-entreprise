@@ -2,13 +2,21 @@ a {
     cursor: pointer;
     text-decoration: none;
 }
-
+.article-post{
+    display:flex;
+    justify-content: center;
+}
 .bigheader {
     width: 100%;
 }
 
 .comment {
-    background-color: white;
+    display:flex;
+    flex-direction: column;
+    background-color:white;
+    border-radius: 0px 0px 10px 10px;
+    margin: 20px 0px 0px 0px;
+    width: 100%;
 }
 
 .comments_publication {
@@ -70,6 +78,7 @@ a {
     border-radius: 10px;
     padding: 15px;
     width: 60%;
+    animation: titre ease 3.5s;
 }
 .feedpublidetail{
     width:60%;
@@ -131,13 +140,18 @@ a {
 }
 
 .icone {
+    display:flex;
+    justify-content: space-between;
     color: #4e5166;
     cursor: pointer;
 }
-
+.iconesInteract{
+    width:100%;
+}
 .icone-like {
     color: green;
 }
+
 .iconesinterdetail{
     width:80%;
 }
@@ -179,20 +193,22 @@ input::placeholder {
 
 .modifyAndRemovePost {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 5px;
 }
 
 .post {
+    display:flex;
+    flex-direction: column;
     background-color: #ffd7d7;
     box-shadow: 10px 5px 5px black;
     border-radius: 10px;
-    margin: 20px 0px 20px 0px;
-    padding: 15px;
+    margin: 20px 0px 0px 0px;
+    padding: 15px 25px 20px 25px;
 }
 
 .post:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     transition: 0.4s ease-in-out;
 }
 
@@ -290,7 +306,7 @@ input::placeholder {
 @keyframes titre{
     0%{
         opacity: 0;
-        transform: translateY(180px);
+        transform: translateY(380px);
     }
     100% {
         opacity: 1;

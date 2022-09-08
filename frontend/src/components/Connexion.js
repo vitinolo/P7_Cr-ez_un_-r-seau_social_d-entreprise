@@ -29,8 +29,7 @@ function Connexion(props) {
             })
             .catch((err) => alert(err ="identifiant ou mot de passe inconnut !"))   
         }
-        postData();
-        //on réinitialise le formulaire après l'envoi  
+        postData();  
     } 
     
     // nouvelle valeur des input

@@ -1,8 +1,10 @@
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
-import Feed from "../components/Feed";
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { Link }  from "react-router-dom";
+import Profile from "../components/Profile";
 import HeaderPosts from "../components/HeaderPosts";
+import Comment from "../components/Comment";
 import CommentsPublisher from "../components/CommentsPublisher";
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
@@ -12,7 +14,7 @@ const FeedPostDetail = (post) => {
   
   useEffect(() => {
     axios
-    .get('http://localhost:3001/api/posts/_id',{
+    .get('http://localhost:3001/api/posts',{
       headers:{
         'Authorization': 'Bearer '+ localStorage.getItem("token")
       }
@@ -24,16 +26,21 @@ const FeedPostDetail = (post) => {
     return (
         <div className="feedpostdetail">
             <HeaderPosts />
+            <CommentsPublisher /> 
             <div className="feedpublidetail">
-              <Feed  post={post} />
+              <div className="post">
+                  <Link to="/feedpostdetail" title="Cliquez vers le post">
+                      <h3><span className="article-post">Publication de :</span></h3>
+                      <Profile />
+                      <img className="img_feed" src="" alt=""></img>
+                      <p className="texte_publication_feed">{post.body}</p>
+                      <div className="vote_publication">
+                          <span className="icone-like icone"><FontAwesomeIcon icon={faThumbsUp} /></span>
+                      </div>
+                  </Link>
+                  <Comment />
+              </div>
             </div>
-            <div className="iconesinterdetail">
-                <div className="modifyAndRemovePost">
-                    <button className="icone-remove icone"><FontAwesomeIcon icon={faTrash} /></button>
-                    <button className="icone-modify icone"><FontAwesomeIcon icon={faPen} /></button>
-                </div>   
-            </div>
-             <CommentsPublisher /> 
         </div>
     );
 };

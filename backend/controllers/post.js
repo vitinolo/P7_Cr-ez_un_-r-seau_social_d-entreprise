@@ -4,7 +4,6 @@ const fs = require("fs");
 //création d'un post
 exports.createPost = (req, res, next) => {
   const postObject = req.body.post;
-  console.log("salutt",postObject)
   let post;
   if (req.file) {
     post = new Post({
@@ -16,7 +15,6 @@ exports.createPost = (req, res, next) => {
   } else {
     post = new Post({ ...postObject });
   }
-  console.log("salut",post)
   post
     .save()
     .then(() => res.status(201).json({ message: "post enregistré !" }))

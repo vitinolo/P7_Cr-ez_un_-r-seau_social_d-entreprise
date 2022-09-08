@@ -7,10 +7,11 @@ import { Link } from "react-router-dom"
         <div className="bigheader">
             <div className="header">
                 <div className="head">
-                    <div className='logo'><img src={logo} alt='groupomania'/></div>
+                    <div className='logo'><img src={logo} alt='groupomania'/>
                     </div>
-                    <span className='inscription'><Link to="/inscription" title="Cliquez vers l'inscription">Inscription</Link></span>
-                    <span className='connexion'><Link to ="/" title="Cliquez vers la connexion">Se connecter</Link></span>
+                </div>
+                <span className='inscription'><Link to="/inscription" title="Cliquez vers l'inscription">Inscription</Link></span>
+                <span className='connexion'><Link to ="/" title="Cliquez vers la connexion">Se connecter</Link></span>
             </div>  
             <span className="titre">Bienvenu dans votre réseau d'entreprise !</span>
         </div> 
