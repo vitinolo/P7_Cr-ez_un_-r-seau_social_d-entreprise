@@ -18,13 +18,12 @@ function FeedsPublisher() {
         const formData = require ('form-data');
         const form = new FormData();
         formData.append("filename", file);
-        formData.append("destination", "images");
+        formData.append("body", form.body);
       
         return axios
         .post('http://localhost:3001/api/posts',{
           post:{
             userId: localStorage.getItem("userId", userId),
-            body: inputMessage,
             form
           }
         },{
@@ -58,7 +57,7 @@ function FeedsPublisher() {
     <div onSubmit={handleSubmit} className="feeds_publication">
       <span className="feed_title">Publiez votre message:</span>
       <div className="feed_publication_send">
-        <input type="file" accept=".Jpg, .Jpeg, .jpg, .jpeg, .Png, .png" className="publication_file" title="Cliquez pour ajouter une image" value={image} onChange={handleChangeImage}></input>
+        <input type="file" accept=".jpg, .jpeg, .png" id="file" name="file" className="publication_file" title="Cliquez pour ajouter une image" value={image} onChange={handleChangeImage}></input>
         <input title="Cliquez puis écrire votre message" placeholder="Tapez ici votre message" type="text" name="text" id="text_feed" value={inputMessage} onChange={handleChangeMessage}></input>
       </div>
       <button onClick={handleClick} className="publication_button_send" title="Cliquez pour afficher votre message">Publier l'article</button>    
