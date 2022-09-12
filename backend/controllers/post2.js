@@ -1,5 +1,4 @@
 const Post = require("../models/Post");
-const User = require("../models/User");
 const fs = require("fs");
 
 //création d'un post
@@ -8,31 +7,18 @@ exports.createPost = (req, res, next) => {
     userId: req.body.userId,
     body: req.body.body,
   }
-  if (req.file){
-    postObject.imageUrl= `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-  }else{
-    postObject.imageUrl = ""
+  if (req.body.file){
+    postObject.imageUrl= `${req.protocol}://${req.get("host")}/images/${req.body.filename}`
   }
   const post = new Post({...postObject});
   delete postObject._id;
-  console.log(post)
   post
     .save()
     .then(() => res.status(201).json({ message: "post enregistré !" }))
     .catch((error) => res.status(400).json({ error }));
-  };
-  
-  //voir toutes les posts
-  exports.getAllPost = (req, res, next) => {
-    Post.find()
-      .then((posts) => {
-        res.status(200).json(posts);
-      })
-      .catch((error) => {
-        res.status(400).json({ error });
-      });
-  };
-  //sélection d'un post
+};
+
+//sélection d'un post
 exports.getOnePost = (req, res, next) => {
   Post.findOne({ _id: req.params.id })
     .then((post) => {
@@ -45,15 +31,13 @@ exports.getOnePost = (req, res, next) => {
 
 
 //modifier un post
-exports.modifyPost = async (req, res, next) => {
+function modifyPost(req, res, next)  {
   //récupèrer user et post
-  const post =  await Post.findOne({ _id: req.params.id})
-  const user =  await User.findOne({ id:req.body.userId })
-  console.log(post)
+  const post =  Post.findOne({ _id: req.params.id})
+  const user =  User.findOne({ id:req.body.userId })
   const userAuthorized = user.isAdmin || req.body.userId === post.userId
   //si ma requête contient un fichier 
-  const postObject = req.file ? {...req.body.post ,imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,} : { ...req.body.post };
-  console.log(postObject)
+  const postObject = req.file? {...JSON.parse(req.body.post),imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,}: { ...req.body };
   //si l'utilisateur n'est pas autorisé, message d'erreur
   if(!userAuthorized){
     return  res.status(403).json({ error: new Error("unauthorized request") });
@@ -61,13 +45,10 @@ exports.modifyPost = async (req, res, next) => {
   //trouver le post et le supprimer
   if (req.file) {
     Post.findOne({ _id: req.params.id })
-      .then((postone) => {
-        console.log(postone)
-        if(post.imageUrl !=""){
-          const filename = postone.imageUrl.split("/images/")[1];
-          fs.unlink(`images/${filename}` )  
-        }
-          Post.findOneAndUpdate(
+      .then((post) => {
+        const filename = post.imageUrl.split("/images/")[1];
+        fs.unlink(`images/${filename}`, () => {
+          Post.updateOne(
             { _id: req.params.id },
             { ...postObject, _id: req.params.id }
           )
@@ -77,8 +58,8 @@ exports.modifyPost = async (req, res, next) => {
             .catch((error) => {
               res.status(400).json({ error });
             });
+        });
       })
-      
       .catch((error) => {
         res.status(500).json({ error });
       });
@@ -88,16 +69,17 @@ exports.modifyPost = async (req, res, next) => {
       { _id: req.params.id },
       { ...postObject, _id: req.params.id }
     )
-      .then(() => res.status(200).json({ message: "Post mise à jour" }))
+      .then(() => res.status(200).json({ message: "Post mise à jour!" }))
       .catch((error) => res.status(400).json({ error }));
   }
 };
+module.exports.modifyPost = modifyPost
 
 //supprimer un post
- exports.deletePost = (req, res, next) =>{
+async function deletePost(req, res, next) {
    // récupèrer user et post
-   const comment = Post.findOne({ id: req.params.id })
-   const user = User.findOne({ id:req.body.userId })
+   const comment = await Post.findOne({ id: req.params.id })
+   const user = await User.findOne({ id:req.body.userId })
    const userAuthorized = user.isAdmin || req.body.userId === comment.userId
    //si l'utilisateur n'est pas autorisé, message d'erreur
    if(!userAuthorized){
@@ -118,6 +100,18 @@ exports.modifyPost = async (req, res, next) => {
       .then(() => res.status(200).json({ message: "Post supprimé !" }))
       .catch((error) => res.status(400).json({ error }))
   }
+};
+module.exports.deletePost = deletePost
+
+//voir toutes les posts
+exports.getAllPost = (req, res, next) => {
+  Post.find()
+    .then((posts) => {
+      res.status(200).json(posts);
+    })
+    .catch((error) => {
+      res.status(400).json({ error });
+    });
 };
 
 //création et modification des likes pour les posts

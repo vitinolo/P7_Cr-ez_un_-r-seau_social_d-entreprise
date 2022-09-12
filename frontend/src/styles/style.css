@@ -13,7 +13,8 @@ a {
     display:flex;
     flex-direction: column;
     background-color:white;
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 10px;
+    border:2px solid#ffd7d7 ;
     margin: 20px 0px 0px 0px;
     width: 100%;
 }
@@ -25,6 +26,7 @@ a {
     background-color: #ffd7d7;
     box-shadow: 10px 5px 5px black;
     border-radius: 10px;
+    border:2px solid white ;
     padding: 15px;
     margin-top: 20px;
     animation: titre ease 3.5s;
@@ -69,6 +71,7 @@ a {
     background-color: #ffd7d7;
     box-shadow: 10px 5px 5px black;
     border-radius: 10px;
+    border:2px solid white ;
     padding: 15px;
     width: 60%;
     animation: titre ease 3.5s;
@@ -178,6 +181,7 @@ input::placeholder {
     background-color: #ffd7d7;
     box-shadow: 10px 5px 5px black;
     border-radius: 10px;
+    border:2px solid white ;
     margin: 20px 0px 0px 0px;
     padding: 15px 25px 20px 25px;
 }

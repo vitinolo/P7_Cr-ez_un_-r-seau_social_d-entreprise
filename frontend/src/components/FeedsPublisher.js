@@ -5,6 +5,7 @@ import axios from "axios";
 function FeedsPublisher() {
   const [inputMessage, setInputMessage] = useState("")
   const [image, setImage] = useState ("")
+  const [file, setFile] = useState ("")
 
   function handleClick (e) {
     handleSubmit(e)
@@ -13,20 +14,16 @@ function FeedsPublisher() {
   function handleSubmit (e) {
     e.preventDefault()
     function postData() {
-        let userId;
-        let file;
-        const formData = require ('form-data');
+        const userid = localStorage.getItem("userId");
+        const userId = userid;
         const form = new FormData();
-        formData.append("filename", file);
-        formData.append("body", form.body);
+//si fichier sélectionné on ajoute sinon rien
+        form.append("image", file, image);
+        form.append("userId", userId);
+        form.append("body", inputMessage);
       
         return axios
-        .post('http://localhost:3001/api/posts',{
-          post:{
-            userId: localStorage.getItem("userId", userId),
-            form
-          }
-        },{
+        .post('http://localhost:3001/api/posts', form,{
           headers:{
             'Authorization': 'Bearer '+ localStorage.getItem("token")
           }
@@ -50,7 +47,9 @@ function FeedsPublisher() {
   }
 
   function handleChangeImage (e) {
+    console.log(e.target.value)
     setImage(e.target.value)
+    setFile(e.target.files[0])
   }
 
   return (
