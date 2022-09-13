@@ -17,7 +17,7 @@ function FeedsPublisher() {
         const userid = localStorage.getItem("userId");
         const userId = userid;
         const form = new FormData();
-//si fichier sélectionné on ajoute sinon rien
+    //si fichier sélectionné on ajoute sinon rien
         form.append("image", file, image);
         form.append("userId", userId);
         form.append("body", inputMessage);
@@ -35,9 +35,10 @@ function FeedsPublisher() {
           localStorage.getItem("token", token);
           localStorage.getItem("userId", userId);            
         })
-        .catch((err) => alert(err ="identifiant ou mot de passe inconnut !"))   
+        .catch((err) => alert(err ="mettre une image et/ou un texte !"))   
       }
         postData();
+        window.location.reload(true);
         //on réinitialise le formulaire après l'envoi 
         useState = ("")
   } 

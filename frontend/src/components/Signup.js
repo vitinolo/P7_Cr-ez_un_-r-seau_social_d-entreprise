@@ -11,8 +11,8 @@ function Signup () {
 
     function handleClick (e) {
         handleSubmit(e)
-     }
-     function handleSubmit (e) {
+    }
+    function handleSubmit (e) {
         e.preventDefault()
         function postData() {
             return axios

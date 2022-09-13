@@ -1,10 +1,11 @@
-import Profile from "./Profile";
 import { Link }  from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+
+import Profile from "./Profile";
 import IconesInteract from "./IconesInteract";
+import VotePublication from "./VotePublication";
 
 const Feed = ({post}) => {
+    
     return (
         <>
         <div className="post">
@@ -12,11 +13,9 @@ const Feed = ({post}) => {
                 <h3><span className="article-post">Publication de:</span></h3>
                 <Profile />
                 <img className="img_feed" src={post.imageUrl} alt=""/>
-                <p className="texte_publication_feed">{post.body}</p>
-                <div className="vote_publication">
-                    <span className="icone-like icone"><FontAwesomeIcon icon={faThumbsUp} /></span>
-                </div>
+                <span className="texte_publication_feed">{post.body}</span>
             </Link>
+            <VotePublication post ={post} />
             <IconesInteract />
         </div>
         </>
