@@ -4,8 +4,9 @@ import axios from "axios";
 
 function CommentsPublisher () {
     const [inputMessage, setInputMessage] = useState("")
-    const [image, setImage] = useState ();
-    
+    const [image, setImage] = useState ("");
+    const [file, setFile] = useState ("")
+
     function handleClick (e) {
         handleSubmit(e)
     }
@@ -13,21 +14,16 @@ function CommentsPublisher () {
     function handleSubmit (e) {
       e.preventDefault()
       function postData() {
-          let userId;
-          let file;
-          const formData = require ('form-data');
-          const form = new FormData();
-          formData.append("filename", file);
-          formData.append("destination", "images");
+        const userid = localStorage.getItem("userId");
+        const userId = userid;
+        const form = new FormData();
+        //si fichier sélectionné on ajoute sinon rien
+        form.append("image", file, image);
+        form.append("userId", userId);
+        form.append("body", inputMessage);
 
           return axios
-          .post('http://localhost:3001/api/comments',{
-              comment:{
-                  userId: localStorage.getItem("userId", userId),
-                  body: inputMessage,
-                  form
-              }
-          },{
+          .post('http://localhost:3001/api/comments', form,{
             headers:{
               'Authorization': 'Bearer '+ localStorage.getItem("token")
             }
@@ -39,9 +35,10 @@ function CommentsPublisher () {
             localStorage.getItem("token", token);
             localStorage.getItem("userId", userId);            
           })
-          .catch((err) => alert(err ="identifiant ou mot de passe inconnut !"))   
+          .catch((err) => alert(err ="mettre une image et/ou un texte !"))   
       }
       postData();
+      window.location.reload(true);
       //on réinitialise le formulaire après l'envoi 
       useState = ("")
     } 
@@ -51,7 +48,9 @@ function CommentsPublisher () {
     }
 
     function handleChangeImage (e) {
-      setImage(e.target.files[0])
+      console.log(e.target.value)
+      setImage(e.target.value)
+      setFile(e.target.files[0])
     }
     
     return (

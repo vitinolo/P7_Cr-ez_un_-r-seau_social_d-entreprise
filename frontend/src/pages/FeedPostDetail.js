@@ -5,43 +5,58 @@ import Profile from "../components/Profile";
 import HeaderPosts from "../components/HeaderPosts";
 import Comment from "../components/Comment";
 import CommentsPublisher from "../components/CommentsPublisher";
-//import axios from "axios";
-//import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import React, { useEffect } from 'react';
+
+//récupèrer id et userId
+const id = recupId();
+let userId;
+userId =localStorage.getItem("userId", userId);
+
+function recupId () 
+{
+    let queryStringUrlId = window.location.search;
+    let urlSearchParams = new URLSearchParams(queryStringUrlId);
+    return urlSearchParams.get('id');   
+} 
 
 const FeedPostDetail = (post) => {
-  /*const [data, setData] = useState([]);
-  
   useEffect(() => {
     axios
-    .get('http://localhost:3001/api/post/:id',{
+    .get('http://localhost:3001/api/posts/63202174572391bac08ab324',{
       headers:{
         'Authorization': 'Bearer '+ localStorage.getItem("token")
-      }
+      },
     })
-    .then((res) => setData(res.data));   
+    .then (post => {
+       post ={
+        imageUrl : post.imageUrl,
+        body: post.body
+       } 
+    }) 
   },[]);
-  console.log({data})*/
+  console.log(post)
   
-    return (
-        <div className="feedpostdetail">
-            <HeaderPosts />
-            <CommentsPublisher /> 
-            <div className="feedpublidetail">
-              <div className="post">
-                  <>
-                      <h3><span className="article-post">Publication de :</span></h3>
-                      <Profile />
-                      <img className="img_feed" src="" alt=""></img>
-                      <p className="texte_publication_feed">{post.body}</p>
-                      <div className="vote_publication">
-                          <span className="icone-like icone"><FontAwesomeIcon icon={faThumbsUp} /></span>
-                      </div>
-                  </>
-              </div>
-                  <Comment />
+  return (
+      <div className="feedpostdetail">
+          <HeaderPosts />
+          <CommentsPublisher /> 
+          <div className="feedpublidetail">
+            <div className="post">
+                <>
+                  <h3 className="article-post">Publication de :</h3>
+                  <Profile />
+                  <img className="img_feed" src={post.imageUrl} alt=""/>
+                  <p className="texte_publication_feed">{post.body}</p>
+                  <div className="vote_publication">
+                      <span className="icone-like icone"><FontAwesomeIcon icon={faThumbsUp} /></span>
+                  </div>
+                </>
             </div>
-        </div>
-    );
+            <Comment />
+          </div>
+      </div>
+  );
 };
 
 export default FeedPostDetail;

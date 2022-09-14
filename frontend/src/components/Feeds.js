@@ -14,11 +14,11 @@ const Feeds = () => {
         'Authorization': 'Bearer '+ localStorage.getItem("token")
       }
     })
-    .then((res) => setData(res.data));   
+    .then((res) => setData(res.data))  
   },[]);
   
-  console.log({data})
- 
+  console.log(data)
+  
   return ( 
     <div className="feed_publication" >
         <div className="posts">{data.map((post, index) => (

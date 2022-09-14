@@ -5,7 +5,7 @@ import IconesInteract from "./IconesInteract";
 import VotePublication from "./VotePublication";
 
 const Feed = ({post}) => {
-    
+  
     return (
         <>
         <div className="post">

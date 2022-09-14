@@ -17,7 +17,7 @@ function FeedsPublisher() {
         const userid = localStorage.getItem("userId");
         const userId = userid;
         const form = new FormData();
-    //si fichier sélectionné on ajoute sinon rien
+        //si fichier sélectionné on ajoute sinon rien
         form.append("image", file, image);
         form.append("userId", userId);
         form.append("body", inputMessage);

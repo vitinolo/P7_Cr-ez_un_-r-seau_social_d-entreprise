@@ -135,6 +135,7 @@ a {
     width:100%;
 }
 .icone-like {
+    margin-right:5px;
     color: green;
 }
 .iconesinterdetail{
@@ -268,7 +269,7 @@ input::placeholder {
 }
 .vote_publication {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     padding: 5px;
 }
 

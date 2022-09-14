@@ -11,7 +11,7 @@ const Comment = (comment) => {
                         <Profile /> 
                         <div className="comments" >
                                 <div >
-                                        <img className="img_comment" src="" alt=""></img>
+                                        <img className="img_comment" src={comment.imageUrl} alt=""/>
                                         <p className="texte_publication_comment">{comment.body}</p> 
                                 </div>  
                         </div>
