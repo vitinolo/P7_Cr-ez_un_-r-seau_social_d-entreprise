@@ -1,38 +1,27 @@
 import "../styles/style.css";
-//const User = require("../models/User");
-//const Post = require("../models/Post");
+import axios from "axios";
+import React, { useState, useEffect } from 'react';
 
-const Profile = (req, res, next) => { 
-   /* let user ={
-        name: user.name,
-        lastname: user.lastname,
-    }
-    User.findOne({ _id: req.params.id })
-    .then((user) => {
-        res.status(200).json({
-            user: user
-        });  
-    })
-    .catch((error) => {
-        res.status(400).json({ error });
-    });
-    let post ={
-        created_at: post.created_at,
-    };
-    Post.findOne({ _id: req.params.id })
-    .then((post) => {
-        res.status(200).json({
-            post: post
-        });  
-    })
-    .catch((error) => {
-        res.status(400).json({ error });
-    }; */ 
+
+//afficher le profil
+const Profile = (post) => { 
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        axios
+        .get('http://localhost:3001/api/users',{
+          headers:{
+            'Authorization': 'Bearer '+ localStorage.getItem("token")
+          }     
+        })
+        .then((data) => setData(data))  
+      },[]);
+      
+      console.log(data,"cecrrv")
     return (
         <div className="profile">
-            <span className="profile_firstname"> nom </span>
-            <span className="profile_lastname"> prénom </span>
-            <span className="created_at">créé le:</span>
+            <span className="profile_firstname">{data.name} </span>
+            <span className="profile_lastname"> {data.lastname} </span>
+            <span className="created_at">créé le:{post.created_at}</span>
         </div>
     );
 }

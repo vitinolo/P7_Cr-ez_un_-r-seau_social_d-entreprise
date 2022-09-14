@@ -50,11 +50,10 @@ exports.modifyPost = async (req, res, next) => {
   //récupèrer user et post
   const post =  await Post.findOne({ _id: req.params.id})
   const user =  await User.findOne({ id:req.body.userId })
-  console.log(post)
   const userAuthorized = user.isAdmin || req.body.userId === post.userId
   //si ma requête contient un fichier 
   const postObject = req.file ? {...req.body.post, imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,} : { ...req.body };
-  console.log(postObject)
+  
   //si l'utilisateur n'est pas autorisé, message d'erreur
   if(!userAuthorized){
     return  res.status(403).json({ error: new Error("unauthorized request") });
@@ -63,7 +62,6 @@ exports.modifyPost = async (req, res, next) => {
   if (req.file) {
     Post.findOne({ _id: req.params.id })
       .then((postone) => {
-        console.log(postone)
         
           const filename = postone.imageUrl.split("/images/")[1];
           fs.unlink(`images/${filename}` )  
@@ -72,7 +70,6 @@ exports.modifyPost = async (req, res, next) => {
             { _id: req.params.id },
             { ...postObject, _id: req.params.id }
           )
-          console.log(postObject)
             .then(() => {
               res.status(200).json({ message: "Post mise à jour!" });
             })

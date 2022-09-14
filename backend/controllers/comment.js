@@ -7,7 +7,7 @@ const { db } = require("../models/Post");
 //création d'un Commentaire
 exports.createComment = (req, res, next) => {
   const commentObject = {
-  userId: rq.body.userId,
+  userId: req.body.userId,
   body: req.body.body,
 }
 if (req.file){
@@ -35,7 +35,16 @@ exports.getOneComment = (req, res, next) => {
     });
 };
 
-
+//voir toutes les commentaires
+exports.getAllComment = (req, res, next) => {
+  Comment.find()
+    .then((comments) => {
+      res.status(200).json(comments);
+    })
+    .catch((error) => {
+      res.status(400).json({ error });
+    });
+};
 
 
 

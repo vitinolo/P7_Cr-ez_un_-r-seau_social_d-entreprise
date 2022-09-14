@@ -54,7 +54,7 @@ function CommentsPublisher () {
     }
     
     return (
-        <div onSubmit={handleSubmit} className="comments_publication" id="publisher_comment">
+        <div onSubmit={handleSubmit} className="comments_publication">
             <span className="feed_title">Commentez:</span>
             <div className="publication_send">
                 <input  type="file" accept=".jpg, .jpeg, .png" id="file" name="file" className="publication_file" title="Cliquez pour ajouter une image" value={image} onChange={handleChangeImage}></input>

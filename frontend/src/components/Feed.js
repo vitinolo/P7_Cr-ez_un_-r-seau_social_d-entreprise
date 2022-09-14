@@ -7,19 +7,19 @@ import VotePublication from "./VotePublication";
 const Feed = ({post}) => {
   
     return (
-        <>
         <div className="post">
+        
             <Link to="/feedpostdetail" title="Cliquez vers le post">
-                <h3><span className="article-post">Publication de:</span></h3>
-                <Profile />
+                <h3 className="article-post">Publication de:</h3>
+                <Profile post ={post}/>
                 <img className="img_feed" src={post.imageUrl} alt=""/>
                 <span className="texte_publication_feed">{post.body}</span>
             </Link>
             <VotePublication post ={post} />
             <IconesInteract />
+            
         </div>
-        </>
     );
-};
+}
 
 export default Feed;
