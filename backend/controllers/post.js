@@ -53,7 +53,7 @@ exports.modifyPost = async (req, res, next) => {
   console.log(post)
   const userAuthorized = user.isAdmin || req.body.userId === post.userId
   //si ma requête contient un fichier 
-  const postObject = req.file ? {...req.body.post ,imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,} : { ...req.body.post };
+  const postObject = req.file ? {...req.body.post, imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,} : { ...req.body };
   console.log(postObject)
   //si l'utilisateur n'est pas autorisé, message d'erreur
   if(!userAuthorized){
@@ -64,10 +64,10 @@ exports.modifyPost = async (req, res, next) => {
     Post.findOne({ _id: req.params.id })
       .then((postone) => {
         console.log(postone)
-        if(postone.imageUrl !=""){
+        
           const filename = postone.imageUrl.split("/images/")[1];
           fs.unlink(`images/${filename}` )  
-        }
+        
           Post.findOneAndUpdate(
             { _id: req.params.id },
             { ...postObject, _id: req.params.id }

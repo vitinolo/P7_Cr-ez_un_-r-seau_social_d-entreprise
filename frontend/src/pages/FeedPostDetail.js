@@ -23,7 +23,7 @@ function recupId ()
 const FeedPostDetail = (post) => {
   useEffect(() => {
     axios
-    .get('http://localhost:3001/api/posts/63202174572391bac08ab324',{
+    .get('http://localhost:3001/api/posts/'+{id},{
       headers:{
         'Authorization': 'Bearer '+ localStorage.getItem("token")
       },
