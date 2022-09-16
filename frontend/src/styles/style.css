@@ -155,6 +155,10 @@ a {
     object-fit: cover;
     width:100%;
 }
+.img_container{
+    display: flex;
+    justify-content: center;
+}
 .img_feed {
     object-fit: cover;
     max-width: 100%;
@@ -266,14 +270,17 @@ input::placeholder {
 .texte_publication_comment {
     background-color: #ffd7d7;
     color: #4e5166;
+    padding: 5px;
 }
 .texte_publication_feed {
     display:block;
-    width:100%;
+    border-radius: 10px;
+    border: solid 2px;
+    color: #4e5166;
     background-color: white;
     color: #4e5166;
     padding: 5px;
-    margin:10px 0px 10px 0px;
+    margin:20px 0px 10px 0px;
 }
 .text_publication p {
     margin: 0px;

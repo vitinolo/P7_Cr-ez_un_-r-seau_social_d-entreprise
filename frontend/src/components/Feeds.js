@@ -6,7 +6,6 @@ import React, { useState, useEffect } from 'react';
 //afficher les publications et commentaires
 const Feeds = () => {
   const [data, setData] = useState([]);
-  
   useEffect(() => {
     axios
     .get('http://localhost:3001/api/posts',{

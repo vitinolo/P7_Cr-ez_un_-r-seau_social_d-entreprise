@@ -1,9 +1,7 @@
 import "../styles/style.css";
 
 //afficher les commentaires
-const Comments = () => {
-  
-  
+const Comments = () => { 
   return (
     <div className="comments">   
             <Comment />                             

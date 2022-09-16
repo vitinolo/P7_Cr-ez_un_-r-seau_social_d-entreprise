@@ -29,8 +29,7 @@ const Comment = (comment) => {
                                 </div>  
                         </div>
                         </>
-                </div>
-                        
+                </div>                      
                 </>       
         );
 }

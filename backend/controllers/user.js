@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-
+const { db } = require("../models/User");
 exports.signup = (req, res, next) => {
   bcrypt
     .hash(req.body.password, 10)
@@ -43,10 +43,19 @@ exports.login = (req, res, next) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
-
+//voir toutes les users
+exports.getAllUser = (req, res, next) => {
+  User.find()
+    .then((users) => {
+      res.status(200).json(users);
+    })
+    .catch((error) => {
+      res.status(400).json({ error });
+    });
+};
 //sélection d'un user
 exports.getOneUser = (req, res, next) => {
-  Post.findOne({ _id: req.params.id })
+  User.findOne({ _id: req.params.id })
     .then((user) => {
       res.status(200).json(user);
     })

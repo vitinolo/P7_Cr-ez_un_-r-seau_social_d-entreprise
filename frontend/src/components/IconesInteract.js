@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 
+let id = recupId();
 const IconesInteract = () => {
     function handleClickRemove (e) {
         HandleSubmitRemove(e)
@@ -14,7 +15,7 @@ const IconesInteract = () => {
         e.preventDefault()
             useEffect(() => {
                 axios
-                .delete('http://localhost:3001/api/posts/:id',{
+                .delete('http://localhost:3001/api/posts/'+ id,{
                 headers:{
                     'Authorization': 'Bearer '+ localStorage.getItem("token")
                 }
@@ -26,7 +27,7 @@ const IconesInteract = () => {
         e.preventDefault()
             useEffect(() => {
                 axios
-                .put('http://localhost:3001/api/posts/:id',{
+                .put('http://localhost:3001/api/posts/' + id,{
                 headers:{
                     'Authorization': 'Bearer '+ localStorage.getItem("token")
                 }
@@ -34,7 +35,6 @@ const IconesInteract = () => {
                 .then((res) => console.log(res))
             },[]);
     }
-
     return (
     <div className="iconesInteract">
         <div className="modifyAndRemovePost">
@@ -45,5 +45,11 @@ const IconesInteract = () => {
     )
 }
 
+function recupId () 
+{
+  let queryStringUrlId = window.location.search;
+  let urlSearchParams = new URLSearchParams(queryStringUrlId);
+  return urlSearchParams.get('id');   
+}
 export default IconesInteract;
 
