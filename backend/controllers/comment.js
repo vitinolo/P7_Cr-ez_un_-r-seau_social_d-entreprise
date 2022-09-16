@@ -1,5 +1,4 @@
 const Comment = require("../models/Comment");
-const User = require("../models/User");
 const fs = require("fs");
 const { db } = require("../models/Post");
 
@@ -36,14 +35,9 @@ exports.getOneComment = (req, res, next) => {
 };
 
 //voir toutes les commentaires
-exports.getAllComment = (req, res, next) => {
-  Comment.find()
-    .then((comments) => {
-      res.status(200).json(comments);
-    })
-    .catch((error) => {
-      res.status(400).json({ error });
-    });
+exports.getAllComment = async(req, res, next) => {
+  comments = await Comment.find().sort({created_at: -1});
+  res.status(200).json({ comments});
 };
 
 

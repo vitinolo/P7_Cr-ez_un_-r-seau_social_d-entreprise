@@ -24,14 +24,10 @@ exports.createPost = (req, res, next) => {
   };
   
 //voir toutes les posts
-exports.getAllPost = (req, res, next) => {
-  Post.find().sort({created_at: 1})
-    .then((posts) => {
-      res.status(200).json(posts);
-    })
-    .catch((error) => {
-      res.status(400).json({ error });
-    });
+exports.getAllPost = async(req, res, next) => {
+  posts = await Post.find().sort({created_at: -1});
+  users = await User.find({}, "lastname name");
+  res.status(200).json({posts, users});   
 };
 
 //sélection d'un post
