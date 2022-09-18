@@ -1,4 +1,5 @@
 const Comment = require("../models/Comment");
+const User = require("../models/User");
 const fs = require("fs");
 const { db } = require("../models/Post");
 
@@ -40,5 +41,26 @@ exports.getAllComment = async(req, res, next) => {
   res.status(200).json({ comments});
 };
 
-
+//supprimer un commentaire
+exports.deleteComment = (req, res, next) =>{
+  // récupèrer user et post
+  const comment = Comment.findOne({ id: req.params.id })
+  const user = User.findOne({ id:req.body.userId })
+ 
+ if (req.file) {
+   Comment.findOne({ _id: req.params.id })
+   .then((comment) => {
+     const filename = comment.imageUrl.split("/images/")[1];
+     fs.unlink(`images/${filename}`, () => {  
+   Comment.deleteOne({ _id: req.params.id })
+     .then(() => res.status(200).json({ message: "Commentaire supprimé !" }))
+     .catch((error) => res.status(400).json({ error })); 
+     })})
+ }else{
+   Comment.findOne({_id:req.params.id})
+   Comment.deleteOne({ _id: req.params.id })
+     .then(() => res.status(200).json({ message: "Commentaire supprimé !" }))
+     .catch((error) => res.status(400).json({ error }))
+ }
+};
 

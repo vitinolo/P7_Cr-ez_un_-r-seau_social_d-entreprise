@@ -13,15 +13,16 @@ a {
     display:flex;
     flex-direction: column;
     background-color:white;
-    box-shadow: 10px 5px 5px black;
+    box-shadow: 1px 2px 5px black;
     border-radius: 10px;
     border:2px solid#ffd7d7 ;
-    margin: 20px 0px 0px 0px;
+    margin: 20px;
     padding:15px 25px 20px 25px;
 }
 .comment:hover{
     transform: scale(1.1);
     transition: 0.4s ease-in-out;
+    box-shadow: 10px 5px 5px black;
 }
 .comment-post{
     display:flex;
@@ -37,6 +38,18 @@ a {
     border-radius: 10px;
     border:2px solid white ;
     padding: 15px;
+    margin-top: 20px;
+    animation: titre ease 3.5s;
+}
+.comment_publication {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    background-color: #ffd7d7;
+    box-shadow: 1px 2px 5px black;
+    border-radius: 10px;
+    border:2px solid white ;
     margin-top: 20px;
     animation: titre ease 3.5s;
 }
@@ -197,7 +210,7 @@ input::placeholder {
     display:flex;
     flex-direction: column;
     background-color: #ffd7d7;
-    box-shadow: 10px 5px 5px black;
+    box-shadow: 1px 2px 5px black;
     border-radius: 10px;
     border:2px solid white ;
     margin: 20px 0px 0px 0px;
@@ -206,6 +219,7 @@ input::placeholder {
 .post:hover {
     transform: scale(1.1);
     transition: 0.4s ease-in-out;
+    box-shadow: 10px 5px 5px black;
 }
 .posts {
     border-radius: 10px;

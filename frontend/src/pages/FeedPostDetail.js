@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
+//import {useParams} from "react-router-dom";
 import HeaderPosts from "../components/HeaderPosts";
 import Comment from "../components/Comment";
 import CommentsPublisher from "../components/CommentsPublisher";
-import Feed from "../components/Feed";
+import FeedDetail from "../components/FeedDetail";
 
 const FeedPostDetail = () => {
+  //const {id} = useParams();
   const [users, setUsers] = useState([]);
   const [comments, setComments] = useState([]);
   const [posts, setPosts] = useState([]);
@@ -36,7 +38,7 @@ const FeedPostDetail = () => {
   
   useEffect(() => {
     axios
-    .get('http://localhost:3001/api/posts',{
+    .get("http://localhost:3001/api/posts",{
       headers:{
         'Authorization': 'Bearer '+ localStorage.getItem("token")
       }
@@ -51,10 +53,10 @@ const FeedPostDetail = () => {
           <HeaderPosts />
           <CommentsPublisher /> 
           <div className="feedpublidetail">{posts.map((post, index) => (
-            <Feed key={index} post={post} />))}
-            <div className="comment_publication">{comments.map((comment, index) => (
-              <Comment key={index} comment={comment} user={users.find( u => u._id === comment.userId)} />))}
-            </div>
+            <FeedDetail key={index} post={post} user={users} />))}
+          </div>
+          <div className="comment_publication">{comments.map((comment, index) => (
+            <Comment key={index} comment={comment} user={users} />))}
           </div>
       </div>
 

@@ -2,10 +2,7 @@ import "../styles/style.css";
 import ProfileComment from "../components/ProfileComment";
 
 
-
-
-const Comment = (user) => { 
-        
+const Comment = ({user, comment}) => { 
         return (
                 <>
                 <div className="comment" >     
@@ -14,8 +11,8 @@ const Comment = (user) => {
                         <ProfileComment user={user}/>
                         <div className="comments" >
                                 <div >
-                                        <img className="img_comment" src="" alt=""/>
-                                        <p className="texte_publication_comment"></p> 
+                                        <img className="img_comment" src={comment.imageUrl} alt=""/>
+                                        <p className="texte_publication_comment">{comment.body}</p> 
                                 </div>  
                         </div>
                         </>
