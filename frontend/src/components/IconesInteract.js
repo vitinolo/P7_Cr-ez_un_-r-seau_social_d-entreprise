@@ -1,21 +1,22 @@
 import axios from "axios";
+import {useParams} from "react-router-dom";
 import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 
-let id = recupId();
 const IconesInteract = () => {
-    function handleClickRemove (e) {
-        HandleSubmitRemove(e)
+    const {id} = useParams();
+
+    function handleClickModify () {
+        Modify();
     }
-    function handleClickModify (e) {
-        HandleSubmitModify(e)
+    function handleClickRemove () {
+        Remove();
     }
-    function HandleSubmitRemove (e) {
-        e.preventDefault()
+    function Remove () {
             useEffect(() => {
                 axios
-                .delete('http://localhost:3001/api/posts/'+ id,{
+                .delete('http://localhost:3001/api/posts/'+ {id},{
                 headers:{
                     'Authorization': 'Bearer '+ localStorage.getItem("token")
                 }
@@ -23,11 +24,10 @@ const IconesInteract = () => {
                 .then((res) => console.log(res))
             },[]);
     }
-    function HandleSubmitModify (e) {
-        e.preventDefault()
+    function Modify () {
             useEffect(() => {
                 axios
-                .put('http://localhost:3001/api/posts/' + id,{
+                .put('http://localhost:3001/api/posts/' + {id},{
                 headers:{
                     'Authorization': 'Bearer '+ localStorage.getItem("token")
                 }
@@ -35,21 +35,16 @@ const IconesInteract = () => {
                 .then((res) => console.log(res))
             },[]);
     }
+
     return (
     <div className="iconesInteract">
         <div className="modifyAndRemovePost">
-            <button onClick={handleClickRemove} className="icone-remove icone"><FontAwesomeIcon icon={faTrash} /></button>
-            <button onClick={handleClickModify} className="icone-modify icone"><FontAwesomeIcon icon={faPen} /></button>
+            <button onClick={handleClickRemove}  className="icone-remove icone"><FontAwesomeIcon icon={faTrash} /></button>
+            <button onClick={handleClickModify}  className="icone-modify icone"><FontAwesomeIcon icon={faPen} /></button>
         </div>        
     </div>
     )
 }
 
-function recupId () 
-{
-  let queryStringUrlId = window.location.search;
-  let urlSearchParams = new URLSearchParams(queryStringUrlId);
-  return urlSearchParams.get('id');   
-}
 export default IconesInteract;
 

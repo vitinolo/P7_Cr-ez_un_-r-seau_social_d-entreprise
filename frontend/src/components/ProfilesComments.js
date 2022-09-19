@@ -1,10 +1,10 @@
 import "../styles/style.css";
-import Profile from "./Profile";
+import ProfileComment from "./ProfileComment";
 import axios from "axios";
 import React, { useEffect } from 'react';
 
 //récupèrer les users
-const Profiles = () => { 
+const ProfilesComments = () => { 
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
@@ -19,10 +19,10 @@ const Profiles = () => {
     return (
       <>
         <div className="profiles">{data.map((user, index) => (
-          <Profile key={index} user={user} /> ))}
+          <ProfileComment key={index} user={user} /> ))}
         </div>
       </>
     );
 }
 
-export default Profiles;
+export default ProfilesComments;

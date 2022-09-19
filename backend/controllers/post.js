@@ -45,7 +45,7 @@ exports.getOnePost = (req, res, next) => {
 exports.modifyPost = async (req, res, next) => {
   //récupèrer user et post
   const post =  await Post.findOne({ _id: req.params.id})
-  const user =  await User.findOne({ id:req.body.userId })
+  const user =  await User.findOne({ _id:req.body.userId })
   const userAuthorized = user.isAdmin || req.body.userId === post.userId
   //si ma requête contient un fichier 
   const postObject = req.file ? {...req.body.post, imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,} : { ...req.body };
