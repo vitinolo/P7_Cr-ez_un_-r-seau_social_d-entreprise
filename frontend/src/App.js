@@ -13,7 +13,7 @@ function App() {
         <Route path="/" element={<ConnexionPage/>} />
         <Route path="/Inscription" element={<InscriptionPage/>} />
         <Route path="/Feed" element={<FeedPostsPage/>} />
-        <Route path="/Feedpostdetail" element={<FeedPostDetail/>} />
+        <Route path="/Feed/:postId" element={<FeedPostDetail/>} />
         <Route path="/*" element={<NotFoundPage/>} />
       </Routes>
     </div>

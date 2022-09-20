@@ -229,6 +229,12 @@ input::placeholder {
     background-color: #ffd7d7;
     margin:0px 0px 10px 0px;
 }
+.profile_firstname {
+    font-weight: bolder;
+}
+.profile_lastname {
+    font-weight: bolder;
+}
 .publication_button {
     font-size: 10px;
     border: 5px;
@@ -288,6 +294,7 @@ input::placeholder {
 }
 .texte_publication_feed {
     display:block;
+    font-size: 20px;
     border-radius: 10px;
     border: solid 2px;
     color: #4e5166;

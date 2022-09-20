@@ -7,10 +7,10 @@ const Feed = ({post,user}) => {
     let userId;
     userId = localStorage.getItem("userId", userId);
     const userAuthorized = user.admin === true || userId === post.userId;
-    if(!userAuthorized){
+
         return (
                 <div className="post">
-                    <Link to="/feedpostdetail" title="Cliquez vers le post">
+                    <Link to={`/feed/${post._id}`} title="Cliquez vers le post">
                         <h3 className="article-post">Publication de:</h3>
                         <span className="created_at">Publié le: {post.created_at}</span>
                         <Profile post ={post} user={user}/>
@@ -19,28 +19,10 @@ const Feed = ({post,user}) => {
                         </div>
                         <span className="texte_publication_feed">{post.body}</span>
                     </Link>
+                    {userAuthorized && <IconesInteract post ={post}/>}
                     <VotePublication post ={post} />    
                 </div>
             );
-    } else
-    {
-        return (
-            <div className="post">
-                <Link to="/feedpostdetail" title="Cliquez vers le post">
-                    <h3 className="article-post">Publication de:</h3>
-                    <span className="created_at">Publié le: {post.created_at}</span>
-                    <Profile post ={post} user={user}/>
-                    <div className="img_container">
-                        <img className="img_feed" src={post.imageUrl} alt=""/>
-                    </div>
-                    <span className="texte_publication_feed">{post.body}</span>
-                </Link>
-                <VotePublication post ={post} />
-                <IconesInteract post ={post}/>     
-            </div>
-
-            );
-    }
 }
 
 export default Feed;
