@@ -10,10 +10,10 @@ const Feed = ({post,user}) => {
 
         return (
                 <div className="post">
-                    <Link to={`/feed/${post._id}`} title="Cliquez vers le post">
                         <h3 className="article-post">Publication de:</h3>
                         <span className="created_at">Publié le: {post.created_at}</span>
                         <Profile post ={post} user={user}/>
+                    <Link to={`/feed/${post._id}`} title="Cliquez vers le post">
                         <div className="img_container">
                             <img className="img_feed" src={post.imageUrl} alt=""/>
                         </div>

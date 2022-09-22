@@ -9,7 +9,7 @@ import FeedDetail from "../components/FeedDetail";
 const FeedPostDetail = () => {
   const {postId} = useParams();
   const [post, setPost] = useState([]);
-
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     axios
     .get(`http://localhost:3001/api/posts/${postId}`,{
@@ -19,15 +19,17 @@ const FeedPostDetail = () => {
     })
     .then((res) => {
       setPost(res.data.post);
+      setUsers(res.data.users)
       console.log(res.data.post)
     })  
   },[postId]);
+  
   return (
       <div className="feedpostdetail">
           <HeaderPosts />
           <CommentsPublisher /> 
           <div className="feedpublidetail">
-            <FeedDetail post={post} />
+            <FeedDetail post={post} user={users.find( u => u._id === post.userId)} />
           </div>
           <div className="comment_publication">
             <Comment />

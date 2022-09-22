@@ -1,11 +1,15 @@
 import axios from "axios";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 const VotePublication = ({post}) =>{
     const id = post._id;
-    const [likes, setLikes] = useState(post.likes);
+    const [likes, setLikes] = useState(0);
+
+    useEffect(() => {
+       setLikes(post.likes)
+      },[post]);
 
     function liker () {   
             axios

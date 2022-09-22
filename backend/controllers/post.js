@@ -31,10 +31,11 @@ exports.getAllPost = async(req, res, next) => {
 };
 
 //sélection d'un post
-exports.getOnePost = (req, res, next) => {
+exports.getOnePost = async(req, res, next) => {
+  users = await User.find({}, "lastname name");
   Post.findOne({ _id: req.params.id })
     .then((post) => {
-      res.status(200).json({post});
+      res.status(200).json({post,users});
     })
     .catch((error) => {
       res.status(404).json({ error });
@@ -44,8 +45,9 @@ exports.getOnePost = (req, res, next) => {
 //modifier un post
 exports.modifyPost = async (req, res, next) => {
   //récupèrer user et post
-  const post =  await Post.findOne({ _id: req.params.id})
-  const user =  await User.findOne({ _id:req.body.userId })
+  post =  await Post.findOne({ _id: req.params.id})
+  user =  await User.findOne({ _id:req.body.userId })
+  console.log(req.body.userId)
   const userAuthorized = user.isAdmin || req.body.userId === post.userId
   //si ma requête contient un fichier 
   const postObject = req.file ? {...req.body.post, imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,} : { ...req.body };
@@ -57,9 +59,9 @@ exports.modifyPost = async (req, res, next) => {
   //trouver le post et le supprimer
   if (req.file) {
     Post.findOne({ _id: req.params.id })
-      .then((postone) => {
+      .then((post) => {
         
-          const filename = postone.imageUrl.split("/images/")[1];
+          const filename = post.imageUrl.split("/images/")[1];
           fs.unlink(`images/${filename}` )  
         
           Post.findOneAndUpdate(
@@ -88,30 +90,30 @@ exports.modifyPost = async (req, res, next) => {
 };
 
 //supprimer un post
- exports.deletePost = (req, res, next) =>{
+ exports.deletePost = async(req, res, next) =>{
    // récupèrer user et post
-   const post = Post.findOne({ id: req.params.id })
-   const user = User.findOne({ id:req.body.userId })
+   post = await Post.findOne({ _id: req.params.id })
+   user = await User.findOne({ _id:req.body.userId })
    const userAuthorized = user.isAdmin || req.body.userId === post.userId
    //si l'utilisateur n'est pas autorisé, message d'erreur
    if(!userAuthorized){
     return  res.status(403).json({ error: new Error("unauthorized request") });
-  }
-  if (req.file) {
-    Post.findOne({ _id: req.params.id })
-    .then((post) => {
-      const filename = post.imageUrl.split("/images/")[1];
-      fs.unlink(`images/${filename}`, () => {  
-    Post.deleteOne({ _id: req.params.id })
-      .then(() => res.status(200).json({ message: "Post supprimé !" }))
-      .catch((error) => res.status(400).json({ error })); 
-      })})
-  }else{
-    Post.findOne({_id:req.params.id})
-    Post.deleteOne({ _id: req.params.id })
-      .then(() => res.status(200).json({ message: "Post supprimé !" }))
-      .catch((error) => res.status(400).json({ error }))
-  }
+    }
+    if (req.file) {
+      Post.findOne({ _id: req.params.id })
+      .then((post) => {
+        const filename = post.imageUrl.split("/images/")[1];
+        fs.unlink(`images/${filename}`, () => {  
+      Post.deleteOne({ _id: req.params.id })
+        .then(() => res.status(200).json({ message: "Post supprimé !" }))
+        .catch((error) => res.status(400).json({ error })); 
+        })})
+    }else{
+      Post.findOne({_id:req.params.id})
+      Post.deleteOne({ _id: req.params.id })
+        .then(() => res.status(200).json({ message: "Post supprimé !" }))
+        .catch((error) => res.status(400).json({ error }))
+    }
 };
 
 //création et modification des likes pour les posts
