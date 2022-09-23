@@ -27,10 +27,10 @@ const FeedPostDetail = () => {
   return (
       <div className="feedpostdetail">
           <HeaderPosts />
-          <CommentsPublisher /> 
           <div className="feedpublidetail">
             <FeedDetail post={post} user={users.find( u => u._id === post.userId)} />
           </div>
+          <CommentsPublisher /> 
           <div className="comment_publication">
             <Comment />
           </div>

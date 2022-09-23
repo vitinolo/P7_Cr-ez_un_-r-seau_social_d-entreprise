@@ -1,5 +1,6 @@
 const Post = require("../models/Post");
 const User = require("../models/User");
+const Comment = require("../models/Comment");
 const fs = require("fs");
 const { db } = require("../models/Post");
 
@@ -138,3 +139,28 @@ exports.createLike = (req, res) => {
       res.status(500).json({ error });
     });
 };
+
+// création d'un commentaire
+exports.createComment = (req,res) => {
+  const commentObject = {
+    userId: req.body.userId,
+    body: req.body.body,
+  }
+  const comment = new Comment({...commentObject});
+  delete commentObject._id;
+  console.log(comment)
+  comment
+        .save()
+        .then(() => res.status(201).json({ message: "post enregistré !" }))
+        .catch((error) => res.status(400).json({ error }));
+};
+
+//voir tous les commentaires
+exports.getAllComment = (req,res) => {
+
+}
+
+// supprimer un commentaire
+exports.deleteComment = (req,res) => {
+
+}
