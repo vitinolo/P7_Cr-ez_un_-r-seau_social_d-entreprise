@@ -149,14 +149,18 @@ exports.createComment = (req,res) => {
   const comment = new Comment({...commentObject});
   delete commentObject._id;
   console.log(comment)
-  comment
-        .save()
-        .then(() => res.status(201).json({ message: "post enregistré !" }))
-        .catch((error) => res.status(400).json({ error }));
-};
-
-//voir tous les commentaires
-exports.getAllComment = (req,res) => {
+  Post.findOne({ _id: req.params.id })
+    .then((post) => {
+    comment = post.comment;
+    comment
+          .save()
+          .then(() => res.status(200).json({ message: "commentaire enregistré !" }))
+          .catch((error) => res.status(400).json({ error }));
+    })
+  };
+    
+    //voir tous les commentaires
+    exports.getAllComment = (req,res) => {
 
 }
 
