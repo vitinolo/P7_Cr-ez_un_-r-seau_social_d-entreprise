@@ -1,11 +1,9 @@
 import VotePublication from "./VotePublication";
-//import IconesInteract from "./IconesInteract";
+import CommentsPublisher from "../components/CommentsPublisher";
 //import Profile from "./Profile";
 
 const FeedDetail = ({post,user}) => {
-    //let userId;
-    //userId = localStorage.getItem("userId", userId);
-    //const userAuthorized = user.admin === true || userId === post.userId;
+    
     return (
         <>
             <div className="post">
@@ -16,11 +14,11 @@ const FeedDetail = ({post,user}) => {
                     <img className="img_feed" src={post.imageUrl} alt=""/>
                 </div>
                 <span className="texte_publication_feed">{post.body}</span>
-                {/*{userAuthorized && <IconesInteract post ={post}/>}*/}
+                <CommentsPublisher /> 
                 <VotePublication post ={post} user={user} />   
             </div>
 
-          </>
+        </>
     );
 }
 

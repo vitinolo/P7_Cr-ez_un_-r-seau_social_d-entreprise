@@ -13,8 +13,8 @@ router.delete("/:id", auth, postCtrl.deletePost);
 router.post("/:id/like", auth, postCtrl.createLike);
 
 // comments
-router.patch("/comment/:id", postCtrl.createComment);
-router.patch("/comment/:id", postCtrl.getAllComment);
-router.patch("/delete-comment/:id", postCtrl.deleteComment);
+router.patch("/comment-create/:id", postCtrl.createComment);
+router.patch("/comment-get/:id", postCtrl.getAllComment);
+router.patch("/comment-delete/:id", postCtrl.deleteComment);
 
 module.exports = router;

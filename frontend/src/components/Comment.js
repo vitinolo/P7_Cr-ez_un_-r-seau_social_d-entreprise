@@ -6,7 +6,7 @@ const Comment = () => {
         return (
                 <>
                 <div className="comment" >     
-                        <>
+                        
                         <h3 className="comment-post">Commentaire de :</h3>
                         
                         <div className="comments" >
@@ -15,10 +15,8 @@ const Comment = () => {
                                         <p className="texte_publication_comment"></p> 
                                 </div>  
                         </div>
-                        {/*{userAuthorized &&
-                        <IconesInteract post ={post}/>
-                        }*/}
-                        </>
+                       
+                        
                 </div>                      
                 </>       
         );

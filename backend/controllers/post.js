@@ -1,14 +1,15 @@
 const Post = require("../models/Post");
 const User = require("../models/User");
-const Comment = require("../models/Comment");
 const fs = require("fs");
 const { db } = require("../models/Post");
+const ObjectId  = require("mongoose").Types.ObjectId;
 
 //création d'un post
 exports.createPost = (req, res, next) => {
   const postObject = {
     userId: req.body.userId,
     body: req.body.body,
+    comments:[],
   }
   if (req.file){
     postObject.imageUrl= `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
@@ -142,29 +143,29 @@ exports.createLike = (req, res) => {
 
 // création d'un commentaire
 exports.createComment = (req,res) => {
-  const commentObject = {
-    userId: req.body.userId,
-    body: req.body.body,
-  }
-  const comment = new Comment({...commentObject});
-  delete commentObject._id;
-  console.log(comment)
   Post.findOne({ _id: req.params.id })
-    .then((post) => {
-    comment = post.comment;
-    comment
-          .save()
-          .then(() => res.status(200).json({ message: "commentaire enregistré !" }))
-          .catch((error) => res.status(400).json({ error }));
+  .then((post) => {
+      const commentObject = {
+        userId: req.body.userId,
+        body: req.body.body,
+      }
+      const comment = new Comment({...commentObject});
+      delete commentObject._id;
+      console.log(comment)
+      post.comments.push(comment)
+      comment.save();
+      res.status(200).json({ message: "commentaire enregistré !" })
     })
-  };
-    
+        .then((comment) => res.status(200).json(comment))
+        .catch((error) => res.status(500).json({ error }));
+};
+
     //voir tous les commentaires
     exports.getAllComment = (req,res) => {
 
-}
+};
 
 // supprimer un commentaire
 exports.deleteComment = (req,res) => {
 
-}
+};

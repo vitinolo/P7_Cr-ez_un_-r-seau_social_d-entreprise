@@ -3,7 +3,7 @@ import Feed from "./Feed";
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
 
-//afficher les publications et commentaires
+//afficher les publications 
 const Feeds = () => {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);

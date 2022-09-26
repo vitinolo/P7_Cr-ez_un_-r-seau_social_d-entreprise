@@ -40,18 +40,10 @@ a {
     margin-top: 20px;
     animation: titre ease 3.5s;
 }
+
 .comments_publication {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 60%;
-    background-color: #ffd7d7;
-    box-shadow: 10px 5px 5px black;
-    border-radius: 10px;
-    border:2px solid white ;
-    padding: 15px;
-    margin-top: 20px;
-    animation: titre2 ease 3.5s;
+    justify-content: center;
 }
 .connexion a:hover {
     transition: 0.6s;
@@ -205,6 +197,12 @@ input::placeholder {
     display: flex;
     justify-content: space-between;
     padding: 5px;
+}
+.modify_title{
+    display:flex;
+    justify-content: center;
+    color:#fd2d01;
+    font-weight: bolder;
 }
 .post {
     display:flex;
