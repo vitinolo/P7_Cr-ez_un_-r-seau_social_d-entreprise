@@ -2,7 +2,6 @@ import axios from "axios";
 import React, {  useState,useEffect } from 'react';
 import {useParams} from "react-router-dom";
 import HeaderPosts from "../components/HeaderPosts";
-import Comment from "../components/Comment";
 import FeedDetail from "../components/FeedDetail";
 
 const FeedPostDetail = () => {
@@ -28,9 +27,6 @@ const FeedPostDetail = () => {
           <HeaderPosts />
           <div className="feedpublidetail">
             <FeedDetail post={post} user={users.find( u => u._id === post.userId)} />
-          </div>
-          <div className="comment_publication">
-            <Comment />
           </div>
       </div>
 

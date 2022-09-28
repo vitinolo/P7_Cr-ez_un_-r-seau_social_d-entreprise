@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import {useParams} from "react-router-dom";
+import axios from "axios"; 
 import "../styles/style.css";
-import axios from "axios";
 
 function CommentsPublisher () {
   const {postId} = useParams();
-  const [inputMessage, setInputMessage] = useState()
+  const [inputMessage, setInputMessage] = useState("")
 
   function handleClick (e) {
       handleSubmit(e)
@@ -15,31 +15,31 @@ function CommentsPublisher () {
     function postData() {
         const userid = localStorage.getItem("userId");
         const userId = userid;
-        const form = new FormData();
-        form.append("userId", userId);
-        form.append("body", inputMessage);
+        const comment = {
+          "userId": userId,
+          "body": inputMessage 
+        }
 
       return axios
-      .patch(`http://localhost:3001/api/posts/comment-create/${postId}`,form,{
+      .patch(`http://localhost:3001/api/posts/comment-create/${postId}`,{comment},{
         headers:{
           'Authorization': 'Bearer '+ localStorage.getItem("token")
         }
       })
       // rècupèrer le token et le userId dans le localStorage
-    
-      .then(function (res){
+      .then(function (){
         let token;
         let userId;
         localStorage.getItem("token", token);
         localStorage.getItem("userId", userId);            
       })
-      .catch((err) => alert(err ="mettre un texte !"))   
+      .catch((err) => alert(err))   
     }
     
         postData();
-        window.location.reload(true);
+       // window.location.reload(true);
         //on réinitialise le formulaire après l'envoi 
-        useState = ("")
+        //useState = ("")
   }
     function handleChangeMessage (e) {
       setInputMessage(e.target.value)

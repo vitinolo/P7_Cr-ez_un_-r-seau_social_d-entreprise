@@ -2,14 +2,12 @@ const Post = require("../models/Post");
 const User = require("../models/User");
 const fs = require("fs");
 const { db } = require("../models/Post");
-const ObjectId  = require("mongoose").Types.ObjectId;
 
 //création d'un post
 exports.createPost = (req, res, next) => {
   const postObject = {
     userId: req.body.userId,
     body: req.body.body,
-    comments:[],
   }
   if (req.file){
     postObject.imageUrl= `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
@@ -62,9 +60,8 @@ exports.modifyPost = async (req, res, next) => {
   if (req.file) {
     Post.findOne({ _id: req.params.id })
       .then((post) => {
-        
           const filename = post.imageUrl.split("/images/")[1];
-          fs.unlink(`images/${filename}` )  
+          fs.unlink(`images/${filename}`, () => { 
         
           Post.findOneAndUpdate(
             { _id: req.params.id },
@@ -76,10 +73,11 @@ exports.modifyPost = async (req, res, next) => {
             .catch((error) => {
               res.status(400).json({ error });
             });
-      })
-      .catch((error) => {
-        res.status(500).json({ error });
-      });
+          })
+        })
+        .catch((error) => {
+          res.status(500).json({ error });
+        })
     //le mettre à jour
   } else {
     Post.updateOne(
@@ -97,6 +95,7 @@ exports.modifyPost = async (req, res, next) => {
    post = await Post.findOne({ _id: req.params.id })
    user = await User.findOne({ _id:req.body.userId })
    const userAuthorized = user.isAdmin || req.body.userId === post.userId
+   
    //si l'utilisateur n'est pas autorisé, message d'erreur
    if(!userAuthorized){
     return  res.status(403).json({ error: new Error("unauthorized request") });
@@ -142,26 +141,32 @@ exports.createLike = (req, res) => {
 };
 
 // création d'un commentaire
-exports.createComment = (req,res) => {
-  Post.findOne({ _id: req.params.id })
+exports.createComment = async (req,res) => {
+  post = await Post.findOne({ _id: req.params.id })
   .then((post) => {
-      const commentObject = {
-        userId: req.body.userId,
-        body: req.body.body,
+    const commentObject = {
+      userId: req.body.userId,
+      body: req.body.body,
+      postId : req.body.post._id,
+    }
+    post = new Post({...postObject, commentObject});
+    console.log(post)
+    //post.comments.push(comment);
+    Post.findByIdAndUpdate(
+      {   
+        comments:{
+          $push:{ comment }
+        }
       }
-      const comment = new Comment({...commentObject});
-      delete commentObject._id;
-      console.log(comment)
-      post.comments.push(comment)
-      comment.save();
-      res.status(200).json({ message: "commentaire enregistré !" })
+    )
+    post.save();
+    res.status(200).json({ post })
     })
-        .then((comment) => res.status(200).json(comment))
-        .catch((error) => res.status(500).json({ error }));
+    .catch((error) => res.status(500).json({ error }));
 };
 
-    //voir tous les commentaires
-    exports.getAllComment = (req,res) => {
+//voir tous les commentaires
+exports.getAllComment = (req,res) => {
 
 };
 

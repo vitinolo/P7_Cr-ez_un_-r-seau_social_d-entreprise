@@ -1,5 +1,6 @@
 import VotePublication from "./VotePublication";
 import CommentsPublisher from "../components/CommentsPublisher";
+import Comment from "./Comment";
 //import Profile from "./Profile";
 
 const FeedDetail = ({post,user}) => {
@@ -15,7 +16,8 @@ const FeedDetail = ({post,user}) => {
                 </div>
                 <span className="texte_publication_feed">{post.body}</span>
                 <CommentsPublisher /> 
-                <VotePublication post ={post} user={user} />   
+                <VotePublication post ={post} user={user} />
+                <Comment user={user}/>   
             </div>
 
         </>
