@@ -45,12 +45,12 @@ exports.getOnePost = async(req, res, next) => {
 //modifier un post
 exports.modifyPost = async (req, res, next) => {
   //récupèrer user et post
-  post =  await Post.findOne({ _id: req.params.id})
-  user =  await User.findOne({ _id:req.body.userId })
+  const post =  await Post.findOne({ _id: req.params.id})
+  const user =  await User.findOne({ _id:req.body.userId })
   console.log(req.body.userId)
   const userAuthorized = user.isAdmin || req.body.userId === post.userId
-  //si ma requête contient un fichier 
-  const postObject = req.file ? {...req.body.post, imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,} : { ...req.body };
+  //si ma requête contient un fichier post ressemble à ça sinon à ça
+  const postObject = req.file ? {...req.body, imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,} : { ...req.body };
   
   //si l'utilisateur n'est pas autorisé, message d'erreur
   if(!userAuthorized){
@@ -140,37 +140,3 @@ exports.createLike = (req, res) => {
     });
 };
 
-// création d'un commentaire
-exports.createComment = async (req,res) => {
-  post = await Post.findOne({ _id: req.params.id })
-  .then((post) => {
-    const commentObject = {
-      userId: req.body.userId,
-      body: req.body.body,
-      postId : req.body.post._id,
-    }
-    post = new Post({...postObject, commentObject});
-    console.log(post)
-    //post.comments.push(comment);
-    Post.findByIdAndUpdate(
-      {   
-        comments:{
-          $push:{ comment }
-        }
-      }
-    )
-    post.save();
-    res.status(200).json({ post })
-    })
-    .catch((error) => res.status(500).json({ error }));
-};
-
-//voir tous les commentaires
-exports.getAllComment = (req,res) => {
-
-};
-
-// supprimer un commentaire
-exports.deleteComment = (req,res) => {
-
-};

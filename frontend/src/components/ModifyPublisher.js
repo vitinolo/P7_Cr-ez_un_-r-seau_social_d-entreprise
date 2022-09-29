@@ -18,10 +18,17 @@ const ModifyPublisher = ({post}) => {
       function postData() {
           const userid = localStorage.getItem("userId");
           const userId = userid;
-          const form = new FormData();
-          form.append("image", file, image);
-          form.append("userId", userId);
-          form.append("body", inputMessage);
+          let form ; 
+          if(file){
+            form =new FormData();
+            form.append("image", file, image);
+            form.append("userId", userId);
+            form.append("body", inputMessage);
+          }else{
+            form = new FormData();
+            form.append("userId", userId);
+            form.append("body", inputMessage);
+          }
         
           return axios
           .put(`http://localhost:3001/api/posts/${id}`, form,{
@@ -39,7 +46,7 @@ const ModifyPublisher = ({post}) => {
           .catch((err) => alert(err ="mettre une image et/ou un texte !"))   
       }
           postData();
-          //window.location.reload(true);
+          window.location.reload(true);
           //on réinitialise le formulaire après l'envoi 
           useState = ("")
     } 

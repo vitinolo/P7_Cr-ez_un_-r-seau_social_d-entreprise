@@ -12,9 +12,4 @@ router.put("/:id", auth, multer, postCtrl.modifyPost);
 router.delete("/:id", auth, postCtrl.deletePost);
 router.post("/:id/like", auth, postCtrl.createLike);
 
-// comments
-router.patch("/comment-create/:id", postCtrl.createComment);
-router.patch("/comment-get/:id", postCtrl.getAllComment);
-router.patch("/comment-delete/:id", postCtrl.deleteComment);
-
 module.exports = router;

@@ -6,6 +6,7 @@ const helmet = require("helmet");
 const path = require("path");
 const postRoutes = require("./routes/post");
 const userRoutes = require("./routes/user");
+const commentRoutes = require("./routes/comment");
 const dotenv = require("dotenv");
 const result = dotenv.config();
 
@@ -44,6 +45,7 @@ const limiter = rateLimit({
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/posts", postRoutes);
+app.use("/api/comments", commentRoutes);
 app.use("/api/auth", limiter, userRoutes);
 app.use("/api/users", userRoutes);
 app.use(helmet());
