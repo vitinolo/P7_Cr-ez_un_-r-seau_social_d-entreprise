@@ -1,34 +1,32 @@
 const Post = require("../models/Post");
-//const User = require("../models/User");
+const User = require("../models/User");
 const Comment = require("../models/Comment");
 
 // création d'un commentaire
-exports.createComment = async (req,res) => {
-    post = await Post.findOne({ _id: req.params.id })
-    .then((post) => {
+exports.createComment = (req,res) => { 
       const commentObject = {
         userId: req.body.userId,
-        body: req.body.body,
-        postId : req.body.post._id,
+        body: req.body.body, 
+        postId : req.body.postId
       }
       const comment = new Comment({...commentObject});
+      delete commentObject._id;
       console.log(comment)
       comment
         .save()
         .then(() => res.status(201).json({ message: "commentaire enregistré !" }))
         .catch((error) => res.status(400).json({ error }));
-      //post.comments.push(comment);
-      post.comments.push(comment);
-    })
-    .catch((error) => res.status(500).json({ error }));
-  };
-  
-  //voir tous les commentaires
-  exports.getAllComment = (req,res) => {
-  
-  };
-  
-  // supprimer un commentaire
-  exports.deleteComment = (req,res) => {
-  
-  };
+};
+
+//voir tous les commentaires
+exports.getAllComment = async(req, res, next) => {
+  comments = await Comment.find().sort({created_at: -1});
+  users = await User.find({}, "lastname name");
+  res.status(200).json({comments, users});   
+};
+
+
+// supprimer un commentaire
+exports.deleteComment = (req,res) => {
+
+};

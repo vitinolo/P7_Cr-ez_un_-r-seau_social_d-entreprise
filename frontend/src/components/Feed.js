@@ -15,7 +15,7 @@ const Feed = ({post,user}) => {
                         <Profile post ={post} user={user}/>
                     <Link to={`/feed/${post._id}`} title="Cliquez vers le post">
                         <div className="img_container">
-                            <img className="img_feed" src={post.imageUrl} alt=""/>
+                            <img className="img_feed" src={post.imageUrl} alt="un post"/>
                         </div>
                         <span className="texte_publication_feed">{post.body}</span>
                     </Link>
