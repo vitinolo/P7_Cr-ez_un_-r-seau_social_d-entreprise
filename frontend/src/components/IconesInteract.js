@@ -15,7 +15,7 @@ const IconesInteract = ({post}) => {
                 <div className="iconesInteract">
                     <div className="modifyAndRemovePost">
                         <RemoveButton post= {post}/>
-                        <button  onClick={changeVisibility} className="icone-modify icone"><FontAwesomeIcon icon={faPen} /></button>
+                        <button  onClick={changeVisibility} title="Modifier la publication" className="icone-modify icone"><FontAwesomeIcon icon={faPen} /></button>
                     </div>        
                 </div>
                 <div>

@@ -24,7 +24,7 @@ const VotePublication = ({post}) =>{
     }
     return (
         <div className="vote_publication">
-            <button onClick={() => liker()} alt="like" className="icone-like icone" ><FontAwesomeIcon icon={faThumbsUp} /></button>
+            <button onClick={() => liker()} title="Liker" alt="like" className="icone-like icone" ><FontAwesomeIcon icon={faThumbsUp} /></button>
             <div className="numberOfLikes" >{likes}</div>
         </div>                
     );

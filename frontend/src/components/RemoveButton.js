@@ -24,7 +24,7 @@ const RemoveButton = ({post}) => {
     
     return (
 
-        <button onClick={() => remove()} className="icone-remove icone"><FontAwesomeIcon icon={faTrash} /></button>
+        <button onClick={() => remove()} title="Supprimer la publication" className="icone-remove icone"><FontAwesomeIcon icon={faTrash} /></button>
     )
 }
 export default RemoveButton;

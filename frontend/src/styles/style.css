@@ -45,6 +45,9 @@ a {
     display: flex;
     justify-content: center;
 }
+.created_at{
+    color:green;
+}
 .connexion a:hover {
     transition: 0.6s;
     color: #fd2d01;
@@ -314,20 +317,10 @@ input::placeholder {
 @keyframes titre{
     0%{
         opacity: 0;
-        transform: translateY(380px);
+        transform: translateX(380px);
     }
     100% {
         opacity: 1;
-        transform: translateY(0px);
-    }
-}
-@keyframes titre2{
-    0%{
-        opacity: 0;
-        transform: translatex(380px);
-    }
-    100% {
-        opacity: 1;
-        transform: translatex(0px);
+        transform: translateX(0px);
     }
 }
