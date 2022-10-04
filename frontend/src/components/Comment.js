@@ -1,7 +1,7 @@
 import "../styles/style.css";
 
 
-const Comment = () => { 
+const Comment = (comment) => { 
        
         return (     
                 <div className="comment" >     
@@ -10,7 +10,7 @@ const Comment = () => {
 
                         <div className="comments" >
                                 <div >
-                                        <span className="texte_publication_comment"></span> 
+                                        <span className="texte_publication_comment">{comment.body}</span> 
                                 </div>  
                         </div>
                             

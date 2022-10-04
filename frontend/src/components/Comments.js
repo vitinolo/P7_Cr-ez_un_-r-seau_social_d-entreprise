@@ -7,11 +7,11 @@ import {useParams} from "react-router-dom";
 //afficher les commentaires
 const Comments = ({post}) => { 
   const {id} = useParams();
-  const [comments, setComments] = useState([setComments]);
+  const [comments, setComments] = useState([]);
   const [users, setUsers] = useState([]);
   useEffect(() => {
     axios
-    .patch(`http://localhost:3001/api/posts/comment-get/${id}`,{},{
+    .get(`http://localhost:3001/api/comments/${id}`,{
       headers:{
         'Authorization': 'Bearer '+ localStorage.getItem("token")
       }

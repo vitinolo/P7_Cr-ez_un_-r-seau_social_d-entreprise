@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from "axios";
 import "../styles/style.css";
 
 const ModifyPublisher = ({post}) => {
-    
     const id = post._id;
     const [inputMessage, setInputMessage] = useState("")
     const [image, setImage] = useState ("")
     const [file, setFile] = useState ("")
+
+    useEffect(() => {
+      setInputMessage(post.body)
+    },[post]);
 
     function handleClick (e) {
         handleSubmit(e)
@@ -16,20 +19,15 @@ const ModifyPublisher = ({post}) => {
     function handleSubmit (e) {
       e.preventDefault()
       function postData() {
-          const userid = localStorage.getItem("userId");
-          const userId = userid;
-          let form ; 
+          const userId = localStorage.getItem("userId"); 
+          const form =new FormData(); 
+          form.append("userId", userId);
+          form.append("body", inputMessage);
+          
           if(file){
-            form =new FormData();
             form.append("image", file, image);
-            form.append("userId", userId);
-            form.append("body", inputMessage);
-          }else{
-            form = new FormData();
-            form.append("userId", userId);
-            form.append("body", inputMessage);
           }
-        
+
           return axios
           .put(`http://localhost:3001/api/posts/${id}`, form,{
             headers:{
@@ -38,17 +36,11 @@ const ModifyPublisher = ({post}) => {
           })
           // rècupèrer le token et le userId dans le localStorage
           .then(function (res){
-            let token;
-            let userId;
-            localStorage.getItem("token", token);
-            localStorage.getItem("userId", userId);            
+            console.log(res)       
           })
           .catch((err) => alert(err ="mettre une image et/ou un texte !"))   
       }
-          postData();
-          window.location.reload(true);
-          //on réinitialise le formulaire après l'envoi 
-          useState = ("")
+          postData();         
     } 
     
     function handleChangeMessage (e) {
@@ -61,13 +53,13 @@ const ModifyPublisher = ({post}) => {
       setFile(e.target.files[0])
     }
       return(
-          <div onSubmit={handleSubmit} className="modify_publication">
+          <div className="modify_publication">
               <span className="modify_title">Modifier votre message:</span>
               <div className="feed_publication_send">
                   <input type="file" accept=".jpg, .jpeg, .png" id="file" name="file" className="publication_file" title="Cliquez pour ajouter une image" value={image} onChange={handleChangeImage}></input>
                   <input title="Cliquez puis écrire votre message" placeholder="Taper ici votre message" type="text" name="text" id="text_feed" value={inputMessage} onChange={handleChangeMessage}></input>
               </div>
-              <button onClick={handleClick} className="publication_button_send" title="Cliquez pour afficher votre message">Modifier l'article</button>    
+              <button onClick={handleClick} className="publication_button_send" title="Cliquer pour afficher votre message">Modifier l'article</button>    
           </div>       
       ) 
 }

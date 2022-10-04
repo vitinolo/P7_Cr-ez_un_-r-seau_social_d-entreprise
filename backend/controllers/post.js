@@ -68,7 +68,7 @@ exports.modifyPost = async (req, res, next) => {
             { ...postObject, _id: req.params.id }
           )
             .then(() => {
-              res.status(200).json({ message: "Post mise à jour!" });
+              res.status(200).json({ message: "Post mise à jour!", post });
             })
             .catch((error) => {
               res.status(400).json({ error });
@@ -84,7 +84,7 @@ exports.modifyPost = async (req, res, next) => {
       { _id: req.params.id },
       { ...postObject, _id: req.params.id }
     )
-      .then(() => res.status(200).json({ message: "Post mise à jour" }))
+      .then(() =>  res.status(200).json({ message: "Post mise à jour!", post }))
       .catch((error) => res.status(400).json({ error }));
   }
 };

@@ -28,11 +28,8 @@ function FeedsPublisher() {
           }
         })
         // rècupèrer le token et le userId dans le localStorage
-        .then(function (res){
-          let token;
-          let userId;
-          localStorage.getItem("token", token);
-          localStorage.getItem("userId", userId);            
+        .then( function(res){
+          console.log(res)      
         })
         .catch((err) => alert(err ="mettre une image et/ou un texte !"))   
       }
