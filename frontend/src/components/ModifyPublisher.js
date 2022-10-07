@@ -6,8 +6,8 @@ const ModifyPublisher = ({post}) => {
     const id = post._id;
     const [inputMessage, setInputMessage] = useState("")
     const [image, setImage] = useState ("")
-    const [file, setFile] = useState ("")
-
+    const [file, setFile] = useState ("") 
+    
     useEffect(() => {
       setInputMessage(post.body)
     },[post]);
@@ -34,13 +34,13 @@ const ModifyPublisher = ({post}) => {
               'Authorization': 'Bearer '+ localStorage.getItem("token")
             }
           })
-          // rècupèrer le token et le userId dans le localStorage
           .then(function (res){
-            console.log(res)       
+            console.log(res)
           })
           .catch((err) => alert(err ="mettre une image et/ou un texte !"))   
       }
-          postData();         
+          postData();
+          window.location.reload(true);
     } 
     
     function handleChangeMessage (e) {

@@ -14,8 +14,7 @@ function FeedsPublisher() {
   function handleSubmit (e) {
     e.preventDefault()
     function postData() {
-        const userid = localStorage.getItem("userId");
-        const userId = userid;
+        const userId = localStorage.getItem("userId");
         const form = new FormData();
         form.append("image", file, image);
         form.append("userId", userId);
@@ -27,7 +26,6 @@ function FeedsPublisher() {
             'Authorization': 'Bearer '+ localStorage.getItem("token")
           }
         })
-        // rècupèrer le token et le userId dans le localStorage
         .then( function(res){
           console.log(res)      
         })
@@ -35,8 +33,7 @@ function FeedsPublisher() {
       }
         postData();
         window.location.reload(true);
-        //on réinitialise le formulaire après l'envoi 
-        useState = ("")
+        
   } 
 
   function handleChangeMessage (e) {

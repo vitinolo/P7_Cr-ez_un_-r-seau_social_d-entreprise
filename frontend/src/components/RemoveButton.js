@@ -4,23 +4,21 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const RemoveButton = ({post}) => {
     
-     const id = post._id;
-     const token = localStorage.getItem("token")
+    const id = post._id;
+    const token = localStorage.getItem("token")
     
     function remove () {
         axios
             .delete(`http://localhost:3001/api/posts/${id}`,{
                 headers:{
-                    'Authorization': `Bearer ${token}`
-                   
+                    'Authorization': `Bearer ${token}`  
                 }
             })
             .then((res) => {
                 window.location.reload(true);
             })
-            .catch((err) => console.log(err));
-            
-        }
+            .catch((err) => console.log(err));  
+    }
     
     return (
 

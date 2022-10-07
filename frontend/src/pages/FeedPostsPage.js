@@ -1,4 +1,3 @@
-
 import HeaderPosts from "../components/HeaderPosts";
 import FeedsPublisher from "../components/FeedsPublisher"
 import Feeds from "../components/Feeds";

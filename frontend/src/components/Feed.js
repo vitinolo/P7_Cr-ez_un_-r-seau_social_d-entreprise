@@ -6,7 +6,8 @@ import VotePublication from "./VotePublication";
 const Feed = ({post,user}) => {
     let userId;
     userId = localStorage.getItem("userId", userId);
-    const userAuthorized = user.admin === true || userId === post.userId;
+    console.log(user)
+    const userAuthorized = userId === "6340460a1b09256cab8f4094" || userId === post.userId;
     
         return (
                 <div className="post">
@@ -22,7 +23,7 @@ const Feed = ({post,user}) => {
                     {userAuthorized && <IconesInteract post ={post}/>}
                     <VotePublication post ={post} />    
                 </div>
-            );
+        );
 }
 
 export default Feed;

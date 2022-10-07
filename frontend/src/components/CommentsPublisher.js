@@ -13,9 +13,7 @@ const CommentsPublisher = () => {
   function handleSubmit (e) {
     e.preventDefault()
     function postData() {
-        const userid = localStorage.getItem("userId");
-        const userId = userid;
-        
+        const userId = localStorage.getItem("userId");
         const comment = {
           "userId": userId,
           "body": inputMessage,
@@ -28,16 +26,12 @@ const CommentsPublisher = () => {
           'Authorization': 'Bearer '+ localStorage.getItem("token")
         }
       })
-      // rècupèrer le token et le userId dans le localStorage
+      
       .then(function (res){
-        let token;
-        let userId;
-        localStorage.getItem("token", token);
-        localStorage.getItem("userId", userId);            
+        console.log(res)         
       })
       .catch((err) => alert(err ="mettre une image et/ou un texte !"))   
     }
-    
         postData();
         window.location.reload(true);
         //on réinitialise le formulaire après l'envoi 
