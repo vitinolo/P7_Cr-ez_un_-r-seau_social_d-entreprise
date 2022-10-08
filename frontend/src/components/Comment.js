@@ -1,7 +1,6 @@
 import "../styles/style.css";
 
-
-const Comment = (comment) => { 
+const Comment = ({comment}) => { 
        
         return (     
                 <div className="comment" >     

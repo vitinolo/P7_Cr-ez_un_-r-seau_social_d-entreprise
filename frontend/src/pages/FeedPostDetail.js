@@ -8,18 +8,19 @@ const FeedPostDetail = () => {
   const {postId} = useParams();
   const [post, setPost] = useState([]);
   const [users, setUsers] = useState([]);
+  
   useEffect(() => {
     axios
-    .get(`http://localhost:3001/api/posts/${postId}`,{
-      headers:{
-        'Authorization': 'Bearer '+ localStorage.getItem("token")
-      }
-    })
-    .then((res) => {
-      setPost(res.data.post);
-      setUsers(res.data.users)
-      console.log(res.data.post)
-    })  
+      .get(`http://localhost:3001/api/posts/${postId}`,{
+        headers:{
+          'Authorization': 'Bearer '+ localStorage.getItem("token")
+        }
+      })
+      .then((res) => {
+        setPost(res.data.post);
+        setUsers(res.data.users)
+        console.log(res.data.post)
+      })  
   },[postId]);
   
   return (

@@ -20,7 +20,7 @@ exports.createComment = (req,res) => {
 
 //voir tous les commentaires
 exports.getAllComment = async(req, res, next) => {
-  comments = await Comment.find().sort({created_at: -1});
+  comments = await Comment.find({postId: req.params.postId}).sort({created_at: -1});
   users = await User.find({}, "lastname name");
   res.status(200).json({comments, users});   
 };
