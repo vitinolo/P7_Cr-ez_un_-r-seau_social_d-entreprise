@@ -10,19 +10,19 @@ const IconesInteract = ({post}) => {
     function changeVisibility () {
         setVisibility(!visibility)
      }
-        return (
-            <>
-                <div className="iconesInteract">
-                    <div className="modifyAndRemovePost">
-                        <RemoveButton post= {post}/>
-                        <button  onClick={changeVisibility} title="Modifier la publication" className="icone-modify icone"><FontAwesomeIcon icon={faPen} /></button>
-                    </div>        
-                </div>
-                <div>
-                    {visibility && <ModifyPublisher post ={post}/>}
-                </div>
-            </>
-        )
+    return (
+        <>
+            <div className="iconesInteract">
+                <div className="modifyAndRemovePost">
+                    <RemoveButton post= {post}/>
+                    <button  onClick={changeVisibility} title="Modifier la publication" className="icone-modify icone"><FontAwesomeIcon icon={faPen} /></button>
+                </div>        
+            </div>
+            <div>
+                {visibility && <ModifyPublisher post ={post}/>}
+            </div>
+        </>
+    )
 
     
 }

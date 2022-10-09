@@ -33,7 +33,6 @@ function Signup () {
         document.getElementById('firstname').value = '';
         document.getElementById('lastname').value = '';   
     } 
-
     function handleChangeEmail (e) {
         setInputEmail(e.target.value)
     }
@@ -48,7 +47,7 @@ function Signup () {
         setInputLastName (e.target.value)   
     }
 
-     return (
+    return (
         <div className="signup">
             <h2>Inscription</h2>
             <div className="form">

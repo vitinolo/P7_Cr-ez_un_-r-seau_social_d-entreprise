@@ -37,19 +37,19 @@ const CommentsPublisher = () => {
         //on réinitialise le formulaire après l'envoi 
         useState = ("")
   }
-    function handleChangeMessage (e) {
-      setInputMessage(e.target.value)
-    }
+  function handleChangeMessage (e) {
+    setInputMessage(e.target.value)
+  }
     
-    return (
-        <div onSubmit={handleSubmit} className="comments_publication">
-            <span className="feed_title">Commenter:</span>
-            <div className="publication_send">
-                <input title="Cliquez puis écrire votre message" placeholder="Tapez ici votre message" type="text" name="text" id="text_feed" value={inputMessage} onChange={handleChangeMessage}></input>
-            </div>
-            <button onClick={handleClick} className="publication_button_send" title="Cliquez pour afficher votre message">Publier le commentaire</button>
-        </div>
-    );
+  return (
+      <div onSubmit={handleSubmit} className="comments_publication">
+          <span className="feed_title">Commenter:</span>
+          <div className="publication_send">
+              <input title="Cliquez puis écrire votre message" placeholder="Tapez ici votre message" type="text" name="text" id="text_feed" value={inputMessage} onChange={handleChangeMessage}></input>
+          </div>
+          <button onClick={handleClick} className="publication_button_send" title="Cliquez pour afficher votre message">Publier le commentaire</button>
+      </div>
+  );
 }
 
 export default CommentsPublisher;

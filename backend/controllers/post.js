@@ -97,42 +97,42 @@ exports.modifyPost = async (req, res, next) => {
    const userAuthorized = user.isAdmin || req.body.userId === post.userId
    
    //si l'utilisateur n'est pas autorisé, message d'erreur
-   if(!userAuthorized){
-    return  res.status(403).json({ error: new Error("unauthorized request") });
-    }
-    if (req.file) {
-      Post.findOne({ _id: req.params.id })
-      .then((post) => {
-        const filename = post.imageUrl.split("/images/")[1];
-        fs.unlink(`images/${filename}`, () => {  
-      Post.deleteOne({ _id: req.params.id })
-        .then(() => res.status(200).json({ message: "Post supprimé !" }))
-        .catch((error) => res.status(400).json({ error })); 
-        })})
-    }else{
-      Post.findOne({_id:req.params.id})
-      Post.deleteOne({ _id: req.params.id })
-        .then(() => res.status(200).json({ message: "Post supprimé !" }))
-        .catch((error) => res.status(400).json({ error }))
-    }
+  if(!userAuthorized){
+  return  res.status(403).json({ error: new Error("unauthorized request") });
+  }
+  if(req.file){
+    Post.findOne({ _id: req.params.id })
+    .then((post) => {
+      const filename = post.imageUrl.split("/images/")[1];
+      fs.unlink(`images/${filename}`, () => {  
+    Post.deleteOne({ _id: req.params.id })
+      .then(() => res.status(200).json({ message: "Post supprimé !" }))
+      .catch((error) => res.status(400).json({ error })); 
+      })})
+  }else{
+    Post.findOne({_id:req.params.id})
+    Post.deleteOne({ _id: req.params.id })
+      .then(() => res.status(200).json({ message: "Post supprimé !" }))
+      .catch((error) => res.status(400).json({ error }))
+  }
 };
 
 //création et modification des likes pour les posts
 exports.createLike = (req, res) => {
   Post.findOne({ _id: req.params.id })
     .then((post) => {
-      const userId = req.body.userId;
-      const userHasAlreadyLiked = post.usersLiked.includes(userId);
+        const userId = req.body.userId;
+        const userHasAlreadyLiked = post.usersLiked.includes(userId);
 
-      if (!userHasAlreadyLiked) {
-        post.usersLiked.push(userId);
-      }else{
-        const index = post.usersLiked.findIndex(a => a == userId);
-        post.usersLiked.splice(index, 1)
-      }
-      post.likes = post.usersLiked.length;
-      post.save();
-      res.status(200).json({ post })
+        if (!userHasAlreadyLiked) {
+          post.usersLiked.push(userId);
+        }else{
+          const index = post.usersLiked.findIndex(a => a == userId);
+          post.usersLiked.splice(index, 1)
+        }
+        post.likes = post.usersLiked.length;
+        post.save();
+        res.status(200).json({ post })
     })
     .then((post) => res.status(200).json(post))
     .catch((error) => {

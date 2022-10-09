@@ -1,56 +1,64 @@
-.connexion{ 
+.connexion {
     height: 50px;
     text-align: center;
-    margin-top: 20px;   
+    margin-top: 20px;
 }
-.deconnexion{
-    display:flex;
-    align-items: center;  
+
+.deconnexion {
+    display: flex;
+    align-items: center;
 }
-.header{
-    display:flex;
+
+.header {
+    display: flex;
     background-color: white;
     align-items: center;
-    justify-content: space-around; 
+    justify-content: space-around;
     border: solid 3px black;
     border-radius: 10px;
 }
-.headposts{
-    display:flex;
-    justify-content: space-around;  
+
+.headposts {
+    display: flex;
+    justify-content: space-around;
 }
-.headerposts{
+
+.headerposts {
     background-color: white;
     align-items: center;
     border: solid 3px black;
     border-radius: 10px;
     height: 150px;
 }
-.inscription{
+
+.inscription {
     height: 50px;
     text-align: center;
-    margin-top: 20px; 
+    margin-top: 20px;
 }
-.logo{
-    width:150px;
+
+.logo {
+    width: 150px;
 }
-.logoposts{
-    display:flex;
+
+.logoposts {
+    display: flex;
     align-items: center;
-    width:150px
+    width: 150px
 }
-.titre{
-    display:inline-block;
-    justify-content: center;
-    color: white;
-    font-size: 20px;
-    margin: 20px;
-}
-.titreposts{
-    display:flex;
+
+.titre {
+    display: inline-block;
     justify-content: center;
     color: white;
     font-size: 20px;
     margin: 20px;
 }
 
+.titreposts {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    margin: 20px;
+}

@@ -14,7 +14,7 @@ const ModifyPublisher = ({post}) => {
 
     function handleClick (e) {
         handleSubmit(e)
-      }
+    }
   
     function handleSubmit (e) {
       e.preventDefault()
@@ -52,16 +52,16 @@ const ModifyPublisher = ({post}) => {
       setImage(e.target.value)
       setFile(e.target.files[0])
     }
-      return(
-          <div className="modify_publication">
-              <span className="modify_title">Modifier votre message:</span>
-              <div className="feed_publication_send">
-                  <input type="file" accept=".jpg, .jpeg, .png" id="file" name="file" className="publication_file" title="Cliquez pour ajouter une image" value={image} onChange={handleChangeImage}></input>
-                  <input title="Cliquez puis écrire votre message" placeholder="Taper ici votre message" type="text" name="text" id="text_feed" value={inputMessage} onChange={handleChangeMessage}></input>
-              </div>
-              <button onClick={handleClick} className="publication_button_send" title="Cliquer pour afficher votre message">Modifier l'article</button>    
-          </div>       
-      ) 
+    return(
+        <div className="modify_publication">
+            <span className="modify_title">Modifier votre message:</span>
+            <div className="feed_publication_send">
+                <input type="file" accept=".jpg, .jpeg, .png" id="file" name="file" className="publication_file" title="Cliquez pour ajouter une image" value={image} onChange={handleChangeImage}></input>
+                <input title="Cliquez puis écrire votre message" placeholder="Taper ici votre message" type="text" name="text" id="text_feed" value={inputMessage} onChange={handleChangeMessage}></input>
+            </div>
+            <button onClick={handleClick} className="publication_button_send" title="Cliquer pour afficher votre message">Modifier l'article</button>    
+        </div>       
+    ) 
 }
 
 export default ModifyPublisher;
