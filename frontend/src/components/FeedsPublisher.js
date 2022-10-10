@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "../styles/style.css";
 import axios from "axios";
 
-function FeedsPublisher() {
+function FeedsPublisher({setPosts}) {
   const [inputMessage, setInputMessage] = useState("")
   const [image, setImage] = useState ("")
   const [file, setFile] = useState ("")
@@ -27,13 +27,11 @@ function FeedsPublisher() {
           }
         })
         .then( function(res){
-          console.log(res)      
+          setPosts(posts => [...posts, res.data.post])    
         })
         .catch((err) => alert(err ="mettre une image et/ou un texte !"))   
       }
-        postData();
-        window.location.reload(true);
-        
+        postData();    
   } 
 
   function handleChangeMessage (e) {

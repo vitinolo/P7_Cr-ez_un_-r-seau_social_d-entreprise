@@ -1,5 +1,6 @@
 const Post = require("../models/Post");
 const User = require("../models/User");
+const Comment =  require("../models/Comment");
 const fs = require("fs");
 const { db } = require("../models/Post");
 
@@ -19,7 +20,7 @@ exports.createPost = (req, res, next) => {
   console.log(post)
   post
     .save()
-    .then(() => res.status(201).json({ message: "post enregistré !" }))
+    .then(() => res.status(201).json({ message: "post enregistré !",post: post }))
     .catch((error) => res.status(400).json({ error }));
   };
   
@@ -67,9 +68,8 @@ exports.modifyPost = async (req, res, next) => {
             { _id: req.params.id },
             { ...postObject, _id: req.params.id }
           )
-            .then(() => {
-              res.status(200).json({ message: "Post mise à jour!", post });
-            })
+            .then(() => 
+              res.status(200).json({ message: "Post mise à jour!", post }))
             .catch((error) => {
               res.status(400).json({ error });
             });
@@ -84,37 +84,31 @@ exports.modifyPost = async (req, res, next) => {
       { _id: req.params.id },
       { ...postObject, _id: req.params.id }
     )
-      .then(() =>  res.status(200).json({ message: "Post mise à jour!", post }))
+      .then(() =>  res.status(200).json({ message: "Post mise à jour!", post: post }))
       .catch((error) => res.status(400).json({ error }));
   }
 };
 
 //supprimer un post
- exports.deletePost = async(req, res, next) =>{
-   // récupèrer user et post
-   post = await Post.findOne({ _id: req.params.id })
-   user = await User.findOne({ _id:req.body.userId })
-   const userAuthorized = user.isAdmin || req.body.userId === post.userId
-   
-   //si l'utilisateur n'est pas autorisé, message d'erreur
+exports.deletePost = async(req, res, next) =>{
+  // récupèrer user et post
+  post = await Post.findOne({ _id: req.params.id })
+  user = await User.findOne({ _id:req.body.userId })
+  const userAuthorized = user.isAdmin || req.body.userId === post.userId
+  
+  //si l'utilisateur n'est pas autorisé, message d'erreur
   if(!userAuthorized){
   return  res.status(403).json({ error: new Error("unauthorized request") });
   }
+  post = await Post.findOne({ _id: req.params.id })
   if(req.file){
-    Post.findOne({ _id: req.params.id })
-    .then((post) => {
-      const filename = post.imageUrl.split("/images/")[1];
-      fs.unlink(`images/${filename}`, () => {  
-    Post.deleteOne({ _id: req.params.id })
+    const filename = post.imageUrl.split("/images/")[1];
+    await fs.unlink(`images/${filename}`);
+  }
+  await Comment.deleteMany({postId: req.params.id})
+  Post.deleteOne({ _id: req.params.id })
       .then(() => res.status(200).json({ message: "Post supprimé !" }))
       .catch((error) => res.status(400).json({ error })); 
-      })})
-  }else{
-    Post.findOne({_id:req.params.id})
-    Post.deleteOne({ _id: req.params.id })
-      .then(() => res.status(200).json({ message: "Post supprimé !" }))
-      .catch((error) => res.status(400).json({ error }))
-  }
 };
 
 //création et modification des likes pour les posts

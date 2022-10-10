@@ -27,10 +27,18 @@ function FeedPostsPage () {
     return(
     <div className="feedposts">
         <HeaderPosts />
-        <FeedsPublisher />
+        <FeedsPublisher setPosts={setPosts} posts={posts}/>
         <div className="feed_publication" >
-            <div className="posts">{posts.map((post, index) => (
-                <Feed key={index} post={post} user={users.find( u => u._id === post.userId)} />))}
+            <div className="posts">{posts.sort((postA, postB) =>
+                {
+                  const a= postA.created_at.replace(/\D/g,'')
+                  const b= postB.created_at.replace(/\D/g,'')
+
+                  if (a > b) {return -1; }
+                  if (a < b) { return 1; }
+                  return 0;
+                }).map((post, index) => (
+                <Feed key={index} post={post} setPosts={setPosts} user={users.find( u => u._id === post.userId)} />))}
             </div>
         </div>     
     </div>

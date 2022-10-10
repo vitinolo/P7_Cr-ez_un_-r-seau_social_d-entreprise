@@ -59,6 +59,7 @@ a {
 
 .created_at {
     color: green;
+    margin-bottom: 5px;
 }
 
 .connexion a:hover {
@@ -356,6 +357,7 @@ input::placeholder {
     color: black;
     border-radius: 10px;
     padding: 10px;
+    margin-top:10px;
 }
 
 .texte_publication_feed {

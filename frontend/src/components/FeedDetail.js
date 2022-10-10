@@ -5,11 +5,13 @@ import "../styles/style.css";
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
 import {useParams} from "react-router-dom";
+import moment from "moment";
 
 const FeedDetail = ({post,user}) => {
   const {postId} = useParams();
   const [comments, setComments] = useState([]);
   const [users, setUsers] = useState([]);
+  const date = moment(post.created_at)
   console.log({user})
   
   useEffect(() => {
@@ -30,10 +32,10 @@ const FeedDetail = ({post,user}) => {
         <>
             <div className="post">
                 <h3 className="article-post">Publication :</h3>
-                <span className="created_at">Publié le: {post.created_at}</span>
-                {/*<div className="profile_firstandlastname">
-                  <span className="profile_firstname"> {user.name} </span>
-                  <span className="profile_lastname"> {user.lastname} </span>
+                <span className="created_at">Publié le: {date.format("DD MMM YYYY HH:mm ")}</span>
+                {/*<div className="firstandlastname">
+                  <span className="firstname"> {user.name} </span>
+                  <span className="lastname"> {user.lastname} </span>
                 </div>*/} 
                 <div className="img_container">
                     <img className="img_feed" src={post.imageUrl} alt=""/>
@@ -43,7 +45,7 @@ const FeedDetail = ({post,user}) => {
                 <VotePublication post ={post} user={user} />
                 <h3 className="comment-post">Commentaires :</h3>
                 <div className="comments">{comments.map((comment, index) => (   
-                    <Comment key={index} comment={comment}  user={users.find( u => u._id === post.userId)} />))}                           
+                    <Comment key={index} comment={comment} user={users.find( u => u._id === comment.userId)} />))}                           
                 </div>    
             </div>
 
