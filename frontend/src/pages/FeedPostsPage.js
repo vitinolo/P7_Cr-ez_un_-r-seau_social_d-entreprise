@@ -5,7 +5,6 @@ import axios from "axios";
 import React, { useState, useEffect } from 'react';
 import "../styles/style.css";
 
-
 function FeedPostsPage () {
     const [posts, setPosts] = useState([]);
     const [users, setUsers] = useState([]);
@@ -23,7 +22,6 @@ function FeedPostsPage () {
         })  
     },[]);
 
-    
     return(
     <div className="feedposts">
         <HeaderPosts />
@@ -38,7 +36,7 @@ function FeedPostsPage () {
                   if (a < b) { return 1; }
                   return 0;
                 }).map((post, index) => (
-                <Feed key={index} post={post} setPosts={setPosts} user={users.find( u => u._id === post.userId)} />))}
+                <Feed key={index} post={post} user={users.find( u => u._id === post.userId)} />))}
             </div>
         </div>     
     </div>

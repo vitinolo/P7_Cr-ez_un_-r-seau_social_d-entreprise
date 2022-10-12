@@ -42,7 +42,7 @@ function Connexion(props) {
     }
     return (
         <div className="signup">
-            <h2>Se connecter</h2>
+            <h2 className='h2-texte'>Se connecter</h2>
             <div className="form">
                 <form onSubmit={handleSubmit} method="post" className='form-signup' id='myform'>
                     <div className='form__question'>

@@ -26,14 +26,14 @@ exports.createPost = (req, res, next) => {
   
 //voir toutes les posts
 exports.getAllPost = async(req, res, next) => {
-  posts = await Post.find().sort({created_at: -1});
-  users = await User.find({}, "lastname name");
+  const posts = await Post.find().sort({created_at: -1});
+  const users = await User.find({}, "lastname name");
   res.status(200).json({posts, users});   
 };
 
 //sélection d'un post
 exports.getOnePost = async(req, res, next) => {
-  users = await User.find({}, "lastname name");
+  const users = await User.find({}, "lastname name");
   Post.findOne({ _id: req.params.id })
     .then((post) => {
       res.status(200).json({post,users});
@@ -69,7 +69,7 @@ exports.modifyPost = async (req, res, next) => {
             { ...postObject, _id: req.params.id }
           )
             .then(() => 
-              res.status(200).json({ message: "Post mise à jour!", post }))
+              res.status(200).json({ message: "Post mise à jour!"}))
             .catch((error) => {
               res.status(400).json({ error });
             });
@@ -103,7 +103,7 @@ exports.deletePost = async(req, res, next) =>{
   post = await Post.findOne({ _id: req.params.id })
   if(req.file){
     const filename = post.imageUrl.split("/images/")[1];
-    await fs.unlink(`images/${filename}`);
+    fs.unlink(`images/${filename}`);
   }
   await Comment.deleteMany({postId: req.params.id})
   Post.deleteOne({ _id: req.params.id })

@@ -1,18 +1,17 @@
-import VotePublication from "./VotePublication";
-import CommentsPublisher from "../components/CommentsPublisher";
-import Comment from "./Comment";
-import "../styles/style.css";
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
 import {useParams} from "react-router-dom";
 import moment from "moment";
+import VotePublication from "./VotePublication";
+import CommentsPublisher from "../components/CommentsPublisher";
+import Comment from "./Comment";
+import "../styles/style.css";
 
 const FeedDetail = ({post,user}) => {
   const {postId} = useParams();
   const [comments, setComments] = useState([]);
   const [users, setUsers] = useState([]);
   const date = moment(post.created_at)
-  console.log({user})
   
   useEffect(() => {
     axios
@@ -26,17 +25,17 @@ const FeedDetail = ({post,user}) => {
         setUsers(res.data.users)
         console.log(res.data.comments)
       })  
-  },[postId]);
+    },[postId]);
+    
 
     return (
-        <>
             <div className="post">
                 <h3 className="article-post">Publication :</h3>
                 <span className="created_at">Publié le: {date.format("DD MMM YYYY HH:mm ")}</span>
-                {/*<div className="firstandlastname">
-                  <span className="firstname"> {user.name} </span>
-                  <span className="lastname"> {user.lastname} </span>
-                </div>*/} 
+                <div className="firstandlastname">
+                  <span className="firstname"> </span>
+                  <span className="lastname">  </span>
+                </div>
                 <div className="img_container">
                     <img className="img_feed" src={post.imageUrl} alt=""/>
                 </div>
@@ -49,7 +48,6 @@ const FeedDetail = ({post,user}) => {
                 </div>    
             </div>
 
-        </>
     );
 }
 

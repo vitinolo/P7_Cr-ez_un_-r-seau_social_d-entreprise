@@ -3,6 +3,16 @@ a {
     text-decoration: none;
 }
 
+.accueil{
+    display:flex;
+    align-items: center;
+    padding: 10px;
+}
+.accueil a:hover{
+    transition: 0.6s;
+    color: #fd2d01;
+    font-weight: bolder;
+}
 .article-post {
     display: flex;
     justify-content: center;
@@ -336,6 +346,7 @@ input::placeholder {
     display: flex;
     flex-direction: column;
     align-items: center;
+    word-wrap: break-word;
     border: solid 3px black;
     border-radius: 10px;
     padding: 10px;
@@ -389,6 +400,34 @@ input::placeholder {
         flex-direction: column;
         align-items: center;
     }
+    .header{
+        display: flex;
+        flex-direction:column;
+        display:flex;
+        align-items: center;
+        word-wrap: break-word;
+        background-color: white;
+        border: solid 3px black;
+        border-radius: 10px;
+    }
+    .headposts {
+        display: flex;
+        flex-direction:column;
+        display:flex;
+        align-items: center;
+        word-wrap: break-word;
+        background-color: white;
+        border: solid 3px black;
+        border-radius: 10px;
+    }
+    
+    .logoposts {
+        display: flex;
+        align-items: center;
+        max-width: 150px
+    }
+    
+    
 }
 
 @keyframes titre {
