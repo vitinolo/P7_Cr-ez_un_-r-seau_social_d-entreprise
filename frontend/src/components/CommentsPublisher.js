@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import axios from "axios"; 
 import "../styles/style.css";
 
-const CommentsPublisher = () => {
+function CommentsPublisher ()  {
   const {postId} = useParams();
   const [inputMessage, setInputMessage] = useState("")
 

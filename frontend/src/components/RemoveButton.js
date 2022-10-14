@@ -2,7 +2,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-const RemoveButton = ({post}) => {
+const RemoveButton = ({post, posts, setPosts}) => {
     
     const id = post._id;
     const token = localStorage.getItem("token")
@@ -14,8 +14,13 @@ const RemoveButton = ({post}) => {
                     'Authorization': `Bearer ${token}`  
                 }
             })
-            .then((res) => {
-                window.location.reload(true);
+            .then(function(res)  {
+                console.log( posts)
+                posts=[...posts]
+                const index= posts.findIndex(post)
+                setPosts= posts.splice[index]
+                console.log(index._id)
+                ///window.location.reload(true);
             })
             .catch((err) => console.log(err));  
     }

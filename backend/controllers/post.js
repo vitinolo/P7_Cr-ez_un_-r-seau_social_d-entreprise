@@ -48,7 +48,6 @@ exports.modifyPost = async (req, res, next) => {
   //récupèrer user et post
   const post =  await Post.findOne({ _id: req.params.id})
   const user =  await User.findOne({ _id:req.body.userId })
-  console.log(req.body.userId)
   const userAuthorized = user.isAdmin || req.body.userId === post.userId
   //si ma requête contient un fichier post ressemble à ça sinon à ça
   const postObject = req.file ? {...req.body, imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,} : { ...req.body };
@@ -80,11 +79,13 @@ exports.modifyPost = async (req, res, next) => {
         })
     //le mettre à jour
   } else {
-    Post.updateOne(
+    await Post.findOneAndUpdate(
       { _id: req.params.id },
       { ...postObject, _id: req.params.id }
-    )
-      .then(() =>  res.status(200).json({ message: "Post mise à jour!", post: post }))
+    );
+    Post.findOne({ _id: req.params.id })
+    .then((post) => {
+      res.status(200).json({ message: "Post mise à jour!", post: post })})
       .catch((error) => res.status(400).json({ error }));
   }
 };
@@ -107,7 +108,7 @@ exports.deletePost = async(req, res, next) =>{
   }
   await Comment.deleteMany({postId: req.params.id})
   Post.deleteOne({ _id: req.params.id })
-      .then(() => res.status(200).json({ message: "Post supprimé !" }))
+      .then((post) => res.status(200).json({ message: "Post supprimé !" }))
       .catch((error) => res.status(400).json({ error })); 
 };
 

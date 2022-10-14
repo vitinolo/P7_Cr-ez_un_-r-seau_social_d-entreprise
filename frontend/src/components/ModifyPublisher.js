@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import axios from "axios";
 import "../styles/style.css";
 
-const ModifyPublisher = ({post}) => {
+const ModifyPublisher = ({post, posts, setPosts}) => {
     const id = post._id;
     const [inputMessage, setInputMessage] = useState("")
     const [image, setImage] = useState ("")
@@ -35,12 +35,16 @@ const ModifyPublisher = ({post}) => {
             }
           })
           .then(function (res){
-            console.log(res)
+            console.log(res.data.post, posts)
+            const index= posts.findIndex(a=> a._id==res.data.post._id)
+            console.log(index)
+            const all=[...posts]
+            all[index]= res.data.post
+            setPosts(all)     
           })
           .catch((err) => alert(err ="mettre une image et/ou un texte !"))   
       }
           postData();
-          window.location.reload(true);
     } 
     
     function handleChangeMessage (e) {

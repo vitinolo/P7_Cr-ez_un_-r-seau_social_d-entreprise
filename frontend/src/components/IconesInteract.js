@@ -4,7 +4,7 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 import RemoveButton from "./RemoveButton";
 import ModifyPublisher from "./ModifyPublisher";
 
-const IconesInteract = ({post}) => {
+const IconesInteract = ({post, posts, setPosts}) => {
     const [visibility, setVisibility] = useState(false)
 
     function changeVisibility () {
@@ -14,12 +14,12 @@ const IconesInteract = ({post}) => {
         <>
             <div className="iconesInteract">
                 <div className="modifyAndRemovePost">
-                    <RemoveButton post = {post} />
+                    {<RemoveButton post={post} posts={posts} setPosts={setPosts} />}
                     <button  onClick={changeVisibility} title="Modifier la publication" className="icone-modify icone"><FontAwesomeIcon icon={faPen} /></button>
                 </div>        
             </div>
             <div>
-                {visibility && <ModifyPublisher post = {post} />}
+                {visibility && <ModifyPublisher post={post} posts={posts} setPosts={setPosts} />}
             </div>
         </>
     )

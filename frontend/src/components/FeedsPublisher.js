@@ -16,9 +16,15 @@ function FeedsPublisher({setPosts}) {
     function postData() {
         const userId = localStorage.getItem("userId");
         const form = new FormData();
-        form.append("image", file, image);
+        if(image){
+          form.append("image", file, image);
+          
+        }
         form.append("userId", userId);
-        form.append("body", inputMessage);
+        if(inputMessage){
+          form.append("body", inputMessage);
+
+        }
       
         return axios
         .post('http://localhost:3001/api/posts', form,{

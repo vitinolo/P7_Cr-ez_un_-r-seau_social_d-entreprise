@@ -1,4 +1,4 @@
-import HeaderPosts from "../components/HeaderPosts";
+import HeaderPosts1 from "../components/HeaderPosts1";
 import FeedsPublisher from "../components/FeedsPublisher"
 import Feed from "../components/Feed";
 import axios from "axios";
@@ -24,7 +24,7 @@ function FeedPostsPage () {
 
     return(
     <div className="feedposts">
-        <HeaderPosts />
+        <HeaderPosts1 />
         <FeedsPublisher setPosts={setPosts} posts={posts}/>
         <div className="feed_publication" >
             <div className="posts">{posts.sort((postA, postB) =>
@@ -36,7 +36,7 @@ function FeedPostsPage () {
                   if (a < b) { return 1; }
                   return 0;
                 }).map((post, index) => (
-                <Feed key={index} post={post} user={users.find( u => u._id === post.userId)} />))}
+                <Feed key={index} post={post} setPosts={setPosts} posts={posts} user={users.find( u => u._id === post.userId)} />))}
             </div>
         </div>     
     </div>

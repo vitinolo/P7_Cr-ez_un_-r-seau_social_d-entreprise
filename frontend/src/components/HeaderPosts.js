@@ -14,8 +14,8 @@ import { Link, useNavigate } from "react-router-dom"
          <div className="bigheader">
             <div className="headposts">
                 <div className='logoposts'><img src={logo} alt='groupomania'/></div>
-                <span className='deconnexion'><Link to ="/" onClick={handleClick} title="Cliquez pour vous déconnecter">Se déconnecter</Link></span>
-                <span className='accueil'><Link to ="/Feed" onClick={retour} title="retour">Retour</Link></span>
+                <span className='deconnexion'><Link to ="/" onClick={handleClick} title="Cliquer pour vous déconnecter">Se déconnecter</Link></span>
+                <span className='accueil'><Link to ="/Feed" onClick={retour} title="retour vers les publications">Retour</Link></span>
             </div>
             <span className="titreposts">Bienvenu dans votre réseau social d'entreprise !</span> 
         </div>  

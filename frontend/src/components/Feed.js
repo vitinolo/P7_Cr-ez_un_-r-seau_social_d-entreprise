@@ -3,12 +3,12 @@ import IconesInteract from "./IconesInteract";
 import VotePublication from "./VotePublication";
 import moment from "moment";
 
-const Feed = ({post,user}) => {
+const Feed = ({post, posts, user, setPosts}) => {
     let userId;
     userId = localStorage.getItem("userId", userId);
     const userAuthorized = userId === "6340460a1b09256cab8f4094" || userId === post.userId;
     const date = moment(post.created_at)
-
+    
     return (
         <div className="post">
             <h3 className="article-post">Publication :</h3>
@@ -19,11 +19,11 @@ const Feed = ({post,user}) => {
             </div> 
             <Link to={`/feed/${post._id}`} title="Cliquer vers la publication">
                 <div className="img_container">
-                    <img className="img_feed" src={post.imageUrl} alt="un post"/>
+                    <img className="img_feed" src={post.imageUrl} />
                 </div>
                 <span className="texte_publication_feed">{post.body}</span>
             </Link>
-            {userAuthorized && <IconesInteract post ={post}/>}
+            {userAuthorized && <IconesInteract post ={post} posts={posts} setPosts={setPosts}/>}
             <VotePublication post ={post} />    
         </div>
     );
