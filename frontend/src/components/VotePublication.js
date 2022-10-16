@@ -13,11 +13,7 @@ const VotePublication = ({post}) =>{
 
     function liker () {   
             axios
-                .post(`http://localhost:3001/api/posts/${id}/like`,{},{
-                    headers:{
-                        'Authorization': 'Bearer '+ localStorage.getItem("token")
-                    }
-                })
+                .post(`posts/${id}/like`,{})
                 .then((res) => (
                 setLikes(res.data.post.likes)  
                 ))

@@ -15,7 +15,7 @@ function Connexion(props) {
         e.preventDefault()
         function postData() {
             return axios
-            .post('http://localhost:3001/api/auth/login',{
+            .post('auth/login',{
                 email: inputEmail,
                 password: inputPassword,
             })
@@ -25,6 +25,7 @@ function Connexion(props) {
                 const userId = res.data.userId;
                 localStorage.setItem("token", token);
                 localStorage.setItem("userId", userId);
+                localStorage.setItem('isAdmin', res.data.isAdmin)
                 navigate('/Feed');
             })
             .catch((err) => alert(err ="identifiant ou mot de passe inconnut !"))   

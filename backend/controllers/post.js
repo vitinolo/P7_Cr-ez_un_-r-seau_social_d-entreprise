@@ -5,9 +5,9 @@ const fs = require("fs");
 const { db } = require("../models/Post");
 
 //création d'un post
-exports.createPost = (req, res, next) => {
+exports.createPost = async (req, res, next) => {
   const postObject = {
-    userId: req.body.userId,
+    user: req.body.userId,
     body: req.body.body,
   }
   if (req.file){
@@ -15,20 +15,15 @@ exports.createPost = (req, res, next) => {
   }else{
     postObject.imageUrl = ""
   }
-  const post = new Post({...postObject});
-  delete postObject._id;
-  console.log(post)
-  post
-    .save()
-    .then(() => res.status(201).json({ message: "post enregistré !",post: post }))
-    .catch((error) => res.status(400).json({ error }));
-  };
+  const post = new Post({...postObject, created_at: Date.now()});
+  await post.save();
+  return res.status(201).send({ message: "post enregistré !", post});
+};
   
 //voir toutes les posts
 exports.getAllPost = async(req, res, next) => {
-  const posts = await Post.find().sort({created_at: -1});
-  const users = await User.find({}, "lastname name");
-  res.status(200).json({posts, users});   
+  const posts = await Post.find().populate({ path: 'user', select: ['name', 'lastname']}).sort({created_at: -1});
+  res.status(200).json({posts});   
 };
 
 //sélection d'un post
@@ -48,7 +43,7 @@ exports.modifyPost = async (req, res, next) => {
   //récupèrer user et post
   const post =  await Post.findOne({ _id: req.params.id})
   const user =  await User.findOne({ _id:req.body.userId })
-  const userAuthorized = user.isAdmin || req.body.userId === post.userId
+  const userAuthorized = user.isAdmin || req.body.userId == post.user.toString();
   //si ma requête contient un fichier post ressemble à ça sinon à ça
   const postObject = req.file ? {...req.body, imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,} : { ...req.body };
   
@@ -62,20 +57,13 @@ exports.modifyPost = async (req, res, next) => {
       .then((post) => {
           const filename = post.imageUrl.split("/images/")[1];
           fs.unlink(`images/${filename}`, () => { 
-        
-          Post.findOneAndUpdate(
-            { _id: req.params.id },
-            { ...postObject, _id: req.params.id }
-          )
+            Post.findOneAndUpdate(
+              { _id: req.params.id },
+              { ...postObject, _id: req.params.id }
+            )
             .then(() => 
-              res.status(200).json({ message: "Post mise à jour!"}))
-            .catch((error) => {
-              res.status(400).json({ error });
-            });
+              res.status(200).json({ message: "Post mise à jour!", post: postObject}))
           })
-        })
-        .catch((error) => {
-          res.status(500).json({ error });
         })
     //le mettre à jour
   } else {
@@ -86,7 +74,6 @@ exports.modifyPost = async (req, res, next) => {
     Post.findOne({ _id: req.params.id })
     .then((post) => {
       res.status(200).json({ message: "Post mise à jour!", post: post })})
-      .catch((error) => res.status(400).json({ error }));
   }
 };
 
@@ -95,21 +82,21 @@ exports.deletePost = async(req, res, next) =>{
   // récupèrer user et post
   post = await Post.findOne({ _id: req.params.id })
   user = await User.findOne({ _id:req.body.userId })
-  const userAuthorized = user.isAdmin || req.body.userId === post.userId
-  
+  const userAuthorized = user.isAdmin || req.body.userId === post.user.toString()
   //si l'utilisateur n'est pas autorisé, message d'erreur
   if(!userAuthorized){
-  return  res.status(403).json({ error: new Error("unauthorized request") });
+    return  res.status(403).json({ error: new Error("unauthorized request") });
   }
-  post = await Post.findOne({ _id: req.params.id })
-  if(req.file){
+
+  if(post.imageUrl){
     const filename = post.imageUrl.split("/images/")[1];
-    fs.unlink(`images/${filename}`);
+    fs.unlink(`images/${filename}`, () => {
+      console.log('Image deleted');
+    });
   }
   await Comment.deleteMany({postId: req.params.id})
-  Post.deleteOne({ _id: req.params.id })
-      .then((post) => res.status(200).json({ message: "Post supprimé !" }))
-      .catch((error) => res.status(400).json({ error })); 
+  await Post.deleteOne({ _id: req.params.id });
+  return res.send({ message: "Post supprimé !" });
 };
 
 //création et modification des likes pour les posts

@@ -8,38 +8,26 @@ import "../styles/style.css";
 function FeedPostsPage () {
     const [posts, setPosts] = useState([]);
     const [users, setUsers] = useState([]);
-
+    
     useEffect(() => {
         axios
-        .get('http://localhost:3001/api/posts',{
-          headers:{
-            'Authorization': 'Bearer '+ localStorage.getItem("token")
-          }
-        })
+        .get('posts')
         .then((res) => {
           setPosts(res.data.posts)
           setUsers(res.data.users)
         })  
     },[]);
-
+console.log(posts);
     return(
-    <div className="feedposts">
-        <HeaderPosts1 />
-        <FeedsPublisher setPosts={setPosts} posts={posts}/>
-        <div className="feed_publication" >
-            <div className="posts">{posts.sort((postA, postB) =>
-                {
-                  const a= postA.created_at.replace(/\D/g,'')
-                  const b= postB.created_at.replace(/\D/g,'')
-
-                  if (a > b) {return -1; }
-                  if (a < b) { return 1; }
-                  return 0;
-                }).map((post, index) => (
-                <Feed key={index} post={post} setPosts={setPosts} posts={posts} user={users.find( u => u._id === post.userId)} />))}
-            </div>
-        </div>     
-    </div>
+      <div className="feedposts">
+          <HeaderPosts1 />
+          <FeedsPublisher setPosts={setPosts} posts={posts}/>
+          <div className="feed_publication" >
+              <div className="posts">{posts.map((post, index) => (
+                  <Feed key={index} users={users} post={post} setPosts={setPosts} posts={posts} />))}
+              </div>
+          </div>     
+      </div>
     )
 }
 export default FeedPostsPage

@@ -9,7 +9,7 @@ exports.createComment = (req,res) => {
         body: req.body.body, 
         postId : req.body.postId
       }
-      const comment = new Comment({...commentObject});
+      const comment = new Comment({...commentObject, created_at: Date.now()});
       delete commentObject._id;
       console.log(comment)
       comment

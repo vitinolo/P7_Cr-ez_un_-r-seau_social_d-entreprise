@@ -11,15 +11,12 @@ const FeedPostDetail = () => {
   
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/posts/${postId}`,{
-        headers:{
-          'Authorization': 'Bearer '+ localStorage.getItem("token")
-        }
-      })
+      .get(`posts/${postId}`)
       .then((res) => {
         setPost(res.data.post);
         setUsers(res.data.users)
         console.log(res.data.post)
+        console.log(res.data.users)
       })  
   },[postId]);
   
@@ -27,7 +24,7 @@ const FeedPostDetail = () => {
       <div className="feedpostdetail">
           <HeaderPosts />
           <div className="feedpublidetail">
-            <FeedDetail post={post} user={users.find( u => u._id === post.userId)} />
+            <FeedDetail post={post} user={users.find( u => u._id === post.user_id)} />
           </div>
       </div>
 

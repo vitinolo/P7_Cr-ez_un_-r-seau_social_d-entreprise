@@ -28,19 +28,15 @@ const ModifyPublisher = ({post, posts, setPosts}) => {
             form.append("image", file, image);
           }
 
-          return axios
-          .put(`http://localhost:3001/api/posts/${id}`, form,{
-            headers:{
-              'Authorization': 'Bearer '+ localStorage.getItem("token")
-            }
-          })
-          .then(function (res){
-            console.log(res.data.post, posts)
-            const index= posts.findIndex(a=> a._id==res.data.post._id)
+        axios
+          .put(`posts/${id}`, form)
+          .then(res => {
+            const index = posts.findIndex(p => p._id === id)
             console.log(index)
-            const all=[...posts]
-            all[index]= res.data.post
-            setPosts(all)     
+            const postsCopy = [...posts]
+            postsCopy[index].body = res.data.post.body;
+            postsCopy[index].imageUrl = res.data.post.imageUrl;
+            setPosts(postsCopy)     
           })
           .catch((err) => alert(err ="mettre une image et/ou un texte !"))   
       }

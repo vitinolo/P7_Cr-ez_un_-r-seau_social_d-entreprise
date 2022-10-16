@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import axios from "axios"; 
 import "../styles/style.css";
 
-function CommentsPublisher ()  {
+function CommentsPublisher ({setPosts, comments, setComments})  {
   const {postId} = useParams();
   const [inputMessage, setInputMessage] = useState("")
 
@@ -21,21 +21,16 @@ function CommentsPublisher ()  {
         }
 
       return axios
-      .post('http://localhost:3001/api/comments',comment,{
-        headers:{
-          'Authorization': 'Bearer '+ localStorage.getItem("token")
-        }
-      })
-      
-      .then(function (res){
-        console.log(res)         
+      .post('comments',comment)
+      .then(res => {
+        setComments(comments => [{
+          ...res.data.comment,
+          user: {'name': 'Vous', lastname: '', _id: userId}
+        }, ...comments])    
       })
       .catch((err) => alert(err ="mettre une image et/ou un texte !"))   
     }
-        postData();
-        window.location.reload(true);
-        //on réinitialise le formulaire après l'envoi 
-        useState = ("")
+      postData();
   }
   function handleChangeMessage (e) {
     setInputMessage(e.target.value)

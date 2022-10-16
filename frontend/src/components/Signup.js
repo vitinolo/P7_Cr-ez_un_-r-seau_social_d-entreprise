@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import "../styles/style.css";
 import axios from "axios";
@@ -12,27 +11,25 @@ function Signup () {
     function handleClick (e) {
         handleSubmit(e)
     }
+
     function handleSubmit (e) {
         e.preventDefault()
         function postData() {
             return axios
-            .post('http://localhost:3001/api/auth/signup',{
+            .post('auth/signup',{
                 email: inputEmail,
                 password: inputPassword,
                 name: inputFirstName,
                 lastname: inputLastName,
             })
-            .then((res) => console.log(res.data))
+            .then((res) => {
+                alert(res.data.message);
+            })
             .catch((err) => console.log(err));
         }
         postData();
-
-        //on réinitialise le formulaire après l'envoi
-        document.getElementById('email').value = '';
-        document.getElementById('password').value = '';
-        document.getElementById('firstname').value = '';
-        document.getElementById('lastname').value = '';   
     } 
+
     function handleChangeEmail (e) {
         setInputEmail(e.target.value)
     }

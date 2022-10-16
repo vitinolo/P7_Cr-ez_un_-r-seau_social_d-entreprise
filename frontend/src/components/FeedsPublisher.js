@@ -27,13 +27,12 @@ function FeedsPublisher({setPosts}) {
         }
       
         return axios
-        .post('http://localhost:3001/api/posts', form,{
-          headers:{
-            'Authorization': 'Bearer '+ localStorage.getItem("token")
-          }
-        })
-        .then( function(res){
-          setPosts(posts => [...posts, res.data.post])    
+        .post('posts', form)
+        .then(res => {
+          setPosts(posts => [{
+            ...res.data.post,
+            user: {'name': 'Vous', lastname: '', _id: userId}
+          }, ...posts])    
         })
         .catch((err) => alert(err ="mettre une image et/ou un texte !"))   
       }

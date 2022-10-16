@@ -3,31 +3,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const RemoveButton = ({post, posts, setPosts}) => {
-    
     const id = post._id;
-    const token = localStorage.getItem("token")
-    
+
     function remove () {
         axios
-            .delete(`http://localhost:3001/api/posts/${id}`,{
-                headers:{
-                    'Authorization': `Bearer ${token}`  
-                }
-            })
-            .then(function(res)  {
+            .delete(`posts/${id}`)
+            .then(res =>  {
                 console.log( posts)
-                posts=[...posts]
-                const index= posts.findIndex(post)
-                setPosts= posts.splice[index]
-                console.log(index._id)
-                ///window.location.reload(true);
+                const postsCopy =[...posts]
+                const index = postsCopy.findIndex(p => p._id === id);
+                postsCopy.splice(index, 1);
+                setPosts(postsCopy);
+                alert(res.data.message);
             })
             .catch((err) => console.log(err));  
     }
     
     return (
 
-        <button onClick={() => remove()} title="Supprimer la publication" className="icone-remove icone"><FontAwesomeIcon icon={faTrash} /></button>
+        <button onClick={remove} title="Supprimer la publication" className="icone-remove icone"><FontAwesomeIcon icon={faTrash} /></button>
     )
 }
 export default RemoveButton;
