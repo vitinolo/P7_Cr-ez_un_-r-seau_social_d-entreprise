@@ -5,7 +5,8 @@ import "../styles/style.css";
 
 function CommentsPublisher ({ setComments })  {
   const {postId} = useParams();
-  const [inputMessage, setInputMessage] = useState("")
+  const [inputMessage, setInputMessage] = useState("");
+
   const refreshPage = ()=>{
     window.location.reload();
  }

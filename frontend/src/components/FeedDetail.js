@@ -36,7 +36,7 @@ const FeedDetail = ({post}) => {
                 <VotePublication post ={post}  />
                 <h3 className="comment-post">Commentaires :</h3>
                 <div className="comments">{comments.map((comment, index) => (   
-                    <Comment key={index} comment={comment} comments={comments} setComments={setComments} user={users.find( u => u._id === comment.userId)} />))}                           
+                    <Comment key={index} comment={comment} user={users.find( u => u._id === comment.userId)} />))}                           
                 </div>    
             </div>
 
