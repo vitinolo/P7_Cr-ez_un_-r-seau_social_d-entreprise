@@ -6,7 +6,9 @@ import "../styles/style.css";
 function CommentsPublisher ({ setComments })  {
   const {postId} = useParams();
   const [inputMessage, setInputMessage] = useState("")
-
+  const refreshPage = ()=>{
+    window.location.reload();
+ }
   function handleClick (e) {
       handleSubmit(e)
   }
@@ -27,7 +29,8 @@ function CommentsPublisher ({ setComments })  {
           ...res.data.comment,
           user: {'name': 'Vous', lastname: '', _id: userId}
         }, ...comments]);
-        alert(res.data.message);    
+        alert(res.data.message);
+        refreshPage() ;  
       })
       .catch((err) => alert(err ="mettre une image et/ou un texte !"))   
     }

@@ -4,7 +4,6 @@ import VotePublication from "./VotePublication";
 import moment from "moment";
 
 const Feed = ({post, posts, setPosts}) => {
-
     const userId = localStorage.getItem("userId");
     const isAdmin = localStorage.getItem('isAdmin');
     const isAuthorized = (userId === post.user._id || isAdmin === 'true');

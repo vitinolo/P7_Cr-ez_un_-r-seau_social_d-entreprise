@@ -1,12 +1,13 @@
 import axios from "axios";
-import React, {  useState,useEffect } from 'react';
-import {useParams} from "react-router-dom";
+import React, { useState,useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import HeaderPosts from "../components/HeaderPosts";
 import FeedDetail from "../components/FeedDetail";
 
 const FeedPostDetail = () => {
   const {postId} = useParams();
   const [post, setPost] = useState([]);
+  const [comments, setComments] = useState([]);
   const [users, setUsers] = useState([]);
   
   useEffect(() => {
@@ -24,7 +25,7 @@ const FeedPostDetail = () => {
       <div className="feedpostdetail">
           <HeaderPosts />
           <div className="feedpublidetail">
-            <FeedDetail post={post} user={users.find( u => u._id === post.user_id)} />
+            <FeedDetail post={post} setPost={setPost} comments={comments} setComments={setComments} setUsers={setUsers} users={users} user={users.find( u => u._id === post.user_id)} />
           </div>
       </div>
 

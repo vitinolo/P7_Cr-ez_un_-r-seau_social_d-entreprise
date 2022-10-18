@@ -11,7 +11,6 @@ function Signup () {
     function handleClick (e) {
         handleSubmit(e)
     }
-
     function handleSubmit (e) {
         e.preventDefault()
         function postData() {
@@ -31,7 +30,6 @@ function Signup () {
         }
         postData();
     } 
-
     function handleChangeEmail (e) {
         setInputEmail(e.target.value)
     }

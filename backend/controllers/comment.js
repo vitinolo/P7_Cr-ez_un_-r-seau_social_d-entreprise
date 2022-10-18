@@ -20,8 +20,8 @@ exports.createComment = (req,res) => {
 
 //voir tous les commentaires
 exports.getAllComment = async(req, res, next) => {
-  comments = await Comment.find({postId: req.params.postId}).sort({created_at: -1});
-  users = await User.find({}, "lastname name");
+  const comments = await Comment.find({postId: req.params.postId}).sort({created_at: -1});
+  const users = await User.find({}, "lastname name");
   res.status(200).json({comments, users});   
 };
 
@@ -39,8 +39,8 @@ exports.getOneComment = async(req, res, next) => {
 // supprimer un commentaire
 exports.deleteComment = async(req,res) => {
    // récupèrer user et comment
-   comment = await Comment.findOne({ _id: req.params.id })
-   user = await User.findOne({ _id:req.body.userId })
+   const comment = await Comment.findOne({ _id: req.params.id })
+   const user = await User.findOne({ _id:req.body.userId })
    const userAuthorized = user.isAdmin || req.body.userId === comment.userId
    
    //si l'utilisateur n'est pas autorisé, message d'erreur

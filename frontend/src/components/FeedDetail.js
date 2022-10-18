@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import moment from "moment";
 import VotePublication from "./VotePublication";
 import CommentsPublisher from "../components/CommentsPublisher";
@@ -28,10 +28,6 @@ const FeedDetail = ({post}) => {
             <div className="post">
                 <h3 className="article-post">Publication :</h3>
                 <span className="created_at">Publié le: {date.format("DD MMM YYYY HH:mm ")}</span>
-                <div className="firstandlastname">
-                  <span className="firstname"> </span>
-                  <span className="lastname">  </span>
-                </div>
                 <div className="img_container">
                     <img className="img_feed" src={post.imageUrl} alt=""/>
                 </div>
