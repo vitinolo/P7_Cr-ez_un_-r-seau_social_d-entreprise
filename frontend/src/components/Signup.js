@@ -23,9 +23,11 @@ function Signup () {
                 lastname: inputLastName,
             })
             .then((res) => {
-                alert(res.data.message);
+                return alert(res.data.message);
             })
-            .catch((err) => console.log(err));
+            .catch(() => {   
+                return alert("Mot de passse trop faible: il faut 8 caractères dont 1 majuscule et 2 chiffres");
+            });
         }
         postData();
     } 

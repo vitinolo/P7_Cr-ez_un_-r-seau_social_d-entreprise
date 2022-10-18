@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import axios from "axios"; 
 import "../styles/style.css";
 
-function CommentsPublisher ({setPosts, comments, setComments})  {
+function CommentsPublisher ({ setComments })  {
   const {postId} = useParams();
   const [inputMessage, setInputMessage] = useState("")
 
@@ -26,7 +26,8 @@ function CommentsPublisher ({setPosts, comments, setComments})  {
         setComments(comments => [{
           ...res.data.comment,
           user: {'name': 'Vous', lastname: '', _id: userId}
-        }, ...comments])    
+        }, ...comments]);
+        alert(res.data.message);    
       })
       .catch((err) => alert(err ="mettre une image et/ou un texte !"))   
     }

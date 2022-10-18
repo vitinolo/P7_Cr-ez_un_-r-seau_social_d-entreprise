@@ -36,7 +36,8 @@ const ModifyPublisher = ({post, posts, setPosts}) => {
             const postsCopy = [...posts]
             postsCopy[index].body = res.data.post.body;
             postsCopy[index].imageUrl = res.data.post.imageUrl;
-            setPosts(postsCopy)     
+            setPosts(postsCopy);
+            alert(res.data.message);    
           })
           .catch((err) => alert(err ="mettre une image et/ou un texte !"))   
       }
