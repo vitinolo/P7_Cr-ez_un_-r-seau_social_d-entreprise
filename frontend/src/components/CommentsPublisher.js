@@ -7,9 +7,6 @@ function CommentsPublisher ({ setComments })  {
   const {postId} = useParams();
   const [inputMessage, setInputMessage] = useState("");
 
-  const refreshPage = ()=>{
-    window.location.reload();
- }
   function handleClick (e) {
       handleSubmit(e)
   }
@@ -31,7 +28,8 @@ function CommentsPublisher ({ setComments })  {
           user: {'name': 'Vous', lastname: '', _id: userId}
         }, ...comments]);
         alert(res.data.message);
-        refreshPage() ;  
+        console.log(res.data)
+        //refreshPage() ;  
       })
       .catch((err) => alert(err ="mettre une image et/ou un texte !"))   
     }

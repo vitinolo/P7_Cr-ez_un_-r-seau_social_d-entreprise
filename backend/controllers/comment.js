@@ -14,7 +14,7 @@ exports.createComment = (req,res) => {
       console.log(comment)
       comment
         .save()
-        .then(() => res.status(201).json({ message: "commentaire enregistré !" }))
+        .then(() => res.status(201).json({ message: "commentaire enregistré !", comment }))
         .catch((error) => res.status(400).json({ error }));
 };
 

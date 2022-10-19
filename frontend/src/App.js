@@ -1,4 +1,3 @@
-
 import {Routes, Route} from "react-router-dom";
 import ConnexionPage from "./pages/ConnexionPage";
 import InscriptionPage from "./pages/InscriptionPage";
